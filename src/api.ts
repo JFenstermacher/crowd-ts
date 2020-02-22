@@ -1,9 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
-import debug from 'debug';
 import pRetry from 'p-retry';
 import pQueue from 'p-queue';
 
-interface ApiConfig extends AxiosRequestConfig {
+export interface ApiConfig extends AxiosRequestConfig {
   concurrency?: number,
   retries?: number
 }

@@ -1,4 +1,4 @@
-import { Api } from './api';
+import { Api, ApiConfig } from './api';
 import axios from 'axios';
 import { AxiosRequestConfig } from 'axios';
 
@@ -20,14 +20,16 @@ type User = {
 }
 
 type Group = {
-  name: string
+  name: string,
+  active?: boolean,
+  description?: string
   attributes?: Attributes
 }
 
 interface GetUserRequest {
   username?: string,
   key?: string
-  attributes?: boolean 
+  expand?: boolean 
 }
 
 interface AddUserRequest extends User {
@@ -47,20 +49,100 @@ interface GetUserGroups extends PaginatedRequest {
 
 export class CrowdApplication extends Api {
 
+  constructor(config: ApiConfig) {
+    super(Object.assign({}, config, { baseURL: `${config.baseURL}/`}));
+  }
+
+  public async getGroup(req: { groupname: string, expand?: boolean }) {
+    const { groupname, expand = false } = req;
+
+    const { attributes: attrs, expand: e, link, type, ...group } = await this.request({
+      params: {
+        expand: expand ? 'attributes' : undefined,
+        groupname 
+      },
+      url: 'group'
+    })
+
+    if (attrs.attributes.length) group.attributes = this.convertAttrToObj(attrs);
+
+    return group;
+  }
+
+  public async addGroup(req: { groupname: string, description?: string }) {
+    const response = await this.request({
+      data: Object.assign({}, req, { type: "GROUP" }),
+      method: 'POST',
+      url: 'group'
+    });
+
+    return response;
+  }
+
+  public removeGroup = async(req: { groupname: string }) => this.request({
+    method: 'DELETE',
+    params: req,
+    url: 'group'
+  })
+
+  public updateGroup = async (req: { name: string, description?: string }) => {
+    const { name } = req;
+
+    const response = await this.request({
+      data: Object.assign({}, req, { type: 'GROUP' }),
+      params: { groupname: name },
+      url: 'group'
+    });
+
+    const { attributes, expand, link, type, ...group } = response;
+
+    if (attributes.attributes.length) group.attributes = this.convertAttrToObj(attributes);
+
+    return group;
+  }
+
+  public getGroupAttributes = async(req: { groupname: string }) => {
+    const { attributes } = await this.request({
+      params: req,
+      url: 'group/attribute'
+    })
+
+    return this.convertAttrToObj(attributes);
+  }
+
+  public updateGroupAttributes = async (req: { groupname: string, attributes: Attributes }) => {
+    const { groupname, attributes } = req;
+
+    const data = { attributes: this.convertAttrToList(attributes) };
+
+    return this.request({
+      data,
+      method: 'POST',
+      params: { groupname },
+      url: 'group/attribute'
+    });
+  }
+
+  public deleteGroupAttribute = async (req: { groupname: string, attributeName: string }) => this.request({
+    method: 'DELETE',
+    params: req,
+    url: 'group/attribute'
+  })
+
   public async getUser(req: GetUserRequest): Promise<User> {
-    const { username, key, attributes = false } = req;
+    const { username, key, expand = false } = req;
 
     if (!username && !key) throw new Error("Provide either [username,key]");
 
     const params = {
-      expand: attributes ? 'attributes' : undefined,
+      expand: expand ? 'attributes' : undefined,
       key,
       username
     };
 
-    const { attributes: attrs, expand, link, password, ...user } = await this.request({
+    const { attributes: attrs, expand: e, link, password, ...user } = await this.request({
       params: params,
-      url: 'rest/usermanagement/1/user'
+      url: 'user'
     });
     
     if (attrs.attributes.length) user.attributes = this.convertAttrToObj(attrs);
@@ -82,7 +164,7 @@ export class CrowdApplication extends Api {
     return this.request({
       data: data,
       method: 'POST',
-      url: 'rest/usermanagement/1/user'
+      url: 'user'
     });
   }
 
@@ -93,17 +175,15 @@ export class CrowdApplication extends Api {
       data: req,
       method: 'PUT',
       params: { username },
-      url: 'rest/usermanagement/1/user'
+      url: 'user'
     })
   }
 
-  public async removeUser(req: { username: string }) {
-    const { username } = req;
-
+  public removeUser = async(req: { username: string }) => {
     return this.request({
       method: 'DELETE',
-      params: { username },
-      url: 'rest/usermanagement/1/user'
+      params: req,
+      url: 'user'
     });
   }
 
@@ -112,7 +192,7 @@ export class CrowdApplication extends Api {
 
     const { attributes } = await this.request({
       params: { username },
-      url: 'rest/usermanagement/1/user/attribute'
+      url: 'user/attribute'
     });
 
     return this.convertAttrToObj(attributes);
@@ -127,20 +207,16 @@ export class CrowdApplication extends Api {
       data,
       method: 'POST',
       params: { username },
-      url: 'rest/usermanagement/1/user/attribute'
+      url: 'user/attribute'
     })
   }
 
-  public async deleteUserAttributes(req: { username: string, attributeNames: string[] }) {
-    const { username, attributeNames } = req;
-
-    const deleteAttr = async (attributeName: string) => this.request({
+  public async deleteUserAttributes(req: { username: string, attributeName: string }) {
+    return this.request({
       method: 'DELETE',
-      params: { username, attributeName },
-      url: 'rest/usermanagement/1/user/attribute'
-    })
-
-    return await Promise.all(attributeNames.map( name => deleteAttr(name) ));
+      params: req,
+      url: 'user/attribute'
+    });
   }
 
   public async getUserGroups(req: GetUserGroups) {
@@ -151,7 +227,7 @@ export class CrowdApplication extends Api {
         expand: expand ? 'group' : undefined,
         username,
       },
-      url: `rest/usermanagement/1/user/group/${queryType}`,
+      url: `user/group/${queryType}`,
       queryType: 'groups'
     })
 
