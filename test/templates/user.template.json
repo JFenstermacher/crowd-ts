@@ -1,0 +1,9 @@
+{
+  "active": true,
+  "name": "testuser",
+  "password": "Pa55w0rd!",
+  "first-name": "Test",
+  "last-name": "User",
+  "display-name": "Test User",
+  "email": "test@test.com"
+}
