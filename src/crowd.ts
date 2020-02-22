@@ -19,6 +19,11 @@ type User = {
   'updated-date'?: string
 }
 
+type Group = {
+  name: string
+  attributes?: Attributes
+}
+
 interface GetUserRequest {
   username?: string,
   key?: string
@@ -27,6 +32,17 @@ interface GetUserRequest {
 
 interface AddUserRequest extends User {
   password: string
+}
+
+interface PaginatedRequest {
+  maxResults?: number,
+  startIndex?: number
+}
+
+interface GetUserGroups extends PaginatedRequest {
+  username: string,
+  queryType?: 'direct' | 'nested',
+  expand?: boolean
 }
 
 export class CrowdApplication extends Api {
@@ -47,7 +63,7 @@ export class CrowdApplication extends Api {
       url: 'rest/usermanagement/1/user'
     });
     
-    if (attrs.attributes.length) user.attributes = this.convertAttrs(attrs);
+    if (attrs.attributes.length) user.attributes = this.convertAttrToObj(attrs);
 
     return user;
   }
@@ -125,6 +141,46 @@ export class CrowdApplication extends Api {
     })
 
     return await Promise.all(attributeNames.map( name => deleteAttr(name) ));
+  }
+
+  public async getUserGroups(req: GetUserGroups) {
+    const { username, queryType = 'direct', expand = false } = req;
+
+    const response = this.makePaginatedRequest({
+      params: {
+        expand: expand ? 'group' : undefined,
+        username,
+      },
+      url: `rest/usermanagement/1/user/group/${queryType}`,
+      queryType: 'groups'
+    })
+
+    return response;
+  }
+
+  private async makePaginatedRequest<T>(req: AxiosRequestConfig & { queryType: string }): Promise<T[]> {
+    const { queryType, ...requestParams } = req;
+    const { maxResults = 1000, startIndex = 0, ...params } = requestParams.params;
+
+    const total = maxResults < 1000 ? maxResults : Number.MAX_SAFE_INTEGER;
+
+    const results: T[] = [];
+
+    params['max-results'] = maxResults;
+    params['start-index'] = startIndex;
+    requestParams.params = params;
+
+    while (results.length < total) {
+      const { [queryType]: response } = await this.request(requestParams);
+
+      results.push(...response);
+
+      if (response.length < maxResults) break;
+
+      requestParams.params['start-index'] += maxResults;
+    }
+
+    return results;
   }
 
   private convertAttrToObj(attrs: { attributes: { link: any, name: string, values: string[] }[]  }): Attributes {
