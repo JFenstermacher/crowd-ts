@@ -28,7 +28,7 @@ const readJSON = async (filename: string) => fs.promises.readFile(filename)
 const initializeUsers = async () => {
   const user = await readJSON(USER_TEMPLATE);
 
-  const users = Array.from({ length: 1 }, (a, i) => ({
+  const users = Array.from({ length: 2 }, (_, i) => ({
     active: true,
     name: `${i}testuser`,
     password: user.password,
@@ -58,5 +58,21 @@ test('adding user', async () => {
 })
 
 test('removing user', async () => {
-  const response = await crowd.removeUser({ username: '0testuser'})
+  const username = '0testuser';
+
+  const response = await crowd.removeUser({ username })
+})
+
+test('update user', async () => {
+  const username = '1testuser';
+
+  const { 'created-date': cd, 'updated-date': ud, ...user }= await crowd.getUser({ username });
+
+  user.email = 'testing@testing.com';
+
+  const response = await crowd.updateUser(user);
+
+  const update = await crowd.getUser({ username });
+
+  expect(update.email).toEqual(user.email);
 })

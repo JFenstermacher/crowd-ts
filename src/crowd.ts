@@ -42,12 +42,12 @@ export class CrowdApplication extends Api {
       username
     };
 
-    const { attributes: attrs, ...user } = await this.request({
+    const { attributes: attrs, expand, link, password, ...user } = await this.request({
       params: params,
       url: 'rest/usermanagement/1/user'
     });
     
-    user.attributes = this.convertAttrs(attrs);
+    if (attrs.attributes.length) user.attributes = this.convertAttrs(attrs);
 
     return user;
   }
@@ -68,6 +68,17 @@ export class CrowdApplication extends Api {
       method: 'POST',
       url: 'rest/usermanagement/1/user'
     });
+  }
+
+  public async updateUser(req: any) {
+    const { name: username } = req;
+
+    return this.request({
+      data: req,
+      method: 'PUT',
+      params: { username },
+      url: 'rest/usermanagement/1/user'
+    })
   }
 
   public async removeUser(req: { username: string }) {
