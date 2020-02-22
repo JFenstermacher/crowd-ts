@@ -70,7 +70,7 @@ export class CrowdApplication extends Api {
     });
   }
 
-  public async updateUser(req: any) {
+  public async updateUser(req: User) {
     const { name: username } = req;
 
     return this.request({
@@ -91,9 +91,55 @@ export class CrowdApplication extends Api {
     });
   }
 
-  private convertAttrs(attrs: { attributes: { link: any, name: string, values: string[] }[]  }): Attributes {
+  public async getUserAttribues(req: { username: string }) {
+    const { username } = req;
+
+    const { attributes } = await this.request({
+      params: { username },
+      url: 'rest/usermanagement/1/user/attribute'
+    });
+
+    return this.convertAttrToObj(attributes);
+  }
+
+  public async updateUserAttributes(req: { username: string, attributes: Attributes }) {
+    const { username, attributes } = req;
+
+    const data = { attributes: this.convertAttrToList(attributes) };
+
+    return this.request({
+      data,
+      method: 'POST',
+      params: { username },
+      url: 'rest/usermanagement/1/user/attribute'
+    })
+  }
+
+  public async deleteUserAttributes(req: { username: string, attributeNames: string[] }) {
+    const { username, attributeNames } = req;
+
+    const deleteAttr = async (attributeName: string) => this.request({
+      method: 'DELETE',
+      params: { username, attributeName },
+      url: 'rest/usermanagement/1/user/attribute'
+    })
+
+    return await Promise.all(attributeNames.map( name => deleteAttr(name) ));
+  }
+
+  private convertAttrToObj(attrs: { attributes: { link: any, name: string, values: string[] }[]  }): Attributes {
     const { attributes } = attrs;
 
     return Object.assign({}, ...attributes.map( attr => ({ [attr.name]: attr.values.join('') })));
+  }
+
+  private convertAttrToList(attrs: Attributes): { name: string, values: string[] }[] {
+    const retval = [];
+
+    for (const [name, value] of Object.entries(attrs)) {
+      retval.push({ name, values: [value] });
+    }
+
+    return retval;
   }
 }
