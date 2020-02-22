@@ -25,54 +25,53 @@ const crowd = new CrowdApplication({
 const readJSON = async (filename: string) => fs.promises.readFile(filename)
   .then( bytes => JSON.parse(bytes.toString()) );
 
-const initializeUsers = async () => {
-  const user = await readJSON(USER_TEMPLATE);
-
-  const users = Array.from({ length: 2 }, (_, i) => ({
+const generateUser = function*() {
+  for (let i = 1; ; i++) yield {
     active: true,
-    name: `${i}testuser`,
-    password: user.password,
-    'first-name': `${i} ${user['first-name']}`,
-    'last-name': `${i} ${user['last-name']}`,
-    'display-name': `${i} ${user['display-name']}`,
-    email: user.email
-  }));
+    name: `${i} testuser`,
+    password: CROWD_PASSWORD,
+    'first-name': `${i} test`,
+    'last-name': 'user',
+    'display-name': `${i} test user`,
+    email: `${i}test@test.com`
+  };
+}
+
+const initializeUsers = async () => {
+  const users = Array.from({ length: 2 }, () => generateUser().next().value );
 
   await Promise.all(users.map( user => crowd.addUser(user) ))
 }
 
-const initializeGroups = async (crowd: CrowdApplication) => {
-  const group = await readJSON(`groups.template.json`);
-}
-
-beforeAll( async () => {
-  await Promise.all([
-    initializeUsers(),
-  ])
+beforeAll(async () => {
+  await initializeUsers();
 })
 
-test('adding user', async () => {
-  const user = await readJSON(USER_TEMPLATE);
+describe('Testing Crowd user functionalities', () => {
+  const users = [];
 
-  await crowd.addUser(user);
+  test('adding user', async () => {
+    const user = await readJSON(USER_TEMPLATE);
+
+    await crowd.addUser(user);
+  })
+  
+  test('removing user', async () => {
+    const user = await readJSON(USER_TEMPLATE);
+    await crowd.removeUser({ username: user.name });
+  })
 })
 
-test('removing user', async () => {
-  const username = '0testuser';
+// test('update user', async () => {
+//   const username = '1testuser';
 
-  const response = await crowd.removeUser({ username })
-})
+//   const { 'created-date': cd, 'updated-date': ud, ...user }= await crowd.getUser({ username });
 
-test('update user', async () => {
-  const username = '1testuser';
+//   user.email = 'testing@testing.com';
 
-  const { 'created-date': cd, 'updated-date': ud, ...user }= await crowd.getUser({ username });
+//   const response = await crowd.updateUser(user);
 
-  user.email = 'testing@testing.com';
+//   const update = await crowd.getUser({ username });
 
-  const response = await crowd.updateUser(user);
-
-  const update = await crowd.getUser({ username });
-
-  expect(update.email).toEqual(user.email);
-})
+//   expect(update.email).toEqual(user.email);
+// })
