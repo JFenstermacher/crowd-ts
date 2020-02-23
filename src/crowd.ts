@@ -44,7 +44,7 @@ interface PaginatedRequest {
 
 interface GetUserGroups extends PaginatedRequest {
   username: string,
-  queryType?: 'direct' | 'nested',
+  nested?: boolean,
   expand?: boolean
 }
 
@@ -68,6 +68,24 @@ export class CrowdApplication extends Api {
 
   constructor(config: ApiConfig) {
     super(Object.assign({}, config, { baseURL: `${config.baseURL}/rest/usermanagement/1` }));
+  }
+
+  @convertResponse('User')
+  public async authenticateUser(req: { username: string, password: string }) {
+    const { username, password } = req;
+
+    return this.request({
+      method: 'POST',
+      params: { username },
+      data: { value: password },
+      url: 'authentication'
+    });
+  }
+
+  public async getConfig() {
+    return this.request({
+      url: 'config/cookie'
+    });
   }
 
   @convertResponse('Group')
@@ -234,16 +252,16 @@ export class CrowdApplication extends Api {
 
   @convertResponse('Group')
   public async getUserGroups(req: GetUserGroups) {
-    const { username, queryType = 'direct', expand = false, ...params } = req;
+    const { username, nested = false, expand = false, ...params } = req;
 
     return this.makePaginatedRequest({
       params: Object.assign({}, params, {
         expand: expand ? 'group' : undefined,
         username,
       }),
-      url: `user/group/${queryType}`,
+      url: `user/group/${nested ? 'nested' : 'direct'}`,
       queryType: 'groups'
-    })
+    });
   }
 
   public async search(req: SearchRequest) {
