@@ -48,6 +48,22 @@ interface GetUserGroups extends PaginatedRequest {
   expand?: boolean
 }
 
+interface SearchRequest extends PaginatedRequest {
+  entityType: 'group' | 'user',
+  restriction?: string
+  expand?: boolean | string[]
+}
+
+interface SearchUsersRequest extends PaginatedRequest {
+  restriction?: string,
+  expand?: boolean | string[] 
+}
+
+interface SearchGroupsRequest extends PaginatedRequest {
+  restriction?: string,
+  expand?: boolean | string[]
+}
+
 export class CrowdApplication extends Api {
 
   constructor(config: ApiConfig) {
@@ -218,18 +234,56 @@ export class CrowdApplication extends Api {
 
   @convertResponse('Group')
   public async getUserGroups(req: GetUserGroups) {
-    const { username, queryType = 'direct', expand = false } = req;
+    const { username, queryType = 'direct', expand = false, ...params } = req;
 
     return this.makePaginatedRequest({
-      params: {
+      params: Object.assign({}, params, {
         expand: expand ? 'group' : undefined,
         username,
-      },
+      }),
       url: `user/group/${queryType}`,
       queryType: 'groups'
     })
   }
 
+  public async search(req: SearchRequest) {
+    const { entityType, ...request } = req;
+
+    return entityType === 'user' ? this.searchUsers(request) : this.searchGroups(request);
+  }
+
+  @convertResponse('User')
+  private async searchUsers(req: SearchUsersRequest) {
+    const { expand = [], ...params } = req;
+    
+    const expansionParam = typeof expand === 'boolean' ? 'user,attributes' : expand.join(',');
+
+    return this.makePaginatedRequest({
+      params: Object.assign({}, params, {
+        expand: expansionParam.length ? expansionParam : undefined,
+        'entity-type': 'user'
+      }),
+      url: 'search',
+      queryType: 'users'
+    })
+  }
+
+  @convertResponse('Group')
+  private async searchGroups(req: SearchGroupsRequest) {
+    const { expand = [], ...params } = req;
+
+    const expansionParam = typeof expand === 'boolean' ? 'group,attributes' : expand.join(',');
+
+    return this.makePaginatedRequest({
+      params: Object.assign({}, params, {
+        expand: expansionParam.length ? expansionParam : undefined,
+        'entity-type': 'group'
+      }),
+      url: 'search',
+      queryType: 'groups'
+    })
+  }
+  
   private async makePaginatedRequest<T>(req: AxiosRequestConfig & { queryType: string }): Promise<T[]> {
     const { queryType, ...requestParams } = req;
     const { maxResults = 1000, startIndex = 0, ...params } = requestParams.params;
