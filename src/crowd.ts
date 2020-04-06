@@ -6,6 +6,7 @@ import { convertResponse, convertAttrToList } from './utilities';
 enum EntityType {
   ATTRIBUTES = 'attributes',
   GROUP = 'group',
+  TOKEN = 'token',
   USER = 'user'
 }
 
@@ -443,6 +444,47 @@ export class CrowdApplication extends Api {
       },
       url: 'search',
       queryType: QueryTypes.GROUPS
+    });
+  }
+
+  public async deleteUserToken(req: DeleteUserTokenRequest): Promise<any> {
+    const { name: username, exclude } = req;
+
+    return this.request({
+      params: {
+        exclude,
+        username 
+      },
+      method: Method.DELETE,
+      url: 'session'
+    });
+  }
+
+  public async invalidateToken(req: InvalidateUserTokenRequest) {
+    const { token } = req;
+
+    return this.request({
+      method: Method.DELETE,
+      url: `session/${token}`
+    });
+  }
+
+  @convertResponse('token')
+  public async ValidateToken(req: ValidateTokenRequest) {
+    const { token } = req;
+
+    return this.request({
+      method: Method.POST,
+      url: `session/${token}`
+    });
+  }
+
+  @convertResponse('token')
+  public async getSession(req: GetSessionRequest) {
+    const { token } = req;
+
+    return this.request({
+      url: `session/${token}`
     });
   }
   

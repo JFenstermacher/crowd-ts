@@ -16,6 +16,12 @@ const CONVERSION_KEYS: { [key: string]: string[] } = {
     'attributes',
     'created-date',
     'updated-date',
+  ],
+  token: [
+    'token',
+    'user',
+    'created-date',
+    'expiry-date'
   ]
 }
 

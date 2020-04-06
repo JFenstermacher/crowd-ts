@@ -24,6 +24,13 @@ type Attributes = {
   [key: string]: string
 }
 
+type Token = {
+  token: string
+  user: { name: string } 
+  'created-date': string
+  'expiry-date': string
+}
+
 type Config = {
   domain: string
   secure: false
@@ -187,6 +194,23 @@ interface RemoveUserPasswordRequest {
 interface RenameUserRequest {
   name: string
   newname: string
+}
+
+interface DeleteUserTokenRequest {
+  name: string
+  exclude?: string
+}
+
+interface InvalidateUserTokenRequest {
+  token: string
+}
+
+interface ValidateTokenRequest {
+  token: string
+}
+
+interface GetSessionRequest {
+  token: string
 }
 
 interface SearchUsersRequest extends PaginatedRequest {
