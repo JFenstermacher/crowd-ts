@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig, AxiosInstance } from 'axios';
-import pRetry from 'p-retry';
 import pQueue from 'p-queue';
 
 export interface ApiConfig extends AxiosRequestConfig {
@@ -7,25 +6,26 @@ export interface ApiConfig extends AxiosRequestConfig {
   retries?: number
 }
 
+export enum Method {
+  GET = 'GET',
+  DELETE = 'DELETE',
+  POST = 'POST',
+  PUT = 'PUT',
+}
+
 export class Api {
   public instance: AxiosInstance;
   public queue: pQueue;
-  public retries: number;
 
   constructor(apiConfig: ApiConfig) {
-    const { concurrency = 5, retries = 0, ...config } = apiConfig;
+    const { concurrency = 10, ...config } = apiConfig;
 
     this.instance = axios.create(config);
     this.queue = new pQueue({ concurrency });
-    this.retries = retries;
   }
 
   public async request(params: AxiosRequestConfig) {
-    const run = () => pRetry(() => this.instance.request(params), { 
-      retries: this.retries
-    });
-
-    const { data } = await this.queue.add(() => run());
+    const { data } = await this.queue.add(() => this.instance.request(params) );
 
     return data;
   }

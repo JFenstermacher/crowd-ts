@@ -1,13 +1,11 @@
-import { Attributes } from './crowd';
-
 const CONVERSION_KEYS: { [key: string]: string[] } = {
-  Group: [
+  group: [
     'name',
     'active',
     'description',
     'attributes'
   ],
-  User: [
+  user: [
     'name',
     'active',
     'first-name',
@@ -34,10 +32,15 @@ const convertResponse = (type: string) => {
 }
 
 const convertObj = (obj: any, type: string) => {
-  if (type === 'attributes') return convertAttrToObj(obj.attributes);
+  if (type === 'attributes') return convertAttrToObj(obj);
 
   const keys = CONVERSION_KEYS[type];
-  const retval = Object.assign({}, ...keys.map( (key) => ({ [key]: obj[key] }) ))
+
+  const entries = keys
+    .filter( key => obj[key] !== undefined )
+    .map( key => ({ [key]: obj[key] }) );
+
+  const retval = Object.assign({}, ...entries);
 
   const { attributes } = retval;
 

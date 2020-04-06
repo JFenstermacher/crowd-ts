@@ -1,170 +1,294 @@
-import { Api, ApiConfig } from './api';
-import axios from 'axios';
 import { AxiosRequestConfig } from 'axios';
+import * as Parser from 'node-xml-stream';
+import { Api, ApiConfig, Method } from './api';
 import { convertResponse, convertAttrToList } from './utilities';
 
-export type Attributes = {
-  [key: string]: string
+enum EntityType {
+  ATTRIBUTES = 'attributes',
+  GROUP = 'group',
+  USER = 'user'
 }
 
-type User = {
-  name: string,
-  active: boolean,
-  'first-name': string,
-  'last-name': string,
-  'display-name': string,
-  email: string,
-  key?: string,
-  attributes?: Attributes
-  'created-date'?: string,
-  'updated-date'?: string
-}
-
-type Group = {
-  name: string,
-  active?: boolean,
-  description?: string
-  attributes?: Attributes
-}
-
-interface GetUserRequest {
-  username?: string,
-  key?: string
-  expand?: boolean 
-}
-
-interface AddUserRequest extends User {
-  password: string
-}
-
-interface PaginatedRequest {
-  maxResults?: number,
-  startIndex?: number
-}
-
-interface GetUserGroups extends PaginatedRequest {
-  username: string,
-  nested?: boolean,
-  expand?: boolean
-}
-
-interface SearchRequest extends PaginatedRequest {
-  entityType: 'group' | 'user',
-  restriction?: string
-  expand?: boolean | string[]
-}
-
-interface SearchUsersRequest extends PaginatedRequest {
-  restriction?: string,
-  expand?: boolean | string[] 
-}
-
-interface SearchGroupsRequest extends PaginatedRequest {
-  restriction?: string,
-  expand?: boolean | string[]
+enum QueryTypes {
+  GROUPS = 'groups',
+  USERS = 'users'
 }
 
 export class CrowdApplication extends Api {
 
   constructor(config: ApiConfig) {
-    super(Object.assign({}, config, { baseURL: `${config.baseURL}/rest/usermanagement/1` }));
+    super({
+      ...config,
+      baseURL: `${config.baseURL}/rest/usermanagement/1`
+    });
   }
 
-  @convertResponse('User')
-  public async authenticateUser(req: { username: string, password: string }) {
-    const { username, password } = req;
+  /**
+   * 
+   * @param req 
+   * @param req.username 
+   */
+  @convertResponse(EntityType.USER)
+  public async authenticateUser(req: AuthenticateUserRequest): Promise<User> {
+    const { name: username, password } = req;
 
     return this.request({
-      method: 'POST',
+      method: Method.POST,
       params: { username },
       data: { value: password },
       url: 'authentication'
     });
   }
 
-  public async getConfig() {
+  public async getConfig(): Promise<Config> {
     return this.request({
       url: 'config/cookie'
     });
   }
 
-  @convertResponse('Group')
-  public async getGroup(req: { groupname: string, expand?: boolean }) {
-    const { groupname, expand = false } = req;
+  /**
+   * 
+   * @param {GetGroupRequest} req 
+   */
+  @convertResponse(EntityType.GROUP)
+  public async getGroup(req: GetGroupRequest): Promise<Group> {
+    const { name, expand = false } = req;
 
     return this.request({
       params: {
+        groupname: name,
         expand: expand ? 'attributes' : undefined,
-        groupname 
       },
       url: 'group'
     });
   }
 
-  @convertResponse('Group')
-  public async addGroup(req: { groupname: string, description?: string }) {
-    const response = await this.request({
-      data: Object.assign({}, req, { type: "GROUP" }),
-      method: 'POST',
+  @convertResponse(EntityType.GROUP)
+  public async addGroup(req: AddGroupRequest): Promise<Group> {
+    return this.request({
+      data: {
+        ...req,
+        type: "GROUP"
+      },
+      method: Method.POST,
       url: 'group'
     });
-
-    return response;
   }
 
-  public removeGroup = async(req: { groupname: string }) => this.request({
-    method: 'DELETE',
-    params: req,
-    url: 'group'
-  })
+  public async removeGroup(req: RemoveGroupRequest): Promise<void> {
+    return this.request({
+      method: Method.DELETE,
+      params: { groupname: req.name },
+      url: 'group'
+    });
+  }
 
-  @convertResponse('Group')
-  public async updateGroup(req: { name: string, description?: string }) {
-    const { name } = req;
+  @convertResponse(EntityType.GROUP)
+  public async updateGroup(req: UpdateGroupRequest): Promise<Group> {
+    const { name, ...data } = req;
 
     return this.request({
-      data: Object.assign({}, req, { type: 'GROUP' }),
+      method: Method.PUT,
+      data: {
+        ...data,
+        name,
+        type: 'GROUP'
+      },
       params: { groupname: name },
       url: 'group'
     });
   }
 
-  @convertResponse('Attributes')
-  public async getGroupAttributes(req: { groupname: string }) {
-    const { attributes } = await this.request({
-      params: req,
+  @convertResponse(EntityType.ATTRIBUTES)
+  public async getGroupAttributes(req: GetGroupAttributesRequest): Promise<Attributes> {
+    return this.request({
+      params: { groupname: req.name },
       url: 'group/attribute'
-    })
-
-    return attributes;
+    });
   }
 
-  public async updateGroupAttributes(req: { groupname: string, attributes: Attributes }) {
-    const { groupname, attributes } = req;
-
+  public async updateGroupAttributes(req: UpdateUserAttributesRequest): Promise<void> {
+    const { name: groupname, attributes } = req;
     const data = { attributes: convertAttrToList(attributes) };
 
     return this.request({
       data,
-      method: 'POST',
+      method: Method.POST,
       params: { groupname },
       url: 'group/attribute'
     });
   }
 
-  public async deleteGroupAttribute(req: { groupname: string, attributeName: string }) {
+  public async removeGroupAttribute(req: RemoveGroupAttributeRequest): Promise<void> {
+    const { name: groupname, attributename } = req;
     return this.request({
-      method: 'DELETE',
-      params: req,
+      method: Method.DELETE,
+      params: { 
+        attributename,
+        groupname
+      },
       url: 'group/attribute'
-    })
+    });
   }
 
-  @convertResponse('User')
-  public async getUser(req: GetUserRequest): Promise<User> {
-    const { username, key, expand = false } = req;
+  @convertResponse(EntityType.GROUP)
+  public async getGroupChildren(req: GetGroupChildrenRequest): Promise<Groups> {
+    let { name, expand, nested = false, ...params } = req;
 
-    if (!username && !key) throw new Error("Provide either [username,key]");
+    return this.makePaginatedRequest({
+      queryType: QueryTypes.GROUPS,
+      params: {
+        ...params,
+        groupname: name,
+        expand: this._createExpandParam(expand)
+      },
+      url: `group/child-group/${nested ? 'nested' : 'direct'}`,
+    });
+  }
+
+  public async addGroupChild(req: AddGroupChildRequest): Promise<void> {
+    const { name: groupname, childname } = req;
+
+    return this.request({
+      data: { name: childname },
+      params: { groupname },
+      url: 'group/child-group/direct',
+      method: Method.POST,
+    });
+  }
+
+  public async removeGroupChild(req: RemoveGroupChildRequest): Promise<void> {
+    const { name: groupname, childname } = req;
+
+    return this.request({
+      params: { 
+        'child-groupname': childname,
+        groupname
+      },
+      url: 'group/child-group/direct',
+      method: Method.DELETE
+    });
+  }
+
+  @convertResponse(EntityType.GROUP)
+  public async getGroupParents (req: GetGroupParentsRequest): Promise<Groups> {
+    const { name, expand, nested = false, ...params } = req; 
+
+    return this.makePaginatedRequest({
+      queryType: QueryTypes.GROUPS,
+      params: {
+        ...params,
+        groupname: name,
+        expand: this._createExpandParam(expand),
+      },
+      url: `group/parent-group/${nested ? 'nested': 'direct'}`
+    });
+  }
+
+  public async addParentGroup(req: AddGroupParentRequest): Promise<void> {
+    const { name: groupname, parentname: name } = req;
+    return this.request({
+      data: { name },
+      params: { groupname },
+      url: 'group/parent-group/direct',
+      method: Method.POST
+    });
+  }
+
+  @convertResponse(EntityType.USER)
+  public async getGroupUsers(req: GetGroupUsersRequest): Promise<Users> {
+    let { name, expand, nested = false, ...params } = req;
+
+    return this.makePaginatedRequest({
+      queryType: QueryTypes.USERS,
+      params: {
+        ...params,
+        groupname: name,
+        expand: this._createExpandParam(expand)
+      },
+      url: `group/user/${nested ? 'nested': 'direct'}`
+    });
+  }
+
+  public async addGroupToUser(req: AddUserToGroupRequest) {
+    const { name: groupname, username } = req;
+
+    return this.request({
+      data: { name: username },
+      params: {
+        groupname,
+      },
+      url: 'group/user/direct',
+      method: Method.POST
+    });
+  }
+
+  public async removeGroupFromUser(req: removeGroupFromUserRequest): Promise<void> {
+    const { name: groupname, username } = req;
+
+    return this.request({
+      params: {
+        groupname,
+        username
+      },
+      url: 'group/user/direct',
+      method: Method.DELETE
+    });
+  }
+
+  public async getAllMemberships(): Promise<Memberships> {
+    const parser = new Parser();
+
+    const memberships: Memberships = {};
+
+    const stream = await this.request({
+      url: 'group/membership',
+      responseType: 'stream'
+    });
+
+    stream.pipe(parser);
+
+    let currMem;
+    let curr: Membership = { users: [], groups: [] };
+
+    parser.on('opentag', (name: string, attr: any) => {
+      switch(name) {
+        case 'membership': {
+          currMem = attr.group;
+          curr = {
+            users: [],
+            groups: []
+          }
+          memberships[currMem] = curr;
+          break;
+        }
+        case 'user': {
+          const { name } = attr as { name: string }
+          const cleaned = name.split(' ').shift() as string;
+          curr.users.push(cleaned);
+          break;
+        }
+        case 'group': {
+          const { name } = attr as { name: string }
+          const cleaned = name.split(' ').shift() as string;
+          curr.groups.push(cleaned);
+          break;
+        }
+      }
+    });
+
+    return new Promise( (resolve) => {
+      parser.on('finish', () => {
+        resolve(memberships);
+      })
+    });
+  }
+
+  @convertResponse(EntityType.USER)
+  public async getUser(req: GetUserRequest): Promise<User> {
+    const { expand = false } = req;
+    const username = (req as any).name;
+    const key = (req as any).key;
 
     const params = {
       expand: expand ? 'attributes' : undefined,
@@ -178,8 +302,8 @@ export class CrowdApplication extends Api {
     });
   }
   
-  @convertResponse('User')
-  public async addUser(req: AddUserRequest) {
+  @convertResponse(EntityType.USER)
+  public async addUser(req: AddUserRequest): Promise<User> {
     const data: any = {
       name: req.name,
       password: { value: req.password },
@@ -192,114 +316,134 @@ export class CrowdApplication extends Api {
 
     return this.request({
       data: data,
-      method: 'POST',
+      method: Method.POST,
       url: 'user'
     });
   }
 
-  @convertResponse('User')
-  public async updateUser(req: User) {
-    const { name: username } = req;
-
+  public async updateUser(req: UpdateUserRequest): Promise<void> {
     return this.request({
       data: req,
-      method: 'PUT',
-      params: { username },
+      method: Method.PUT,
+      params: { username: req.name },
       url: 'user'
     })
   }
 
-  public removeUser = async(req: { username: string }) => {
+  public async removeUser(req: RemoveUserRequest): Promise<void> {
     return this.request({
-      method: 'DELETE',
-      params: req,
+      method: Method.DELETE,
+      params: { username: req.name },
       url: 'user'
     });
   }
   
-  @convertResponse('Attributes')
-  public async getUserAttribues(req: { username: string }) {
-    const { username } = req;
-
-    const { attributes } = await this.request({
-      params: { username },
+  @convertResponse(EntityType.ATTRIBUTES)
+  public async getUserAttribues(req: GetUserAttributesRequest): Promise<Attributes> {
+    return this.request({
+      params: { username: req.name },
       url: 'user/attribute'
     });
-
-    return attributes;
   }
 
-  public async updateUserAttributes(req: { username: string, attributes: Attributes }) {
-    const { username, attributes } = req;
+  public async updateUserAttributes(req: UpdateUserAttributesRequest): Promise<void> {
+    const { name: username, attributes } = req;
 
     const data = { attributes: convertAttrToList(attributes) };
 
     return this.request({
       data,
-      method: 'POST',
+      method: Method.POST,
       params: { username },
       url: 'user/attribute'
-    })
+    });
   }
 
-  public async deleteUserAttributes(req: { username: string, attributeName: string }) {
+  public async removeUserAttribute(req: RemoveUserAttributeRequest): Promise<void> {
+    const { name: username, attributename } = req;
     return this.request({
       method: 'DELETE',
-      params: req,
+      params: {
+        attributename,
+        username
+      },
       url: 'user/attribute'
     });
   }
 
-  @convertResponse('Group')
-  public async getUserGroups(req: GetUserGroups) {
-    const { username, nested = false, expand = false, ...params } = req;
+  @convertResponse(EntityType.GROUP)
+  public async getUserGroups(req: GetUserGroups): Promise<Groups> {
+    const { name: username, nested = false, expand = false } = req;
 
     return this.makePaginatedRequest({
-      params: Object.assign({}, params, {
-        expand: expand ? 'group' : undefined,
-        username,
-      }),
+      params: {
+        expand: this._createExpandParam(expand),
+        username
+      },
       url: `user/group/${nested ? 'nested' : 'direct'}`,
-      queryType: 'groups'
+      queryType: QueryTypes.GROUPS
     });
   }
 
-  public async search(req: SearchRequest) {
-    const { entityType, ...request } = req;
+  public async updateUserPassword(req: UpdateUserPasswordRequest): Promise<void> {
+    const { name: username, password } = req;
 
-    return entityType === 'user' ? this.searchUsers(request) : this.searchGroups(request);
+    return this.request({
+      data: { value: password },
+      method: Method.PUT,
+      params: { username },
+      url: 'user/password'
+    });
   }
 
-  @convertResponse('User')
-  private async searchUsers(req: SearchUsersRequest) {
-    const { expand = [], ...params } = req;
-    
-    const expansionParam = typeof expand === 'boolean' ? 'user,attributes' : expand.join(',');
-
-    return this.makePaginatedRequest({
-      params: Object.assign({}, params, {
-        expand: expansionParam.length ? expansionParam : undefined,
-        'entity-type': 'user'
-      }),
-      url: 'search',
-      queryType: 'users'
-    })
+  public async removeUserPassword(req: RemoveUserPasswordRequest): Promise<void> {
+    return this.request({
+      method: Method.DELETE,
+      params: { username: req.name },
+      url: 'user/password'
+    });
   }
 
-  @convertResponse('Group')
-  private async searchGroups(req: SearchGroupsRequest) {
-    const { expand = [], ...params } = req;
+  @convertResponse(EntityType.USER)
+  public async renameUser(req: RenameUserRequest): Promise<User> {
+    const { name: username, newname } = req;
 
-    const expansionParam = typeof expand === 'boolean' ? 'group,attributes' : expand.join(',');
+    return this.request({
+      data: { 'new-name': newname },
+      params: { username },
+      url: 'user/rename',
+      method: Method.POST
+    });
+  }
+
+  @convertResponse(EntityType.USER)
+  public async searchUsers(req: SearchUsersRequest = {}): Promise<Users> {
+    const { expand, ...params } = req;
 
     return this.makePaginatedRequest({
-      params: Object.assign({}, params, {
-        expand: expansionParam.length ? expansionParam : undefined,
-        'entity-type': 'group'
-      }),
+      params: {
+        ...params,
+        expand: this._createExpandParam(expand),
+        'entity-type': EntityType.USER
+      },
       url: 'search',
-      queryType: 'groups'
-    })
+      queryType: QueryTypes.USERS
+    });
+  }
+
+  @convertResponse(EntityType.GROUP)
+  public async searchGroups(req: SearchGroupsRequest = {}): Promise<Groups> {
+    const { expand, ...params } = req;
+
+    return this.makePaginatedRequest({
+      params: {
+        ...params,
+        expand: this._createExpandParam(expand),
+        'entity-type': EntityType.GROUP
+      },
+      url: 'search',
+      queryType: QueryTypes.GROUPS
+    });
   }
   
   private async makePaginatedRequest<T>(req: AxiosRequestConfig & { queryType: string }): Promise<T[]> {
@@ -319,11 +463,19 @@ export class CrowdApplication extends Api {
 
       results.push(...response);
 
-      if (response.length < maxResults) break;
+      if (response.length < Math.min(maxResults, 1000)) break;
 
-      requestParams.params['start-index'] += maxResults;
+      requestParams.params['start-index'] += response.length;
     }
 
     return results;
+  }
+
+  private _createExpandParam(expand?: boolean | string[]): string | undefined {
+    expand = expand ? expand : [];
+
+    const param = Array.isArray(expand) ? expand.join(',') : 'user,group,attributes';
+
+    return param.length ? param: undefined;
   }
 }
