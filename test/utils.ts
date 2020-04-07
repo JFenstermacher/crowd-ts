@@ -1,4 +1,6 @@
 import { randomBytes } from 'crypto';
+import { CrowdApplication } from '../src/crowd';
+require('dotenv').config({ path: `${__dirname}/.env` });
 
 // I don't know why I'm doing all this...
 // I guess I'm just feeling silly.
@@ -16,7 +18,7 @@ const generateUser = function*(): Generator<User & { password: string }, User & 
   const set = new Set();
 
   for (let n1 = getRandomEle(names), n2 = getRandomEle(names);;) {
-    const username = `${n1[0].toLowerCase()}${n2.toLowerCase()}`;
+    const username = `${n1[0].toLowerCase()}${n2.toLowerCase()}-${generateRandomString().slice(0,6)}`;
 
     if (set.has(username)) continue;
     yield {
@@ -57,4 +59,32 @@ const generateRandomString = (password = false) => {
   return password ? `${randomString}${specials[((Math.random() * 3) | 0) % 3]}` : randomString;
 }
 
-export { generateRandomString, generateUser, generateGroup, getRandomEle }
+const getCrowd = () => {
+  const { BASE_URL, CROWD_USERNAME = '', CROWD_PASSWORD = '' } = process.env;
+
+  return new CrowdApplication({
+    baseURL: BASE_URL,
+    auth: {
+      username: CROWD_USERNAME,
+      password: CROWD_PASSWORD
+    }
+  })
+}
+
+const addGroupsByCount = async (crowd: CrowdApplication, length: number) => {
+  const groups = Array.from({ length }, () => generateGroup().next().value );
+
+  await Promise.all(groups.map( (group) => crowd.addGroup(group) ));
+
+  return groups;
+}
+
+const addUsersByCount = async(crowd: CrowdApplication, length: number) => {
+  const users = Array.from({ length }, () => generateUser().next().value );
+
+  await Promise.all(users.map( (user) => crowd.addUser(user) ));
+
+  return users;
+}
+
+export { addGroupsByCount, addUsersByCount, generateRandomString, generateUser, generateGroup, getRandomEle, getCrowd }

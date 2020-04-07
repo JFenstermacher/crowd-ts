@@ -7,6 +7,7 @@ type User = {
   'display-name': string
   email: string
   key?: string
+  password?: string
   attributes?: Attributes
   'created-date'?: string
   'updated-date'?: string
@@ -196,9 +197,16 @@ interface RenameUserRequest {
   newname: string
 }
 
-interface DeleteUserTokenRequest {
+interface DeleteTokenRequest {
   name: string
   exclude?: string
+}
+
+interface GetTokenRequest {
+  name: string
+  password: string
+  validate?: boolean
+  duration?: string
 }
 
 interface InvalidateUserTokenRequest {

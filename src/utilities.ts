@@ -48,9 +48,10 @@ const convertObj = (obj: any, type: string) => {
 
   const retval = Object.assign({}, ...entries);
 
-  const { attributes } = retval;
+  const { attributes, user } = retval;
 
   if (attributes) retval.attributes = convertAttrToObj(attributes);
+  if (user) retval.user = convertObj(user, 'user');
 
   return retval;
 }

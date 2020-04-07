@@ -25,22 +25,29 @@ export class CrowdApplication extends Api {
   }
 
   /**
+   * Authenticates user, and returns user
    * 
-   * @param req 
-   * @param req.username 
+   * @param {object} req 
+   * @param {object} req.name
+   * @param {string} req.password
    */
   @convertResponse(EntityType.USER)
   public async authenticateUser(req: AuthenticateUserRequest): Promise<User> {
-    const { name: username, password } = req;
-
     return this.request({
       method: Method.POST,
-      params: { username },
-      data: { value: password },
+      params: { username: req.name },
+      data: { value: req.password },
       url: 'authentication'
     });
   }
 
+  /**
+   *  @return {object} {
+   *    domain: string
+   *    secure: string
+   *    name: string
+   *  }
+   */
   public async getConfig(): Promise<Config> {
     return this.request({
       url: 'config/cookie'
@@ -53,12 +60,10 @@ export class CrowdApplication extends Api {
    */
   @convertResponse(EntityType.GROUP)
   public async getGroup(req: GetGroupRequest): Promise<Group> {
-    const { name, expand = false } = req;
-
     return this.request({
       params: {
-        groupname: name,
-        expand: expand ? 'attributes' : undefined,
+        groupname: req.name,
+        expand: req.expand ? 'attributes' : undefined,
       },
       url: 'group'
     });
@@ -86,15 +91,15 @@ export class CrowdApplication extends Api {
 
   @convertResponse(EntityType.GROUP)
   public async updateGroup(req: UpdateGroupRequest): Promise<Group> {
-    const { name, ...data } = req;
+    const { name, description } = req;
+
+    const data: any = { name, type: 'GROUP' };
+
+    if (description) data.description = description;
 
     return this.request({
+      data,
       method: Method.PUT,
-      data: {
-        ...data,
-        name,
-        type: 'GROUP'
-      },
       params: { groupname: name },
       url: 'group'
     });
@@ -109,24 +114,22 @@ export class CrowdApplication extends Api {
   }
 
   public async updateGroupAttributes(req: UpdateUserAttributesRequest): Promise<void> {
-    const { name: groupname, attributes } = req;
-    const data = { attributes: convertAttrToList(attributes) };
-
     return this.request({
-      data,
+      data: {
+        attributes: convertAttrToList(req.attributes)
+      },
       method: Method.POST,
-      params: { groupname },
+      params: { groupname: req.name },
       url: 'group/attribute'
     });
   }
 
   public async removeGroupAttribute(req: RemoveGroupAttributeRequest): Promise<void> {
-    const { name: groupname, attributename } = req;
     return this.request({
       method: Method.DELETE,
       params: { 
-        attributename,
-        groupname
+        attributename: req.attributename,
+        groupname: req.name
       },
       url: 'group/attribute'
     });
@@ -134,37 +137,32 @@ export class CrowdApplication extends Api {
 
   @convertResponse(EntityType.GROUP)
   public async getGroupChildren(req: GetGroupChildrenRequest): Promise<Groups> {
-    let { name, expand, nested = false, ...params } = req;
-
     return this.makePaginatedRequest({
       queryType: QueryTypes.GROUPS,
       params: {
-        ...params,
-        groupname: name,
-        expand: this._createExpandParam(expand)
+        maxResults: req.maxResults,
+        startIndex: req.startIndex,
+        groupname: req.name,
+        expand: this._createExpandParam(req.expand)
       },
-      url: `group/child-group/${nested ? 'nested' : 'direct'}`,
+      url: `group/child-group/${req.nested ? 'nested' : 'direct'}`,
     });
   }
 
   public async addGroupChild(req: AddGroupChildRequest): Promise<void> {
-    const { name: groupname, childname } = req;
-
     return this.request({
-      data: { name: childname },
-      params: { groupname },
+      data: { name: req.childname },
+      params: { groupname: req.name },
       url: 'group/child-group/direct',
       method: Method.POST,
     });
   }
 
   public async removeGroupChild(req: RemoveGroupChildRequest): Promise<void> {
-    const { name: groupname, childname } = req;
-
     return this.request({
       params: { 
-        'child-groupname': childname,
-        groupname
+        'child-groupname': req.childname,
+        groupname: req.name
       },
       url: 'group/child-group/direct',
       method: Method.DELETE
@@ -173,24 +171,22 @@ export class CrowdApplication extends Api {
 
   @convertResponse(EntityType.GROUP)
   public async getGroupParents (req: GetGroupParentsRequest): Promise<Groups> {
-    const { name, expand, nested = false, ...params } = req; 
-
     return this.makePaginatedRequest({
       queryType: QueryTypes.GROUPS,
       params: {
-        ...params,
-        groupname: name,
-        expand: this._createExpandParam(expand),
+        maxResults: req.maxResults,
+        startIndex: req.startIndex,
+        groupname: req.name,
+        expand: this._createExpandParam(req.expand),
       },
-      url: `group/parent-group/${nested ? 'nested': 'direct'}`
+      url: `group/parent-group/${req.nested ? 'nested': 'direct'}`
     });
   }
 
   public async addParentGroup(req: AddGroupParentRequest): Promise<void> {
-    const { name: groupname, parentname: name } = req;
     return this.request({
-      data: { name },
-      params: { groupname },
+      data: { name: req.parentname },
+      params: { groupname: req.name },
       url: 'group/parent-group/direct',
       method: Method.POST
     });
@@ -198,26 +194,23 @@ export class CrowdApplication extends Api {
 
   @convertResponse(EntityType.USER)
   public async getGroupUsers(req: GetGroupUsersRequest): Promise<Users> {
-    let { name, expand, nested = false, ...params } = req;
-
     return this.makePaginatedRequest({
       queryType: QueryTypes.USERS,
       params: {
-        ...params,
-        groupname: name,
-        expand: this._createExpandParam(expand)
+        maxResults: req.maxResults,
+        startIndex: req.startIndex,
+        groupname: req.name,
+        expand: this._createExpandParam(req.expand)
       },
-      url: `group/user/${nested ? 'nested': 'direct'}`
+      url: `group/user/${req.nested ? 'nested': 'direct'}`
     });
   }
 
   public async addGroupToUser(req: AddUserToGroupRequest) {
-    const { name: groupname, username } = req;
-
     return this.request({
-      data: { name: username },
+      data: { name: req.username },
       params: {
-        groupname,
+        groupname: req.name,
       },
       url: 'group/user/direct',
       method: Method.POST
@@ -225,12 +218,10 @@ export class CrowdApplication extends Api {
   }
 
   public async removeGroupFromUser(req: removeGroupFromUserRequest): Promise<void> {
-    const { name: groupname, username } = req;
-
     return this.request({
       params: {
-        groupname,
-        username
+        groupname: req.name,
+        username: req.username
       },
       url: 'group/user/direct',
       method: Method.DELETE
@@ -287,12 +278,11 @@ export class CrowdApplication extends Api {
 
   @convertResponse(EntityType.USER)
   public async getUser(req: GetUserRequest): Promise<User> {
-    const { expand = false } = req;
     const username = (req as any).name;
     const key = (req as any).key;
 
     const params = {
-      expand: expand ? 'attributes' : undefined,
+      expand: req.expand ? 'attributes' : undefined,
       key,
       username
     };
@@ -323,8 +313,17 @@ export class CrowdApplication extends Api {
   }
 
   public async updateUser(req: UpdateUserRequest): Promise<void> {
+    const updatables = ['name', 'active', 'first-name', 'last-name', 'display-name', 'email'];
+
+    const data = updatables.reduce( (retval: any, curr: string) => {
+      const attr = (req as any)[curr];
+
+      if (attr) retval[curr] = attr;
+      return retval;
+    }, {});
+    
     return this.request({
-      data: req,
+      data: data,
       method: Method.PUT,
       params: { username: req.name },
       url: 'user'
@@ -348,25 +347,22 @@ export class CrowdApplication extends Api {
   }
 
   public async updateUserAttributes(req: UpdateUserAttributesRequest): Promise<void> {
-    const { name: username, attributes } = req;
-
-    const data = { attributes: convertAttrToList(attributes) };
-
     return this.request({
-      data,
+      data: {
+        attributes: convertAttrToList(req.attributes)
+      },
       method: Method.POST,
-      params: { username },
+      params: { username: req.name },
       url: 'user/attribute'
     });
   }
 
   public async removeUserAttribute(req: RemoveUserAttributeRequest): Promise<void> {
-    const { name: username, attributename } = req;
     return this.request({
       method: 'DELETE',
       params: {
-        attributename,
-        username
+        attributename: req.name,
+        username: req.name 
       },
       url: 'user/attribute'
     });
@@ -374,25 +370,21 @@ export class CrowdApplication extends Api {
 
   @convertResponse(EntityType.GROUP)
   public async getUserGroups(req: GetUserGroups): Promise<Groups> {
-    const { name: username, nested = false, expand = false } = req;
-
     return this.makePaginatedRequest({
       params: {
-        expand: this._createExpandParam(expand),
-        username
+        expand: this._createExpandParam(req.expand),
+        username: req.name
       },
-      url: `user/group/${nested ? 'nested' : 'direct'}`,
+      url: `user/group/${req.nested ? 'nested' : 'direct'}`,
       queryType: QueryTypes.GROUPS
     });
   }
 
   public async updateUserPassword(req: UpdateUserPasswordRequest): Promise<void> {
-    const { name: username, password } = req;
-
     return this.request({
-      data: { value: password },
+      data: { value: req.password },
       method: Method.PUT,
-      params: { username },
+      params: { username: req.name },
       url: 'user/password'
     });
   }
@@ -407,11 +399,9 @@ export class CrowdApplication extends Api {
 
   @convertResponse(EntityType.USER)
   public async renameUser(req: RenameUserRequest): Promise<User> {
-    const { name: username, newname } = req;
-
     return this.request({
-      data: { 'new-name': newname },
-      params: { username },
+      data: { 'new-name': req.newname },
+      params: { username: req.name },
       url: 'user/rename',
       method: Method.POST
     });
@@ -419,12 +409,11 @@ export class CrowdApplication extends Api {
 
   @convertResponse(EntityType.USER)
   public async searchUsers(req: SearchUsersRequest = {}): Promise<Users> {
-    const { expand, ...params } = req;
-
     return this.makePaginatedRequest({
       params: {
-        ...params,
-        expand: this._createExpandParam(expand),
+        maxResults: req.maxResults,
+        startIndex: req.startIndex,
+        expand: this._createExpandParam(req.expand),
         'entity-type': EntityType.USER
       },
       url: 'search',
@@ -434,12 +423,11 @@ export class CrowdApplication extends Api {
 
   @convertResponse(EntityType.GROUP)
   public async searchGroups(req: SearchGroupsRequest = {}): Promise<Groups> {
-    const { expand, ...params } = req;
-
     return this.makePaginatedRequest({
       params: {
-        ...params,
-        expand: this._createExpandParam(expand),
+        maxResults: req.maxResults,
+        startIndex: req.startIndex,
+        expand: this._createExpandParam(req.expand),
         'entity-type': EntityType.GROUP
       },
       url: 'search',
@@ -447,13 +435,27 @@ export class CrowdApplication extends Api {
     });
   }
 
-  public async deleteUserToken(req: DeleteUserTokenRequest): Promise<any> {
-    const { name: username, exclude } = req;
+  @convertResponse(EntityType.TOKEN)
+  public async getToken(req: any): Promise<any> {
+    return this.request({
+      data: {
+        username: req.name,
+        password: req.password
+      },
+      params: {
+        'validate-password': req.validate,
+        duration: req.duration
+      },
+      method: Method.POST,
+      url: 'session'
+    })
+  }
 
+  public async deleteToken(req: DeleteTokenRequest): Promise<any> {
     return this.request({
       params: {
-        exclude,
-        username 
+        exclude: req.exclude,
+        username: req.name 
       },
       method: Method.DELETE,
       url: 'session'
@@ -461,30 +463,24 @@ export class CrowdApplication extends Api {
   }
 
   public async invalidateToken(req: InvalidateUserTokenRequest) {
-    const { token } = req;
-
     return this.request({
       method: Method.DELETE,
-      url: `session/${token}`
+      url: `session/${req.token}`
     });
   }
 
   @convertResponse('token')
-  public async ValidateToken(req: ValidateTokenRequest) {
-    const { token } = req;
-
+  public async validateToken(req: ValidateTokenRequest) {
     return this.request({
       method: Method.POST,
-      url: `session/${token}`
+      url: `session/${req.token}`
     });
   }
 
   @convertResponse('token')
   public async getSession(req: GetSessionRequest) {
-    const { token } = req;
-
     return this.request({
-      url: `session/${token}`
+      url: `session/${req.token}`
     });
   }
   
