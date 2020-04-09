@@ -7,7 +7,7 @@ require('dotenv').config({ path: `${__dirname}/.env` });
 
 const getRandomEle = <T>(arr: T[]): T => arr[(Math.random() * arr.length | 0) % arr.length];
 
-const generateUser = function*(): Generator<User & { password: string }, User & { password: string }> {
+const generateUser = function*(): Generator<any, any> {
   const names = [
     'Noah',   'Liam',     'Mason',      'Jacob',      'William',
     'Ethan',  'James',    'Alexander',  'Michael',    'Benjamin',
@@ -74,7 +74,7 @@ const getCrowd = () => {
 const addGroupsByCount = async (crowd: CrowdApplication, length: number) => {
   const groups = Array.from({ length }, () => generateGroup().next().value );
 
-  await Promise.all(groups.map( (group) => crowd.addGroup(group) ));
+  await Promise.all(groups.map( (group) => crowd.group.create(group) ));
 
   return groups;
 }
@@ -82,7 +82,7 @@ const addGroupsByCount = async (crowd: CrowdApplication, length: number) => {
 const addUsersByCount = async(crowd: CrowdApplication, length: number) => {
   const users = Array.from({ length }, () => generateUser().next().value );
 
-  await Promise.all(users.map( (user) => crowd.addUser(user) ));
+  await Promise.all(users.map( (user) => crowd.user.create(user) ));
 
   return users;
 }

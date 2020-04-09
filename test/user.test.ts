@@ -11,7 +11,7 @@ beforeAll(async (done) => {
 })
 
 afterAll(async (done) => {
-  await Promise.all(users.map( user => crowd.removeUser(user) ));
+  await Promise.all(users.map( user => crowd.user.remove(user) ));
   done();
 })
 
@@ -19,7 +19,7 @@ describe('Testing user functionalities', () => {
   test('updating user attributes', async (done) => {
     await Promise.all(
       users.map( ({ name }) => 
-        crowd.updateUserAttributes({ name, attributes: { usertest: '123' } }) 
+        crowd.user.setAttributes({ name, attributes: { usertest: '123' } }) 
       )
     );
 
@@ -36,9 +36,9 @@ describe('Testing user functionalities', () => {
       }
     };
 
-    await crowd.updateUserAttributes(params);
+    await crowd.user.setAttributes(params);
 
-    const attrs = await crowd.getUserAttribues(user);
+    const attrs = await crowd.user.getAttributes(user);
     expect(attrs.usertest).toEqual('doge');
 
     done();
@@ -47,15 +47,15 @@ describe('Testing user functionalities', () => {
   test('removing attribute', async (done) => {
     const { name }= users[1];
 
-    await crowd.removeUserAttribute({ name, attributename: 'usertest' });
+    await crowd.user.removeAttribute({ name, attribute: 'usertest' });
     done();
   })
 
   test('getting user', async (done) => {
     const { name } = getRandomEle(users);
 
-    const noExpand = await crowd.getUser({ name });
-    const expand = await crowd.getUser({ name, expand: true });
+    const noExpand = await crowd.user.get({ name });
+    const expand = await crowd.user.get({ name, expand: true });
 
 
     const nAttrs = Object.keys(noExpand.attributes || {});
@@ -73,13 +73,13 @@ describe('Testing user functionalities', () => {
     user['first-name'] = 'tom';
     user['last-name'] = 'jerry';
 
-    await expect(crowd.updateUser(user)).resolves.toBeFalsy();
+    await expect(crowd.user.update(user)).resolves.toBeFalsy();
 
     done();
   })
 
   test('searching users', async (done) => {
-    let response = await crowd.searchUsers();
+    let response = await crowd.user.search();
     
     const names = new Set(users.map( ({ name }) => name ));
 
@@ -95,7 +95,7 @@ describe('Testing user functionalities', () => {
     const oldname = user.name;
 
     user.name = 'yoda';
-    const response = await crowd.renameUser({ name: oldname, newname: user.name });
+    const response = await crowd.user.rename({ name: oldname, newname: user.name });
 
     expect(response.name).toBe(user.name);
 
@@ -107,12 +107,12 @@ describe('Testing user functionalities', () => {
     const { name, password = '' } = user;
     const newPass = generateRandomString(true);
 
-    await crowd.authenticateUser({ name, password });
+    await crowd.user.authenticate({ name, password });
 
-    await crowd.updateUserPassword({ name, password: newPass });
+    await crowd.user.updatePassword({ name, password: newPass });
     user.password = newPass;
 
-    await crowd.authenticateUser({ name, password: newPass });
+    await crowd.user.authenticate({ name, password: newPass });
 
     done();
   })
@@ -120,9 +120,9 @@ describe('Testing user functionalities', () => {
   test('removing password', async (done) => {
     const { name, password = '' } = getRandomEle(users);
     
-    await crowd.removeUserPassword({ name });
+    await crowd.user.removePassword({ name });
 
-    await expect(crowd.authenticateUser({ name, password })).rejects.toThrow();
+    await expect(crowd.user.authenticate({ name, password })).rejects.toThrow();
 
     done();
   })

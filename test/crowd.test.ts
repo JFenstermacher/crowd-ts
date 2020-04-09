@@ -19,21 +19,21 @@ beforeAll(async (done) => {
 })
 
 afterAll(async (done) => {
-  await users.map( ({ name }) => crowd.removeUser({ name }) );
-  await groups.map( ({ name }) => crowd.removeGroup({ name }) );
+  await users.map( ({ name }) => crowd.user.remove({ name }) );
+  await groups.map( ({ name }) => crowd.group.remove({ name }) );
   
   done();
 })
 
 describe('Testing integrations', () => {
   test('adding users to group (via groups)', async (done) => {
-    await Promise.all(users.map( ({ name }) => crowd.addGroupToUser({ name: group.name, username: name })));
+    await Promise.all(users.map( ({ name }) => crowd.group.addUser({ name: group.name, username: name })));
 
     done();
   })
 
   test('getting group users', async (done) => {
-    const response = await crowd.getGroupUsers({ name: group.name });
+    const response = await crowd.group.getUsers({ name: group.name });
 
     expect(response.length).toBe(users.length);
 
@@ -41,23 +41,23 @@ describe('Testing integrations', () => {
   })
 
   test('removing users from group', async (done) => {
-    await Promise.all(users.map( ({ name }) => crowd.removeGroupFromUser({ name: group.name, username: name })));
+    await Promise.all(users.map( ({ name }) => crowd.group.removeUser({ name: group.name, username: name })));
 
-    const response = await crowd.getGroupUsers({ name: group.name });
+    const response = await crowd.group.getUsers({ name: group.name });
 
     expect(response.length).toBe(0);
 
     done();
   })
 
-  test('adding groups to user', async (done) => {
-    await Promise.all(groups.map( ({ name }) => crowd.addGroupToUser({ name, username: user.name }) ));
+  test('adding groups to user (via user)', async (done) => {
+    await Promise.all(groups.map( ({ name }) => crowd.user.addGroup({ name: user.name, groupname: name }) ));
 
     done();
   })
 
   test('get user groups', async (done) => {
-    const response = await crowd.getUserGroups({ name: user.name });
+    const response = await crowd.user.getGroups({ name: user.name });
 
     expect(response.length).toBe(groups.length);
 

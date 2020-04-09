@@ -17,7 +17,7 @@ const CONVERSION_KEYS: { [key: string]: string[] } = {
     'created-date',
     'updated-date',
   ],
-  token: [
+  session: [
     'token',
     'user',
     'created-date',
@@ -59,7 +59,7 @@ const convertObj = (obj: any, type: string) => {
 const convertAttrToObj = (attrs: { attributes: { link: any, name: string, values: string[] }[]  }): Attributes => {
   const { attributes } = attrs;
 
-  return Object.assign({}, ...attributes.map( attr => ({ [attr.name]: attr.values.join('') })));
+  return Object.assign({}, ...attributes.map( ({ name, values })=> ({ [name]: values.join('') }) ));
 }
 
 const convertAttrToList = (attrs: Attributes): { name: string, values: string[] }[] => {
@@ -72,4 +72,9 @@ const convertAttrToList = (attrs: Attributes): { name: string, values: string[] 
   return retval;
 }
 
-export { convertResponse, convertAttrToList } 
+const convertValidationFactors = (factors: { [key: string]: string }): any => ({ validationFactors: Object
+  .entries(factors)
+  .map( ([name, value]) => ({ name, value }) )
+});
+
+export { convertResponse, convertAttrToList, convertValidationFactors } 

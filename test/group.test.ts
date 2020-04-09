@@ -9,7 +9,7 @@ beforeAll(async (done) => {
 })
 
 afterAll(async (done) => {
-  await Promise.all(groups.map((group) => crowd.removeGroup(group) ));
+  await Promise.all(groups.map((group) => crowd.group.remove(group) ));
   done();
 })
 
@@ -22,7 +22,7 @@ describe('Testing group functionalities', () => {
       }
     }));
 
-    await Promise.all(params.map( p => crowd.updateGroupAttributes(p) ))
+    await Promise.all(params.map( p => crowd.group.setAttributes(p) ))
       .catch( err => {
         console.log(err);
         throw err;
@@ -35,8 +35,8 @@ describe('Testing group functionalities', () => {
     const group = getRandomEle(groups);
 
     const [noExpansion, withExpansion]= await Promise.all([
-      crowd.getGroup({ name: group.name }),
-      crowd.getGroup({ name: group.name, expand: true })
+      crowd.group.get({ name: group.name }),
+      crowd.group.get({ name: group.name, expand: true })
     ]);
 
     expect(noExpansion).toHaveProperty('name');
@@ -57,9 +57,9 @@ describe('Testing group functionalities', () => {
       }
     };
 
-    await crowd.updateGroupAttributes(params);
+    await crowd.group.setAttributes(params);
 
-    const response = await crowd.getGroupAttributes({ name: group.name });
+    const response = await crowd.group.getAttributes({ name: group.name });
 
     expect(response).toMatchObject(params.attributes);
 
@@ -68,13 +68,13 @@ describe('Testing group functionalities', () => {
 
   test('removing a group attribute', async (done) => {
     const { name } = getRandomEle(groups);
-    const attributename = 'test';
+    const attribute = 'test';
 
-    await crowd.removeGroupAttribute({ name, attributename });
+    await crowd.group.removeAttribute({ name, attribute });
 
-    const response = await crowd.getGroupAttributes({ name });
+    const response = await crowd.group.getAttributes({ name });
 
-    expect(Object.keys(response)).not.toContain(attributename);
+    expect(Object.keys(response)).not.toContain(attribute);
 
     done();
   })
@@ -82,7 +82,7 @@ describe('Testing group functionalities', () => {
   test('removing a group that does not exist', async (done) => {
     const name = 'goobly-goobly';
 
-    await expect(crowd.removeGroup({ name })).rejects.toThrow();
+    await expect(crowd.group.remove({ name })).rejects.toThrow();
 
     done();
   })
@@ -91,8 +91,8 @@ describe('Testing group functionalities', () => {
     const [g1, g2, g3] = groups.slice(0,3);
 
     await Promise.all([
-      crowd.addGroupChild({ name: g1.name, childname: g2.name }),
-      crowd.addGroupChild({ name: g2.name, childname: g3.name })
+      crowd.group.addChild({ name: g1.name, childname: g2.name }),
+      crowd.group.addChild({ name: g2.name, childname: g3.name })
     ]);
 
     done();
@@ -101,9 +101,9 @@ describe('Testing group functionalities', () => {
   test('getting group children', async (done) => {
     const [g1,g2,g3] = groups.slice(0,3);
 
-    const direct = expect(crowd.getGroupChildren(g1))
+    const direct = expect(crowd.group.getChildren(g1))
       .resolves.toMatchObject([{ name: g2.name }]);
-    const nested = expect(crowd.getGroupChildren({ ...g1, nested: true }))
+    const nested = expect(crowd.group.getChildren({ ...g1, nested: true }))
       .resolves.toMatchObject([{ name: g2.name }, { name: g3.name }]);
 
     await Promise.all([direct, nested]);
@@ -114,10 +114,10 @@ describe('Testing group functionalities', () => {
   test('getting group parents', async (done) => {
     const [g1,g2,g3] = groups.slice(0,3);
 
-    const direct = expect(crowd.getGroupParents(g3))
+    const direct = expect(crowd.group.getParents(g3))
       .resolves.toMatchObject([{ name: g2.name }]);
     
-    const nested = expect(crowd.getGroupParents({ ...g3, nested: true }))
+    const nested = expect(crowd.group.getParents({ ...g3, nested: true }))
       .resolves.toContainEqual({ name: g1.name });
 
     await Promise.all([direct, nested]);
@@ -128,8 +128,8 @@ describe('Testing group functionalities', () => {
   test('removing group child', async (done) => {
     const [{ name },{ name: childname }] = groups.slice(1,3);
 
-    await expect(crowd.removeGroupChild({ name, childname })).resolves.toBeFalsy();
-    await expect(crowd.getGroupChildren({ name })).resolves.toMatchObject([]);
+    await expect(crowd.group.removeChild({ name, childname })).resolves.toBeFalsy();
+    await expect(crowd.group.getChildren({ name })).resolves.toMatchObject([]);
 
     done();
   })
@@ -137,7 +137,7 @@ describe('Testing group functionalities', () => {
   test('removing group child that does not exist', async (done) => {
     const [{ name }, { name: childname }] = groups.slice(1,3);
 
-    await expect(crowd.removeGroupChild({ name, childname })).rejects.toThrow();
+    await expect(crowd.group.removeChild({ name, childname })).rejects.toThrow();
 
     done();
   })
@@ -145,8 +145,8 @@ describe('Testing group functionalities', () => {
   test('adding group parent', async (done) => {
     const [g1, g2] = groups.slice(1,3);
 
-    await expect(crowd.addParentGroup({ name: g2.name, parentname: g1.name })).resolves.toBeFalsy();
-    await expect(crowd.getGroupParents({ name: g2.name })).resolves.toContainEqual({ name: g1.name })
+    await expect(crowd.group.addParent({ name: g2.name, parentname: g1.name })).resolves.toBeFalsy();
+    await expect(crowd.group.getParents({ name: g2.name })).resolves.toContainEqual({ name: g1.name })
 
     done();
   })
@@ -156,7 +156,7 @@ describe('Testing group functionalities', () => {
 
     group.description = 'desc';
 
-    const response = await crowd.updateGroup({ name: group.name, ...group });
+    const response = await crowd.group.update({ name: group.name, ...group });
 
     expect(response.description).toMatch(group.description);
 
@@ -165,7 +165,7 @@ describe('Testing group functionalities', () => {
 
   test('pulling full membership', async (done) => {
     const names = groups.map( ({ name }) => name );
-    let memberships = await crowd.getAllMemberships();
+    let memberships = await crowd.group.getMemberships();
 
     memberships = Object.assign({}, ...names.map( (name) => ({ [name]: memberships[name] })));
     expect(Object.keys(memberships).length).toBe(groups.length);
@@ -174,11 +174,11 @@ describe('Testing group functionalities', () => {
   })
   
   test('searching groups', async (done) => {
-    const names = new Set(groups.map( ({ name }) => name ));
+    const names: Set<String>  = new Set(groups.map( ({ name }) => name ));
 
-    let response = await crowd.searchGroups();
+    let response = await crowd.group.search();
 
-    response = response.filter( ({ name }) => names.has(name) );
+    response = response.filter( ({ name }) => names.has(name));
 
     expect(response.length).toBe(groups.length);
 

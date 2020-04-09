@@ -6,46 +6,39 @@ let user: User;
 
 beforeAll(async (done) => {
   const users = await addUsersByCount(crowd, 1);
-  user = users.pop() as User;
+  user = users[0];
 
   done();
 })
 
 afterAll(async (done) => {
-  await crowd.removeUser(user);
+  await crowd.user.remove(user);
   done();
 })
 
 describe('Testing authentication tokens', () => {
   test('authenticating user', async (done) => {
-    await crowd.authenticateUser(user as { name: string, password: string });
+    await crowd.user.authenticate(user as { name: string, password: string });
     done();
   })
 
   test('deleting token', async (done) => {
-    const { token } = await crowd.getToken(user);
-    await crowd.deleteToken(token);
+    await crowd.session.create(user as any);
+    await crowd.session.removeAll(user);
 
     done();
   })
 
   test('invalidating token', async(done) => {
-    const { token } = await crowd.getToken(user);
-    await crowd.invalidateToken(token);
-
-    done();
-  })
-
-  test('validating token', async (done) => {
-    const { token } = await crowd.getToken(user);
-    await crowd.validateToken(token);
+    const { token } = await crowd.session.create(user as any);
+    await crowd.session.remove({ token });
 
     done();
   })
 
   test('getting session', async (done) => {
-    const { token } = await crowd.getToken(user);
-    await crowd.getSession(token);
+    const { token } = await crowd.session.create(user as any);
+    await crowd.session.get({ token });
 
     done();
   })
