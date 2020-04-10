@@ -1,7 +1,21 @@
 import { ResourceClient } from '../base';
 
 export class ConfigClient extends ResourceClient {
-  public async getConfig(): Promise<Config> {
+
+  /**
+   * @api {GET} /config config.get
+   * @apiName config.get
+   * @apiGroup Config
+   * 
+   * @apiDescription Returns the cookie configuration for the application. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/config-getConfig>[API DOCS]</a>
+   * 
+   * @apiExample {javascript} Async/await
+   *  const config = await crowd.config.get();
+   * @apiSuccess (Config Response) {String} domain
+   * @apiSuccess (Config Response) {Boolean} secure
+   * @apiSuccess (Config Response) {String} name
+   */
+  public async get(): Promise<Config> {
     return this.request({
       url: 'config/cookie'
     });

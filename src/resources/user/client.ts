@@ -4,6 +4,19 @@ import { EntityType, Method, QueryTypes } from '../../shared/enums';
 
 export class UserClient extends ResourceClient {
 
+  /**
+   *  @apiDefine UserResponseObject
+   * 
+   *  @apiSuccess (User) {String} name Username
+   *  @apiSuccess (User) {Boolean} active Whether user is active
+   *  @apiSuccess (User) {String} first-name User first name
+   *  @apiSuccess (User) {String} last-name User last name 
+   *  @apiSuccess (User) {String} display-name User display name 
+   *  @apiSuccess (User) {String} email User email
+   *  @apiSuccess (User) {String} key User key
+   *  @apiSuccess (User) {Object} attributes Empty object
+   */
+
    /**
    * Authenticates user, and returns user
    * 

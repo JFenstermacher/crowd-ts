@@ -1,8 +1,8 @@
 type Session = {
   token: string
-  user: { name: string } 
-  'created-date': string
-  'expiry-date': string
+  user: User
+  'created-date': number 
+  'expiry-date': number 
 }
 
 type ValidationFactors = {
@@ -15,6 +15,7 @@ interface AuthenticateUserSessionRequest {
   validationFactors?: ValidationFactors
   validate?: boolean
   duration?: number
+  expand?: boolean
 }
 
 interface RemoveAllSessionsRequest {
@@ -40,4 +41,5 @@ interface ValidateTokenRequest {
 
 interface GetSessionRequest {
   token: string
+  expand?: boolean
 }

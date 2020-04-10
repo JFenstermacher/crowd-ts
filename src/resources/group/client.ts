@@ -5,12 +5,52 @@ import { EntityType, Method, QueryTypes } from '../../shared/enums';
 
 export class GroupClient extends ResourceClient {
   /**
-  * Gets a group  
-  * 
-  * @param {GetGroupRequest} req 
-  * @param {string} req.name
-  * @param {boolean} req.expand
-  */
+   *  @apiDefine SmallestGroupResponse 
+   *  
+   *  @apiSuccess (Group Response) {Object} response Response object
+   *  @apiSuccess (Group Response) {String} response.name Group name
+   */
+
+  /**
+   * 
+   * @apiDefine GroupResponse
+   * 
+   *  @apiSuccess (Group Response) {Object} response Response object
+   *  @apiSuccess (Group Response) {String} response.name Group name
+   *  @apiSuccess (Group Response) {Boolean} response.active Whether group is active
+   *  @apiSuccess (Group Response) {String} response.description Group description
+   *  @apiSuccess (Group Response) {Attributes} response.attributes Group attributes object
+   */
+
+  /**
+   *  @api {GET} /group group.get
+   *  @apiName group.get
+   *  @apiGroup Group
+   * 
+   *  @apiDescription Retrieves group from Crowd. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getGroup>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const session = await crowd.group.get(getGroupRequest)
+   *  @apiParamExample {Object} getGroupRequest
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      expand: true
+   *    }
+   * 
+   *  @apiUse GroupResponse 
+   * 
+   *  @apiParam {Object} request Object housing below properties
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {Boolean} [request.expand=false] Expand attributes of group
+   *  
+   *  @apiSuccessExample {Object} GroupResponseExample 
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      active: false,
+   *      description: 'some description',
+   *      attributes: { test: 'test' }
+   *    }
+   */
   @convertResponse(EntityType.GROUP)
   public async get(req: GetGroupRequest): Promise<Group> {
     return this.request({
@@ -23,12 +63,36 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Creates a group
+   *  @api {POST} /group group.create
+   *  @apiName group.create
+   *  @apiGroup Group
    * 
-   * @param {object} req
-   * @param {string} req.name
-   * @param {boolean} req.active
-   * @param {string} req.description
+   *  @apiDescription Creates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addGroup>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const session = await crowd.group.create(createGroupRequest)
+   * 
+   *  @apiParam {Object} request Object housing below properties
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {Boolean} [request.active] Whether group is active
+   *  @apiParam {String} [request.description] Group description
+   *  @apiParamExample {Object} createGroupRequest 
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      active: true,
+   *      description: 'some description',
+   *      expand: true
+   *    }
+   * 
+   *  @apiUse GroupResponse 
+   *  
+   *  @apiSuccessExample {Object} GroupResponseExample 
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      active: false,
+   *      description: 'some description',
+   *      attributes: {}
+   *    }
    */
   @convertResponse(EntityType.GROUP)
   public async create(req: CreateGroupRequest): Promise<Group> {
@@ -43,10 +107,24 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Removes a group
+   *  @api {POST} /group group.create
+   *  @apiName group.create
+   *  @apiGroup Group
    * 
-   * @param {object} req 
-   * @param {string} req.name
+   *  @apiDescription Creates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addGroup>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const session = await crowd.group.create(createGroupRequest)
+   * 
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParamExample {Object} createGroupRequest 
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      active: true,
+   *      description: 'some description',
+   *      expand: true
+   *    }
    */
   public async remove(req: RemoveGroupRequest): Promise<void> {
     return this.request({

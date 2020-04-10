@@ -1,6 +1,3 @@
-crowd-ts
-======
-
 Promise-based typescript library to communicate with an Atlassian Crowd server with Node. This is a wrapper on [CROWD REST Apis](https://https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/). Takes inspiration from [atlassian-crowd-client](https://github.com/ghengeveld/atlassian-crowd-client).
 
 ## Installation
@@ -59,5 +56,3 @@ import { CrowdApplication } from 'crowd-ts';
 
 })()
 ```
-## API Details
-**CrowdApplication(config)**

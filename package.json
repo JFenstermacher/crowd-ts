@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jest"
+    "test": "jest",
+    "docs": "apidoc -f \".*\\.ts$\" -i src -o docs/"
   },
   "keywords": [
     "atlassian",
