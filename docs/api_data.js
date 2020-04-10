@@ -1,4 +1,4 @@
-[
+define({ "api": [
   {
     "type": "GET",
     "url": "/config",
@@ -1353,4 +1353,4 @@
     "filename": "src/resources/session/client.ts",
     "groupTitle": "Session"
   }
-]
+] });

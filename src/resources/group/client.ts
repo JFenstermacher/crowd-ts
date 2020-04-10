@@ -107,6 +107,31 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
+   *  @api {POST} /group group.remove
+   *  @apiName group.create
+   *  @apiGroup Group
+   * 
+   *  @apiDescription Removes a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addGroup>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const session = await crowd.group.remove(createGroupRequest)
+   * 
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParamExample {Object} createGroupRequest 
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *    }
+   */
+  public async remove(req: RemoveGroupRequest): Promise<void> {
+    return this.request({
+      method: Method.DELETE,
+      params: { groupname: req.name },
+      url: 'group'
+    });
+  }
+
+  /**
    *  @api {POST} /group group.create
    *  @apiName group.create
    *  @apiGroup Group
@@ -125,22 +150,6 @@ export class GroupClient extends ResourceClient {
    *      description: 'some description',
    *      expand: true
    *    }
-   */
-  public async remove(req: RemoveGroupRequest): Promise<void> {
-    return this.request({
-      method: Method.DELETE,
-      params: { groupname: req.name },
-      url: 'group'
-    });
-  }
-
-  /**
-   * Update a group 
-   * 
-   * @param {object} req 
-   * @param {string} req.name
-   * @param {boolean} req.active
-   * @param {string} req.description
    */
   @convertResponse(EntityType.GROUP)
   public async update(req: UpdateGroupRequest): Promise<Group> {

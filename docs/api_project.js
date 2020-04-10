@@ -1,4 +1,4 @@
-{
+define({
   "name": "crowd-ts",
   "version": "1.0.0",
   "description": "Crowd typescript",
@@ -15,4 +15,4 @@
     "url": "http://apidocjs.com",
     "version": "0.20.1"
   }
-}
+});
