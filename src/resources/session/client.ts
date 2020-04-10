@@ -22,8 +22,8 @@ export class SessionClient extends ResourceClient {
    *  @apiDescription Allows you to create session token for user. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/session-authenticateUser>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    const session = await crowd.session.create(createSessionRequest)
-   *  @apiParamExample {Object} createSessionRequest
+   *    const session = await crowd.session.create(CreateSessionRequest)
+   *  @apiParamExample {Object} CreateSessionRequest
    *    {
    *      name: 'testuser',
    *      password: 'testpassword',
@@ -92,8 +92,8 @@ export class SessionClient extends ResourceClient {
    *  @apiDescription Remove all session tokens associated with user, unless exclusion given. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/session-invalidateToken>[API DOCS]</a>
    *   
    *  @apiExample {javascript} Async/await
-   *   const session = await crowd.session.removeAll(req)
-   *  @apiParamExample {Object} Remove All Tokens Example
+   *   const session = await crowd.session.removeAll(RemoveAlTokenRequest)
+   *  @apiParamExample {Object} RemoveAllTokensRequest
    *    {
    *      name: 'testuser'
    *    }
@@ -121,8 +121,8 @@ export class SessionClient extends ResourceClient {
    *  @apiDescription Remove all a session token associated with user. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/session-deleteTokensForUser>[API DOCS]</a>
    *   
    *  @apiExample {javascript} Async/await
-   *   const session = await crowd.session.remove(removeAllTokenRequest)
-   *  @apiParamExample {Object} removeAllTokensRequest
+   *   const session = await crowd.session.remove(RemoveTokenRequest)
+   *  @apiParamExample {Object} RemoveTokenRequest
    *    {
    *      token: '<some_token_string>'
    *    }
@@ -147,8 +147,8 @@ export class SessionClient extends ResourceClient {
    *  <span style="color: red;">NOTE: This method is not working currently</span>
    *   
    *  @apiExample {javascript} Async/await
-   *   const session = await crowd.session.remove(validateSessionRequest)
-   *  @apiParamExample {Object} validateSessionRequest
+   *   const session = await crowd.session.remove(ValidateSessionRequest)
+   *  @apiParamExample {Object} ValidateSessionRequest
    *    {
    *      name: '<token_string>',
    *      validationFactors: {
@@ -180,8 +180,8 @@ export class SessionClient extends ResourceClient {
    *  Return values listed with [Depends] are dependent on whether you include the expand attribute in request object
    *   
    *  @apiExample {javascript} Async/await
-   *   const session = await crowd.session.get(getUserSessionRequest)
-   *  @apiParamExample {Object} getUserSessionRequest 
+   *   const session = await crowd.session.get(GetUserSessionRequest)
+   *  @apiParamExample {Object} GetUserSessionRequest 
    *    {
    *      token: '<token_string>',
    *      expand: true

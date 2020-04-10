@@ -8,12 +8,6 @@ export class ResourceClient {
     this.api = api;
   }
 
-  /**
-   * @apiDefine PaginatedRequest 
-   * 
-   * @apiParam (Pagination Parameters) {Number} maxResults [Optional] Limits response results
-   * @apiParam (Pagination Parameters) {Number} startIndex [Optional] Where to start request
-   */
   protected async makePaginatedRequest<T>(req: AxiosRequestConfig & { queryType: string }): Promise<T[]> {
     const { queryType, ...requestParams } = req;
     const { maxResults = 1000, startIndex = 0, ...params } = requestParams.params;

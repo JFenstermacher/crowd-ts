@@ -20,6 +20,7 @@ export class GroupClient extends ResourceClient {
    *  @apiSuccess (Group Response) {Boolean} response.active Whether group is active
    *  @apiSuccess (Group Response) {String} response.description Group description
    *  @apiSuccess (Group Response) {Attributes} response.attributes Group attributes object
+   * 
    */
 
   /**
@@ -30,8 +31,8 @@ export class GroupClient extends ResourceClient {
    *  @apiDescription Retrieves group from Crowd. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getGroup>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    const session = await crowd.group.get(getGroupRequest)
-   *  @apiParamExample {Object} getGroupRequest
+   *    const session = await crowd.group.get(GetGroupRequest)
+   *  @apiParamExample {Object} GetGroupRequest
    *    {
    *      name: 'alpaca-squad-91c4418262ebb7559A',
    *      expand: true
@@ -64,19 +65,19 @@ export class GroupClient extends ResourceClient {
 
   /**
    *  @api {POST} /group group.create
-   *  @apiName group.create
+   *  @apiName create
    *  @apiGroup Group
    * 
    *  @apiDescription Creates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addGroup>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    const session = await crowd.group.create(createGroupRequest)
+   *    const session = await crowd.group.create(CreateGroupRequest)
    * 
    *  @apiParam {Object} request Object housing below properties
    *  @apiParam {String} request.name Group name
    *  @apiParam {Boolean} [request.active] Whether group is active
    *  @apiParam {String} [request.description] Group description
-   *  @apiParamExample {Object} createGroupRequest 
+   *  @apiParamExample {Object} CreateGroupRequest 
    *    {
    *      name: 'alpaca-squad-91c4418262ebb7559A',
    *      active: true,
@@ -107,18 +108,18 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   *  @api {POST} /group group.remove
-   *  @apiName group.create
+   *  @api {DELETE} /group group.remove
+   *  @apiName group.remove
    *  @apiGroup Group
    * 
-   *  @apiDescription Removes a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addGroup>[API DOCS]</a>
+   *  @apiDescription Removes a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeGroup>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    const session = await crowd.group.remove(createGroupRequest)
+   *    const session = await crowd.group.remove(CreateGroupRequest)
    * 
    *  @apiParam {Object} request Object housing properties below
    *  @apiParam {String} request.name Group name
-   *  @apiParamExample {Object} createGroupRequest 
+   *  @apiParamExample {Object} CreateGroupRequest 
    *    {
    *      name: 'alpaca-squad-91c4418262ebb7559A',
    *    }
@@ -132,23 +133,32 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   *  @api {POST} /group group.create
-   *  @apiName group.create
+   *  @api {PUT} /group group.update
+   *  @apiName group.update
    *  @apiGroup Group
    * 
-   *  @apiDescription Creates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addGroup>[API DOCS]</a>
+   *  @apiDescription Updates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-updateGroup>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    const session = await crowd.group.create(createGroupRequest)
+   *    const session = await crowd.group.create(UpdateGroupRequest)
    * 
+   *  @apiUse GroupResponse 
+   *  
    *  @apiParam {Object} request Object housing properties below
    *  @apiParam {String} request.name Group name
-   *  @apiParamExample {Object} createGroupRequest 
+   *  @apiParamExample {Object} UpdateGroupRequest 
    *    {
    *      name: 'alpaca-squad-91c4418262ebb7559A',
    *      active: true,
    *      description: 'some description',
-   *      expand: true
+   *    }
+   * 
+   *  @apiSuccessExample {Object} GroupResponseExample 
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      active: false,
+   *      description: 'some description',
+   *      attributes: {}
    *    }
    */
   @convertResponse(EntityType.GROUP)
@@ -168,10 +178,27 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Get group attributes
+   *  @api {GET} /group/attribute group.getAttributes
+   *  @apiName group.getAttributes
+   *  @apiGroup Group
    * 
-   * @param {object} req
-   * @param {string} req.name
+   *  @apiDescription Gets a group's attributes. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getGroupAttributes>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const session = await crowd.group.getAttributes(GetAttributesRequest)
+   * 
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParamExample {Object} GetAttributesRequest
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *    }
+   * 
+   *  @apiSuccessExample {Object} AttributesResponse
+   *    {
+   *      attr1: 'test1',
+   *      attr2: 'test2
+   *    }
    */
   @convertResponse(EntityType.ATTRIBUTES)
   public async getAttributes(req: GetGroupAttributesRequest): Promise<Attributes> {
@@ -182,11 +209,26 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Set group attributes
+   *  @api {POST} /group/attribute group.setAttributes
+   *  @apiName group.setAttributes
+   *  @apiGroup Group
    * 
-   * @param {object} req
-   * @param {string} req.name
-   * @param {object} req.attributes
+   *  @apiDescription Sets a group's attributes. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-storeGroupAttributes>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const session = await crowd.group.setAttributes(SetAttributesRequest)
+   * 
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {Attributes} request.attributes Object of type { [key: string]: string }
+   *  @apiParamExample {Object} SetAttributesRequest
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      attributes: {
+   *        attr1: 'test1',
+   *        attr2: 'test2' 
+   *      }
+   *    }
    */
   public async setAttributes(req: SetGroupAttributesRequest): Promise<void> {
     return this.request({

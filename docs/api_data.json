@@ -93,13 +93,13 @@
     "type": "POST",
     "url": "/group",
     "title": "group.create",
-    "name": "group.create",
+    "name": "create",
     "group": "Group",
     "description": "<p>Creates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addGroup>[API DOCS]</a></p>",
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.create(createGroupRequest)",
+        "content": "const session = await crowd.group.create(CreateGroupRequest)",
         "type": "javascript"
       }
     ],
@@ -138,7 +138,7 @@
       },
       "examples": [
         {
-          "title": "createGroupRequest",
+          "title": "CreateGroupRequest",
           "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  active: true,\n  description: 'some description',\n  expand: true\n}",
           "type": "Object"
         }
@@ -200,58 +200,13 @@
     "type": "POST",
     "url": "/group",
     "title": "group.create",
-    "name": "group.create",
+    "name": "create",
     "group": "Group",
     "description": "<p>Creates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addGroup>[API DOCS]</a></p>",
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.create(createGroupRequest)",
-        "type": "javascript"
-      }
-    ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Object",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Object housing properties below</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "request.name",
-            "description": "<p>Group name</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "createGroupRequest",
-          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  active: true,\n  description: 'some description',\n  expand: true\n}",
-          "type": "Object"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
-    "groupTitle": "Group"
-  },
-  {
-    "type": "POST",
-    "url": "/group",
-    "title": "group.create",
-    "name": "group.create",
-    "group": "Group",
-    "description": "<p>Creates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addGroup>[API DOCS]</a></p>",
-    "examples": [
-      {
-        "title": "Async/await",
-        "content": "const session = await crowd.group.create(createGroupRequest)",
+        "content": "const session = await crowd.group.create(CreateGroupRequest)",
         "type": "javascript"
       }
     ],
@@ -290,7 +245,7 @@
       },
       "examples": [
         {
-          "title": "createGroupRequest ",
+          "title": "CreateGroupRequest ",
           "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  active: true,\n  description: 'some description',\n  expand: true\n}",
           "type": "Object"
         }
@@ -349,51 +304,6 @@
     "groupTitle": "Group"
   },
   {
-    "type": "POST",
-    "url": "/group",
-    "title": "group.create",
-    "name": "group.create",
-    "group": "Group",
-    "description": "<p>Creates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addGroup>[API DOCS]</a></p>",
-    "examples": [
-      {
-        "title": "Async/await",
-        "content": "const session = await crowd.group.create(createGroupRequest)",
-        "type": "javascript"
-      }
-    ],
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Object",
-            "optional": false,
-            "field": "request",
-            "description": "<p>Object housing properties below</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "request.name",
-            "description": "<p>Group name</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "createGroupRequest ",
-          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  active: true,\n  description: 'some description',\n  expand: true\n}",
-          "type": "Object"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
-    "groupTitle": "Group"
-  },
-  {
     "type": "GET",
     "url": "/group",
     "title": "group.get",
@@ -403,14 +313,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.get(getGroupRequest)",
+        "content": "const session = await crowd.group.get(GetGroupRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "getGroupRequest",
+          "title": "GetGroupRequest",
           "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  expand: true\n}",
           "type": "Object"
         }
@@ -504,14 +414,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.get(getGroupRequest)",
+        "content": "const session = await crowd.group.get(GetGroupRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "getGroupRequest",
+          "title": "GetGroupRequest",
           "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  expand: true\n}",
           "type": "Object"
         }
@@ -548,6 +458,494 @@
         {
           "title": "GroupResponseExample ",
           "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  active: false,\n  description: 'some description',\n  attributes: { test: 'test' }\n}",
+          "type": "Object"
+        }
+      ],
+      "fields": {
+        "Group Response": [
+          {
+            "group": "Group Response",
+            "type": "Object",
+            "optional": false,
+            "field": "response",
+            "description": "<p>Response object</p>"
+          },
+          {
+            "group": "Group Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Group Response",
+            "type": "Boolean",
+            "optional": false,
+            "field": "response.active",
+            "description": "<p>Whether group is active</p>"
+          },
+          {
+            "group": "Group Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.description",
+            "description": "<p>Group description</p>"
+          },
+          {
+            "group": "Group Response",
+            "type": "Attributes",
+            "optional": false,
+            "field": "response.attributes",
+            "description": "<p>Group attributes object</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/group/attribute",
+    "title": "group.getAttributes",
+    "name": "group.getAttributes",
+    "group": "Group",
+    "description": "<p>Gets a group's attributes. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getGroupAttributes>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const session = await crowd.group.getAttributes(GetAttributesRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GetAttributesRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "AttributesResponse",
+          "content": "{\n  attr1: 'test1',\n  attr2: 'test2\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/group/attribute",
+    "title": "group.getAttributes",
+    "name": "group.getAttributes",
+    "group": "Group",
+    "description": "<p>Gets a group's attributes. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getGroupAttributes>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const session = await crowd.group.getAttributes(GetAttributesRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GetAttributesRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "AttributesResponse",
+          "content": "{\n  attr1: 'test1',\n  attr2: 'test2\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "DELETE",
+    "url": "/group",
+    "title": "group.remove",
+    "name": "group.remove",
+    "group": "Group",
+    "description": "<p>Removes a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeGroup>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const session = await crowd.group.remove(CreateGroupRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "CreateGroupRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "DELETE",
+    "url": "/group",
+    "title": "group.remove",
+    "name": "group.remove",
+    "group": "Group",
+    "description": "<p>Removes a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeGroup>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const session = await crowd.group.remove(CreateGroupRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "CreateGroupRequest ",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "POST",
+    "url": "/group/attribute",
+    "title": "group.setAttributes",
+    "name": "group.setAttributes",
+    "group": "Group",
+    "description": "<p>Sets a group's attributes. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-storeGroupAttributes>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const session = await crowd.group.setAttributes(SetAttributesRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Attributes",
+            "optional": false,
+            "field": "request.attributes",
+            "description": "<p>Object of type { [key: string]: string }</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "SetAttributesRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  attributes: {\n    attr1: 'test1',\n    attr2: 'test2'\n  }\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "POST",
+    "url": "/group/attribute",
+    "title": "group.setAttributes",
+    "name": "group.setAttributes",
+    "group": "Group",
+    "description": "<p>Sets a group's attributes. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-storeGroupAttributes>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const session = await crowd.group.setAttributes(SetAttributesRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Attributes",
+            "optional": false,
+            "field": "request.attributes",
+            "description": "<p>Object of type { [key: string]: string }</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "SetAttributesRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  attributes: {\n    attr1: 'test1',\n    attr2: 'test2' \n  }\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "PUT",
+    "url": "/group",
+    "title": "group.update",
+    "name": "group.update",
+    "group": "Group",
+    "description": "<p>Updates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-updateGroup>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const session = await crowd.group.create(UpdateGroupRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "UpdateGroupRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  active: true,\n  description: 'some description',\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "GroupResponseExample",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  active: false,\n  description: 'some description',\n  attributes: {}\n}",
+          "type": "Object"
+        }
+      ],
+      "fields": {
+        "Group Response": [
+          {
+            "group": "Group Response",
+            "type": "Object",
+            "optional": false,
+            "field": "response",
+            "description": "<p>Response object</p>"
+          },
+          {
+            "group": "Group Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Group Response",
+            "type": "Boolean",
+            "optional": false,
+            "field": "response.active",
+            "description": "<p>Whether group is active</p>"
+          },
+          {
+            "group": "Group Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.description",
+            "description": "<p>Group description</p>"
+          },
+          {
+            "group": "Group Response",
+            "type": "Attributes",
+            "optional": false,
+            "field": "response.attributes",
+            "description": "<p>Group attributes object</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "PUT",
+    "url": "/group",
+    "title": "group.update",
+    "name": "group.update",
+    "group": "Group",
+    "description": "<p>Updates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-updateGroup>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const session = await crowd.group.create(UpdateGroupRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "UpdateGroupRequest ",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  active: true,\n  description: 'some description',\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "GroupResponseExample ",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  active: false,\n  description: 'some description',\n  attributes: {}\n}",
           "type": "Object"
         }
       ],
@@ -605,14 +1003,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.session.create(createSessionRequest)",
+        "content": "const session = await crowd.session.create(CreateSessionRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "createSessionRequest",
+          "title": "CreateSessionRequest",
           "content": "{\n  name: 'testuser',\n  password: 'testpassword',\n  validationFactors: {\n    remote_address: '127.0.0.1'\n  }\n}",
           "type": "Object"
         }
@@ -734,14 +1132,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.session.create(createSessionRequest)",
+        "content": "const session = await crowd.session.create(CreateSessionRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "createSessionRequest",
+          "title": "CreateSessionRequest",
           "content": "{\n  name: 'testuser',\n  password: 'testpassword',\n  validationFactors: {\n    remote_address: '127.0.0.1'\n  }\n}",
           "type": "Object"
         }
@@ -863,14 +1261,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.session.get(getUserSessionRequest)",
+        "content": "const session = await crowd.session.get(GetUserSessionRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "getUserSessionRequest",
+          "title": "GetUserSessionRequest",
           "content": "{\n  token: '<token_string>',\n  expand: true\n}",
           "type": "Object"
         }
@@ -964,14 +1362,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.session.get(getUserSessionRequest)",
+        "content": "const session = await crowd.session.get(GetUserSessionRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "getUserSessionRequest ",
+          "title": "GetUserSessionRequest ",
           "content": "{\n  token: '<token_string>',\n  expand: true\n}",
           "type": "Object"
         }
@@ -1065,14 +1463,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.session.remove(removeAllTokenRequest)",
+        "content": "const session = await crowd.session.remove(RemoveTokenRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "removeAllTokensRequest",
+          "title": "RemoveTokenRequest",
           "content": "{\n  token: '<some_token_string>'\n}",
           "type": "Object"
         }
@@ -1110,14 +1508,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.session.remove(removeAllTokenRequest)",
+        "content": "const session = await crowd.session.remove(RemoveTokenRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "removeAllTokensRequest",
+          "title": "RemoveTokenRequest",
           "content": "{\n  token: '<some_token_string>'\n}",
           "type": "Object"
         }
@@ -1155,14 +1553,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.session.removeAll(req)",
+        "content": "const session = await crowd.session.removeAll(RemoveAlTokenRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "Remove All Tokens Example",
+          "title": "RemoveAllTokensRequest",
           "content": "{\n  name: 'testuser'\n}",
           "type": "Object"
         }
@@ -1207,14 +1605,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.session.removeAll(req)",
+        "content": "const session = await crowd.session.removeAll(RemoveAlTokenRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "Remove All Tokens Example",
+          "title": "RemoveAllTokensRequest",
           "content": "{\n  name: 'testuser'\n}",
           "type": "Object"
         }
@@ -1259,14 +1657,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.session.remove(validateSessionRequest)",
+        "content": "const session = await crowd.session.remove(ValidateSessionRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "validateSessionRequest",
+          "title": "ValidateSessionRequest",
           "content": "{\n  name: '<token_string>',\n  validationFactors: {\n    remote_address: '127.0.0.1'\n  }\n}",
           "type": "Object"
         }
@@ -1311,14 +1709,14 @@
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.session.remove(validateSessionRequest)",
+        "content": "const session = await crowd.session.remove(ValidateSessionRequest)",
         "type": "javascript"
       }
     ],
     "parameter": {
       "examples": [
         {
-          "title": "validateSessionRequest",
+          "title": "ValidateSessionRequest",
           "content": "{\n  name: '<token_string>',\n  validationFactors: {\n    remote_address: '127.0.0.1'\n  }\n}",
           "type": "Object"
         }
