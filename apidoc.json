@@ -2,5 +2,8 @@
   "header": {
     "title": "Atlassian Crowd Typescript",
     "filename": "README.md"
+  },
+  "template": {
+    "withCompare": false
   }
 }

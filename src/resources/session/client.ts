@@ -48,14 +48,14 @@ export class SessionClient extends ResourceClient {
    *     user: {
    *       name: 'aemma',
    *       active: true,
-   *       'first-name': 'Abigail',
-   *       'last-name': 'Emma',
-   *       'display-name': 'Abigail Emma',
+   *       firstName: 'Abigail',
+   *       lastName: 'Emma',
+   *       displayName: 'Abigail Emma',
    *       email: 'aemma@test.com',
    *       key: '<key_string>',
    *       attributes: {},
-   *       'created-date': 1586223686277,
-   *       'updated-date': 1586482147883
+   *       createdDate: 1586223686277,
+   *       updatedDate: 1586482147883
    *     },
    *     'created-date': 1586475704136,
    *     'expiry-date': 1586510947886
@@ -199,15 +199,15 @@ export class SessionClient extends ResourceClient {
    *     user: {
    *       name: 'aemma',
    *       active: true,
-   *       'first-name': 'Abigail',
-   *       'last-name': 'Emma',
-   *       'display-name': 'Abigail Emma',
+   *       firstName: 'Abigail',
+   *       lastName: 'Emma',
+   *       displayName: 'Abigail Emma',
    *       email: 'aemma@test.com',
    *       key: '<key_string>',
    *       attributes: {}
    *     },
-   *     'created-date': 1586475704136,
-   *     'expiry-date': 1586510947886
+   *     createdDate: 1586475704136,
+   *     expiryDate: 1586510947886
    *   }
    */
   @convertResponse(EntityType.SESSION)

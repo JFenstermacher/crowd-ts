@@ -107,11 +107,11 @@ export class GroupClient extends ResourceClient {
    *  @apiDescription Removes a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeGroup>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    await crowd.group.remove(CreateGroupRequest)
+   *    await crowd.group.remove(RemoveGroupRequest)
    *  
    *  @apiParam {Object} request Object housing properties below
    *  @apiParam {String} request.name Group name
-   *  @apiParamExample {Object} CreateGroupRequest 
+   *  @apiParamExample {Object} RemoveGroupRequest 
    *    {
    *      name: 'alpaca-squad-91c4418262ebb7559A',
    *    }
@@ -243,12 +243,12 @@ export class GroupClient extends ResourceClient {
    *  @apiDescription Remove a group attribute. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-deleteGroupAttribute>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    await crowd.group.deleteAttribute(DeleteAttributesRequest)
+   *    await crowd.group.removeAttribute(RemoveAttributeRequest)
    *  
    *  @apiParam {Object} request Object housing properties below
    *  @apiParam {String} request.name Group name
    *  @apiParam {String} request.attribute Attribute to remove
-   *  @apiParamExample {Object} DeleteAttributesRequest 
+   *  @apiParamExample {Object} RemoveAttributeRequest 
    *    {
    *      name: 'alpaca-squad-91c4418262ebb7559A',
    *      attribute: 'attr1'
@@ -673,7 +673,7 @@ export class GroupClient extends ResourceClient {
    *  @apiName group.search
    *  @apiGroup Group
    *  
-   *  @apiDescription Search for groups based on CQL expression. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-searchByCql>[API DOCS]</a>
+   *  @apiDescription Search for groups based on CQL expression. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/search-searchByCql>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
    *    const groups = await crowd.group.search(SearchRequest)
@@ -725,7 +725,7 @@ export class GroupClient extends ResourceClient {
    *  @apiName group.list
    *  @apiGroup Group
    *  
-   *  @apiDescription Search alias. List all groups, full expansion by default. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-searchByCql>[API DOCS]</a>
+   *  @apiDescription Search alias. List all groups, full expansion by default. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/search-searchByCql>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
    *    const groups = await crowd.group.list()
@@ -733,7 +733,7 @@ export class GroupClient extends ResourceClient {
    *  @apiParam {Object} request Object housing properties below
    *  @apiParam {Boolean} [request.expand=true] Expand groups
    *  
-   *  @apiSuccess (Groups Response) {Group[]} Returns a list of groups
+   *  @apiSuccess (Groups Response) {Group[]} response Returns a list of groups
    *  @apiSuccessExample {Group[]} GroupsResponse 
    *    [
    *      {
@@ -746,12 +746,10 @@ export class GroupClient extends ResourceClient {
    *        name: 'gnu-cohort-6fc32ad92454394faA',
    *        active: true,
    *        attributes: {}
-   *      }, ...
+   *      }
    *    ]
    */
-  public async list(req: { expand?: boolean | string[] }): Promise<Groups> {
-    const { expand = true } = req;
-
-    return this.search({ expand });
+  public async list(req: { expand?: boolean | string[] } = { expand: true }): Promise<Groups> {
+    return this.search(req);
   }
 }

@@ -70,8 +70,8 @@ describe('Testing user functionalities', () => {
   test('updating user', async (done) => {
     const user = users[0];
     
-    user['first-name'] = 'tom';
-    user['last-name'] = 'jerry';
+    user.firstName = 'tom';
+    user.lastName = 'jerry';
 
     await expect(crowd.user.update(user)).resolves.toBeFalsy();
 
@@ -95,7 +95,7 @@ describe('Testing user functionalities', () => {
     const oldname = user.name;
 
     user.name = 'yoda';
-    const response = await crowd.user.rename({ name: oldname, newname: user.name });
+    const response = await crowd.user.rename({ name: oldname, newName: user.name });
 
     expect(response.name).toBe(user.name);
 

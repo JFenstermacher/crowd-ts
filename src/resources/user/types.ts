@@ -2,15 +2,15 @@ type Users = User[];
 type User = {
   name: string
   active?: boolean
-  'first-name'?: string
-  'last-name'?: string
-  'display-name'?: string
+  firstName?: string
+  lastName?: string
+  displayName?: string
   email?: string
   key?: string
   password?: string
   attributes?: Attributes
-  'created-date'?: string
-  'updated-date'?: string
+  createdDate?: string
+  updatedDate?: string
 }
 
 interface AuthenticateUserRequest {
@@ -33,9 +33,9 @@ type GetUserRequest = GetUserRequestWithKey | GetUserRequestWithName
 interface CreateUserRequest {
   name: string
   active: boolean
-  'first-name': string
-  'last-name': string
-  'display-name': string
+  firstName: string
+  lastName: string
+  displayName: string
   email: string
   password: string
 }
@@ -43,9 +43,9 @@ interface CreateUserRequest {
 interface UpdateUserRequest {
   name: string
   active?: boolean
-  'first-name'?: string
-  'last-name'?: string
-  'display-name'?: string
+  firstName?: string
+  lastName?: string
+  displayName?: string
   email?: string
 }
 
@@ -94,7 +94,7 @@ interface RemoveUserPasswordRequest {
 
 interface RenameUserRequest {
   name: string
-  newname: string
+  newName: string
 }
 
 interface SearchUsersRequest extends PaginatedRequest {

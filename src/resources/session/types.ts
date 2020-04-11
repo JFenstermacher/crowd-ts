@@ -1,8 +1,8 @@
 type Session = {
   token: string
   user: User
-  'created-date': number 
-  'expiry-date': number 
+  createdDate: number 
+  expiryDate: number 
 }
 
 type ValidationFactors = {

@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
-import { CrowdApplication } from '../crowd';
+import { CrowdApplication } from '..';
 
 export class ResourceClient {
   protected api: CrowdApplication;

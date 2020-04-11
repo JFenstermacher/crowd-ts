@@ -1,27 +1,27 @@
-const CONVERSION_KEYS: { [key: string]: string[] } = {
+const CONVERSION_KEYS: { [key: string]: any[] } = {
   group: [
-    'name',
-    'active',
-    'description',
-    'attributes'
+    ['name', 'name'],
+    ['active', 'active'],
+    ['description', 'description'],
+    ['attributes', 'attributes']
   ],
   user: [
-    'name',
-    'active',
-    'first-name',
-    'last-name',
-    'display-name',
-    'email',
-    'key',
-    'attributes',
-    'created-date',
-    'updated-date',
+    ['name', 'name'],
+    ['active', 'active'],
+    ['first-name', 'firstName'],
+    ['last-name', 'lastName'],
+    ['display-name', 'displayName'],
+    ['email', 'email'],
+    ['key', 'key'],
+    ['attributes', 'attributes'],
+    ['created-date', 'createdDate'],
+    ['updated-date', 'updatedDate']
   ],
   session: [
-    'token',
-    'user',
-    'created-date',
-    'expiry-date'
+    ['token', 'token'],
+    ['user', 'user'],
+    ['created-date', 'createdDate'],
+    ['expiry-date', 'expiryDate']
   ]
 }
 
@@ -40,13 +40,13 @@ const convertResponse = (type: string) => {
 const convertObj = (obj: any, type: string) => {
   if (type === 'attributes') return convertAttrToObj(obj);
 
-  const keys = CONVERSION_KEYS[type];
+  const retval: any = { };
 
-  const entries = keys
-    .filter( key => obj[key] !== undefined )
-    .map( key => ({ [key]: obj[key] }) );
+  for (const [key, name] of CONVERSION_KEYS[type]) {
+    if (obj[key] === undefined) continue;
 
-  const retval = Object.assign({}, ...entries);
+    retval[name] = obj[key];
+  }
 
   const { attributes, user } = retval;
 

@@ -1,5 +1,5 @@
 import { randomBytes } from 'crypto';
-import { CrowdApplication } from '../src/crowd';
+import { CrowdApplication } from '../src';
 require('dotenv').config({ path: `${__dirname}/.env` });
 
 // I don't know why I'm doing all this...
@@ -25,9 +25,9 @@ const generateUser = function*(): Generator<any, any> {
       active: true,
       name: username,
       password: generateRandomString(true),
-      'first-name': n1,
-      'last-name': n2,
-      'display-name': `${n1} ${n2}`,
+      firstName: n1,
+      lastName: n2,
+      displayName: `${n1} ${n2}`,
       email: `${username}@test.com`
     };
 

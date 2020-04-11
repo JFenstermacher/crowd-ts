@@ -1,18 +1,18 @@
-Promise-based typescript library to communicate with an Atlassian Crowd server with Node. This is a wrapper on [CROWD REST Apis](https://https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/). Takes inspiration from [atlassian-crowd-client](https://github.com/ghengeveld/atlassian-crowd-client).
+Promise-based typescript library to communicate with an Atlassian Crowd server with Node. Simple, hopefully intuitive namespaced API. Built on top of axios, with built-in concurrency via p-queue. This is a wrapper on [CROWD REST Apis](https://https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/). Takes inspiration from [atlassian-crowd-client](https://github.com/ghengeveld/atlassian-crowd-client).
 
 ## Installation
 ```npm install --save crowd-ts```
 
-## Usage
+## Basic Usage
 ```
 import { CrowdApplication } from 'crowd-ts';
 
 (async () => {
   const crowd = new CrowdApplication({
-    baseURL: https://<SERVER>
+    baseURL: 'https://<SERVER>'
     auth: {
-      username: <APPLICATION_NAME>,
-      password: <APPLICATION_PASS>
+      username: '<APPLICATION_NAME>',
+      password: '<APPLICATION_PASS>'
     },
     concurrency: 10
   })
@@ -21,15 +21,16 @@ import { CrowdApplication } from 'crowd-ts';
   const params = {
     active: true,
     name: 'testuser',
-    'first-name': 'tom',
-    'last-name': 'jerry',
-    'display-name': 'tom and jerry',
+    password: 'testpassword',
+    firstName: 'tom',
+    lastName: 'jerry',
+    displayName: 'tom and jerry',
     email: 'test@test.com'
   };
 
   const user = await crowd.user.add(params);
 
-  params.email = 'update@test.com' // Update a user
+  user.email = 'update@test.com' // Update a user
   await crowd.user.update(user); //Update User
 
   // Add Group
@@ -43,6 +44,9 @@ import { CrowdApplication } from 'crowd-ts';
 
   // Returning all users with attributes
   const users = await crowd.user.list();
+
+  // Add all users to group
+  await Promise.all(users.map( ({ name }) => crowd.user.addGroup({ name, groupname: group.name })));
 
   // Returning users fitting some CQL restriction
   const users2 = await crowd.user.search({ restriction: '<restriction>' });
