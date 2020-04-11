@@ -99,7 +99,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.create(CreateGroupRequest)",
+        "content": "const group = await crowd.group.create(CreateGroupRequest)",
         "type": "javascript"
       }
     ],
@@ -206,7 +206,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.create(CreateGroupRequest)",
+        "content": "const group = await crowd.group.create(CreateGroupRequest)",
         "type": "javascript"
       }
     ],
@@ -304,6 +304,318 @@ define({ "api": [
     "groupTitle": "Group"
   },
   {
+    "type": "POST",
+    "url": "/group/child-group/direct",
+    "title": "group.addChild",
+    "name": "group.addChild",
+    "group": "Group",
+    "description": "<p>Adds a child group to a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addDirectChildGroupMembership>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.addChild(AddChildRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.childname",
+            "description": "<p>Name of child group</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "AddChildRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  childname: 'hartebeest-cohort-95210146b41b9c375A'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "POST",
+    "url": "/group/child-group/direct",
+    "title": "group.addChild",
+    "name": "group.addChild",
+    "group": "Group",
+    "description": "<p>Adds a child group to a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addDirectChildGroupMembership>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.addChild(AddChildRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.childname",
+            "description": "<p>Name of child group</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "AddChildRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  childname: 'hartebeest-cohort-95210146b41b9c375A'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "POST",
+    "url": "/group/parent-group/direct",
+    "title": "group.addParent",
+    "name": "group.addParent",
+    "group": "Group",
+    "description": "<p>Adds a parent group to a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addDirectParentGroupMembership>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.addParent(AddParentRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.parentname",
+            "description": "<p>Name of child group</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "AddParentRequest",
+          "content": "{\n  name: 'hartebeest-cohort-95210146b41b9c375A',\n  parentname: 'alpaca-squad-91c4418262ebb7559A'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "POST",
+    "url": "/group/parent-group/direct",
+    "title": "group.addParent",
+    "name": "group.addParent",
+    "group": "Group",
+    "description": "<p>Adds a parent group to a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addDirectParentGroupMembership>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.addParent(AddParentRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.parentname",
+            "description": "<p>Name of child group</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "AddParentRequest",
+          "content": "{\n  name: 'hartebeest-cohort-95210146b41b9c375A',\n  parentname: 'alpaca-squad-91c4418262ebb7559A'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "POST",
+    "url": "/group/user/direct",
+    "title": "group.addUser",
+    "name": "group.addUser",
+    "group": "Group",
+    "description": "<p>Adds a user to group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addUserAsDirectGroupMember>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.addUser(AddUserRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.username",
+            "description": "<p>User name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "AddUserRequest",
+          "content": "{\n  name: 'hartebeest-cohort-95210146b41b9c375A',\n  username: 'aemma'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "POST",
+    "url": "/group/user/direct",
+    "title": "group.addUser",
+    "name": "group.addUser",
+    "group": "Group",
+    "description": "<p>Adds a user to group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addUserAsDirectGroupMember>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.addUser(AddUserRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.username",
+            "description": "<p>User name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "AddUserRequest",
+          "content": "{\n  name: 'hartebeest-cohort-95210146b41b9c375A',\n  username: 'aemma'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
     "type": "GET",
     "url": "/group",
     "title": "group.get",
@@ -313,7 +625,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.get(GetGroupRequest)",
+        "content": "const group = await crowd.group.get(GetGroupRequest)",
         "type": "javascript"
       }
     ],
@@ -414,7 +726,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.get(GetGroupRequest)",
+        "content": "const group = await crowd.group.get(GetGroupRequest)",
         "type": "javascript"
       }
     ],
@@ -515,7 +827,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.getAttributes(GetAttributesRequest)",
+        "content": "const attributes = await crowd.group.getAttributes(GetAttributesRequest)",
         "type": "javascript"
       }
     ],
@@ -547,6 +859,17 @@ define({ "api": [
       ]
     },
     "success": {
+      "fields": {
+        "Attributes Response": [
+          {
+            "group": "Attributes Response",
+            "type": "Attributes",
+            "optional": false,
+            "field": "response",
+            "description": "<p>Attributes object in the form { [key: string]: string }</p>"
+          }
+        ]
+      },
       "examples": [
         {
           "title": "AttributesResponse",
@@ -569,7 +892,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.getAttributes(GetAttributesRequest)",
+        "content": "const attributes = await crowd.group.getAttributes(GetAttributesRequest)",
         "type": "javascript"
       }
     ],
@@ -601,11 +924,688 @@ define({ "api": [
       ]
     },
     "success": {
+      "fields": {
+        "Attributes Response": [
+          {
+            "group": "Attributes Response",
+            "type": "Attributes",
+            "optional": false,
+            "field": "response",
+            "description": "<p>Attributes object in the form { [key: string]: string }</p>"
+          }
+        ]
+      },
       "examples": [
         {
           "title": "AttributesResponse",
           "content": "{\n  attr1: 'test1',\n  attr2: 'test2\n}",
           "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/group/child-group/[direct|nested]",
+    "title": "group.getChildren",
+    "name": "group.getChildren",
+    "group": "Group",
+    "description": "<p>Gets the child groups of a group. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getDirectChildrenOfGroup>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const groups = await crowd.group.getChildren(GetChildrenRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "description": "<p>Expand groups</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.nested",
+            "defaultValue": "false",
+            "description": "<p>Bring back nested groups, brings back direct by default</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.maxResults",
+            "defaultValue": "groups.length",
+            "description": "<p>Limits the max results brought back</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.startIndex",
+            "defaultValue": "0",
+            "description": "<p>Starting index of query</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GetChildrenRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  expand: true,\n  nested: true\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Groups Response": [
+          {
+            "group": "Groups Response",
+            "type": "Groups[]",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>a list of groups</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GroupsResponse",
+          "content": "[\n  {\n    name: 'hartebeest-cohort-95210146b41b9c375A',\n    active: true,\n    attributes: {}\n  },\n  {\n    name: 'koala-team-c29b0dd79bc188fbcA',\n    active: true,\n    attributes: {}\n  }\n]",
+          "type": "Object[]"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/group/child-group/[direct|nested]",
+    "title": "group.getChildren",
+    "name": "group.getChildren",
+    "group": "Group",
+    "description": "<p>Gets the child groups of a group. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getDirectChildrenOfGroup>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const groups = await crowd.group.getChildren(GetChildrenRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "description": "<p>Expand groups</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.nested",
+            "defaultValue": "false",
+            "description": "<p>Bring back nested groups, brings back direct by default</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.maxResults",
+            "defaultValue": "groups.length",
+            "description": "<p>Limits the max results brought back</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.startIndex",
+            "defaultValue": "0",
+            "description": "<p>Starting index of query</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GetChildrenRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  expand: true,\n  nested: true\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Groups Response": [
+          {
+            "group": "Groups Response",
+            "type": "Groups[]",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>a list of groups</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GroupsResponse",
+          "content": "[\n  {\n    name: 'hartebeest-cohort-95210146b41b9c375A',\n    active: true,\n    attributes: {}\n  },\n  {\n    name: 'koala-team-c29b0dd79bc188fbcA',\n    active: true,\n    attributes: {}\n  }\n]",
+          "type": "Object[]"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/group/membership",
+    "title": "group.getMemberships",
+    "name": "group.getMemberships",
+    "group": "Group",
+    "description": "<p>Gets all group memberships. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeDirectGroupMembership>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const memberships = await crowd.group.getMemberships()",
+        "type": "javascript"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Memberships Response": [
+          {
+            "group": "Memberships Response",
+            "type": "Memberships",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>memberships in form { [groupname: string]: { users: string[], groups: string[] } }</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "MembershipResponse",
+          "content": "{\n  'alpaca-squad-91c4418262ebb7559A': {\n    users: [\n      'aemma'\n    ],\n    groups: [\n      'hartebeest-cohort-95210146b41b9c375A',\n      'koala-team-c29b0dd79bc188fbcA',\n    ]\n  },\n  'gnu-cohort-6fc32ad92454394faA': {\n    users: [],\n    groups: [\n      'alpaca-squad-91c4418262ebb7559A'\n    ]\n  }\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/group/membership",
+    "title": "group.getMemberships",
+    "name": "group.getMemberships",
+    "group": "Group",
+    "description": "<p>Gets all group memberships. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeDirectGroupMembership>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const memberships = await crowd.group.getMemberships()",
+        "type": "javascript"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Memberships Response": [
+          {
+            "group": "Memberships Response",
+            "type": "Memberships",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>memberships in form { [groupname: string]: { users: string[], groups: string[] } }</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "MembershipResponse ",
+          "content": "{ \n  'alpaca-squad-91c4418262ebb7559A': {\n    users: [\n      'aemma'\n    ],\n    groups: [\n      'hartebeest-cohort-95210146b41b9c375A',\n      'koala-team-c29b0dd79bc188fbcA',\n    ]\n  },\n  'gnu-cohort-6fc32ad92454394faA': { \n    users: [],\n    groups: [ \n      'alpaca-squad-91c4418262ebb7559A'\n    ]\n  }\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/group/parent-group/[direct|nested]",
+    "title": "group.getParents",
+    "name": "group.getParents",
+    "group": "Group",
+    "description": "<p>Gets the parent groups of a group. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getDirectParentsOfGroup>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const groups = await crowd.group.getParents(GetParentsRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "description": "<p>Expand groups</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.nested",
+            "defaultValue": "false",
+            "description": "<p>Bring back nested groups, brings back direct by default</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.maxResults",
+            "defaultValue": "groups.length",
+            "description": "<p>Limits the max results brought back</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.startIndex",
+            "defaultValue": "0",
+            "description": "<p>Starting index of query</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GetParentsRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  expand: true,\n  nested: true\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Groups Response": [
+          {
+            "group": "Groups Response",
+            "type": "Groups[]",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>a list of groups</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GroupsResponse",
+          "content": "[\n  {\n    name: 'whale-cohort-8208b9e1cd22b2f7aA',\n    active: true,\n    attributes: {}\n  },\n  {\n    name: 'skunk-squad-1bab57c561676580fA',\n    active: true,\n    attributes: {}\n  }\n]",
+          "type": "Object[]"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/group/parent-group/[direct|nested]",
+    "title": "group.getParents",
+    "name": "group.getParents",
+    "group": "Group",
+    "description": "<p>Gets the parent groups of a group. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getDirectParentsOfGroup>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const groups = await crowd.group.getParents(GetParentsRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "description": "<p>Expand groups</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.nested",
+            "defaultValue": "false",
+            "description": "<p>Bring back nested groups, brings back direct by default</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.maxResults",
+            "defaultValue": "groups.length",
+            "description": "<p>Limits the max results brought back</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.startIndex",
+            "defaultValue": "0",
+            "description": "<p>Starting index of query</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GetParentsRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  expand: true,\n  nested: true\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Groups Response": [
+          {
+            "group": "Groups Response",
+            "type": "Groups[]",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>a list of groups</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GroupsResponse",
+          "content": "[\n  {\n    name: 'whale-cohort-8208b9e1cd22b2f7aA',\n    active: true,\n    attributes: {}\n  },\n  {\n    name: 'skunk-squad-1bab57c561676580fA',\n    active: true,\n    attributes: {}\n  }\n]",
+          "type": "Object[]"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/group/user/[direct|nested]",
+    "title": "group.getUsers",
+    "name": "group.getUsers",
+    "group": "Group",
+    "description": "<p>Gets group users. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getDirectMembersOfGroup>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const users = await crowd.group.getUsers(GetUsersRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "request.username",
+            "description": "<p>Returns specific user if exists</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "description": "<p>Expand users</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.nested",
+            "defaultValue": "false",
+            "description": "<p>Bring back nested users, brings back direct by default</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.maxResults",
+            "defaultValue": "groups.length",
+            "description": "<p>Limits the max results brought back</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.startIndex",
+            "defaultValue": "0",
+            "description": "<p>Starting index of query</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GetUsersRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  expand: true,\n  nested: true\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Users Response": [
+          {
+            "group": "Users Response",
+            "type": "User|User[]",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>either a user or list of users, depends on if username was passed</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GroupsResponse",
+          "content": "[\n   {\n     name: 'aemma',\n     active: true,\n     'first-name': 'Abigail',\n     'last-name': 'Emma',\n     'display-name': 'Abigail Emma',\n     email: 'aemma@test.com',\n     key: '<key>',\n     attributes: {},\n     'created-date': 1586223686277,\n     'updated-date': 1586482147883\n   },\n   {\n     name: 'ajacob',\n     active: true,\n     'first-name': 'Alexander',\n     'last-name': 'Jacob',\n     'display-name': 'Alexander Jacob',\n     email: 'ajacob@test.com',\n     key: '<key>',\n     attributes: {},\n     'created-date': 1586132987812,\n     'updated-date': 1586132987812\n   }\n]",
+          "type": "Object[]"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/group/user/[direct|nested]",
+    "title": "group.getUsers",
+    "name": "group.getUsers",
+    "group": "Group",
+    "description": "<p>Gets group users. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getDirectMembersOfGroup>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const users = await crowd.group.getUsers(GetUsersRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "request.username",
+            "description": "<p>Returns specific user if exists</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "description": "<p>Expand users</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.nested",
+            "defaultValue": "false",
+            "description": "<p>Bring back nested users, brings back direct by default</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.maxResults",
+            "defaultValue": "groups.length",
+            "description": "<p>Limits the max results brought back</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.startIndex",
+            "defaultValue": "0",
+            "description": "<p>Starting index of query</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GetUsersRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  expand: true,\n  nested: true\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Users Response": [
+          {
+            "group": "Users Response",
+            "type": "User|User[]",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>either a user or list of users, depends on if username was passed</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GroupsResponse",
+          "content": "[  \n   {\n     name: 'aemma',\n     active: true,\n     'first-name': 'Abigail',\n     'last-name': 'Emma',\n     'display-name': 'Abigail Emma',\n     email: 'aemma@test.com',\n     key: '<key>',\n     attributes: {},\n     'created-date': 1586223686277,\n     'updated-date': 1586482147883\n   },\n   {\n     name: 'ajacob',\n     active: true,\n     'first-name': 'Alexander',\n     'last-name': 'Jacob',\n     'display-name': 'Alexander Jacob',\n     email: 'ajacob@test.com',\n     key: '<key>',\n     attributes: {},\n     'created-date': 1586132987812,\n     'updated-date': 1586132987812\n   }\n]",
+          "type": "Object[]"
         }
       ]
     },
@@ -623,7 +1623,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.remove(CreateGroupRequest)",
+        "content": "await crowd.group.remove(CreateGroupRequest)",
         "type": "javascript"
       }
     ],
@@ -668,7 +1668,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.remove(CreateGroupRequest)",
+        "content": "await crowd.group.remove(CreateGroupRequest)",
         "type": "javascript"
       }
     ],
@@ -704,6 +1704,318 @@ define({ "api": [
     "groupTitle": "Group"
   },
   {
+    "type": "DELETE",
+    "url": "/group/attribute",
+    "title": "group.removeAttribute",
+    "name": "group.removeAttribute",
+    "group": "Group",
+    "description": "<p>Remove a group attribute. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-deleteGroupAttribute>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.deleteAttribute(DeleteAttributesRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.attribute",
+            "description": "<p>Attribute to remove</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "DeleteAttributesRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  attribute: 'attr1'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "DELETE",
+    "url": "/group/attribute",
+    "title": "group.removeAttribute",
+    "name": "group.removeAttribute",
+    "group": "Group",
+    "description": "<p>Remove a group attribute. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-deleteGroupAttribute>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.deleteAttribute(DeleteAttributesRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.attribute",
+            "description": "<p>Attribute to remove</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "DeleteAttributesRequest ",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  attribute: 'attr1'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "DELETE",
+    "url": "/group/child-group/direct",
+    "title": "group.removeChild",
+    "name": "group.removeChild",
+    "group": "Group",
+    "description": "<p>Removes a child group from a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeDirectChildGroupMembership>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.removeChild(RemoveChildRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.childname",
+            "description": "<p>Name of child group</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "RemoveChildRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  childname: 'hartebeest-cohort-95210146b41b9c375A'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "DELETE",
+    "url": "/group/child-group/direct",
+    "title": "group.removeChild",
+    "name": "group.removeChild",
+    "group": "Group",
+    "description": "<p>Removes a child group from a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeDirectChildGroupMembership>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.removeChild(RemoveChildRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.childname",
+            "description": "<p>Name of child group</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "RemoveChildRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  childname: 'hartebeest-cohort-95210146b41b9c375A'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "DELETE",
+    "url": "/group/user/direct",
+    "title": "group.removeUser",
+    "name": "group.removeUser",
+    "group": "Group",
+    "description": "<p>Remove user from group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeDirectGroupMembership>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.removeUser(RemoveUserRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.username",
+            "description": "<p>User name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "RemoveUserRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  username: 'aemma'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "DELETE",
+    "url": "/group/user/direct",
+    "title": "group.removeUser",
+    "name": "group.removeUser",
+    "group": "Group",
+    "description": "<p>Remove user from group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeDirectGroupMembership>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "await crowd.group.removeUser(RemoveUserRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>Group name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.username",
+            "description": "<p>User name</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "RemoveUserRequest",
+          "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  username: 'aemma'\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
     "type": "POST",
     "url": "/group/attribute",
     "title": "group.setAttributes",
@@ -713,7 +2025,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.setAttributes(SetAttributesRequest)",
+        "content": "await crowd.group.setAttributes(SetAttributesRequest)",
         "type": "javascript"
       }
     ],
@@ -765,7 +2077,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.setAttributes(SetAttributesRequest)",
+        "content": "await crowd.group.setAttributes(SetAttributesRequest)",
         "type": "javascript"
       }
     ],
@@ -817,7 +2129,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.create(UpdateGroupRequest)",
+        "content": "const group = await crowd.group.create(UpdateGroupRequest)",
         "type": "javascript"
       }
     ],
@@ -910,7 +2222,7 @@ define({ "api": [
     "examples": [
       {
         "title": "Async/await",
-        "content": "const session = await crowd.group.create(UpdateGroupRequest)",
+        "content": "const group = await crowd.group.create(UpdateGroupRequest)",
         "type": "javascript"
       }
     ],

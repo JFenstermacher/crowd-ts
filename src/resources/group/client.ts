@@ -5,15 +5,7 @@ import { EntityType, Method, QueryTypes } from '../../shared/enums';
 
 export class GroupClient extends ResourceClient {
   /**
-   *  @apiDefine SmallestGroupResponse 
-   *  
-   *  @apiSuccess (Group Response) {Object} response Response object
-   *  @apiSuccess (Group Response) {String} response.name Group name
-   */
-
-  /**
-   * 
-   * @apiDefine GroupResponse
+   *  @apiDefine GroupResponse
    * 
    *  @apiSuccess (Group Response) {Object} response Response object
    *  @apiSuccess (Group Response) {String} response.name Group name
@@ -27,19 +19,19 @@ export class GroupClient extends ResourceClient {
    *  @api {GET} /group group.get
    *  @apiName group.get
    *  @apiGroup Group
-   * 
+   *  
    *  @apiDescription Retrieves group from Crowd. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getGroup>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    const session = await crowd.group.get(GetGroupRequest)
+   *    const group = await crowd.group.get(GetGroupRequest)
    *  @apiParamExample {Object} GetGroupRequest
    *    {
    *      name: 'alpaca-squad-91c4418262ebb7559A',
    *      expand: true
    *    }
-   * 
+   *  
    *  @apiUse GroupResponse 
-   * 
+   *  
    *  @apiParam {Object} request Object housing below properties
    *  @apiParam {String} request.name Group name
    *  @apiParam {Boolean} [request.expand=false] Expand attributes of group
@@ -67,12 +59,12 @@ export class GroupClient extends ResourceClient {
    *  @api {POST} /group group.create
    *  @apiName create
    *  @apiGroup Group
-   * 
+   *  
    *  @apiDescription Creates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addGroup>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    const session = await crowd.group.create(CreateGroupRequest)
-   * 
+   *    const group = await crowd.group.create(CreateGroupRequest)
+   *  
    *  @apiParam {Object} request Object housing below properties
    *  @apiParam {String} request.name Group name
    *  @apiParam {Boolean} [request.active] Whether group is active
@@ -84,7 +76,7 @@ export class GroupClient extends ResourceClient {
    *      description: 'some description',
    *      expand: true
    *    }
-   * 
+   *  
    *  @apiUse GroupResponse 
    *  
    *  @apiSuccessExample {Object} GroupResponseExample 
@@ -111,12 +103,12 @@ export class GroupClient extends ResourceClient {
    *  @api {DELETE} /group group.remove
    *  @apiName group.remove
    *  @apiGroup Group
-   * 
+   *  
    *  @apiDescription Removes a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeGroup>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    const session = await crowd.group.remove(CreateGroupRequest)
-   * 
+   *    await crowd.group.remove(CreateGroupRequest)
+   *  
    *  @apiParam {Object} request Object housing properties below
    *  @apiParam {String} request.name Group name
    *  @apiParamExample {Object} CreateGroupRequest 
@@ -136,12 +128,12 @@ export class GroupClient extends ResourceClient {
    *  @api {PUT} /group group.update
    *  @apiName group.update
    *  @apiGroup Group
-   * 
+   *  
    *  @apiDescription Updates a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-updateGroup>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    const session = await crowd.group.create(UpdateGroupRequest)
-   * 
+   *    const group = await crowd.group.create(UpdateGroupRequest)
+   *  
    *  @apiUse GroupResponse 
    *  
    *  @apiParam {Object} request Object housing properties below
@@ -152,7 +144,7 @@ export class GroupClient extends ResourceClient {
    *      active: true,
    *      description: 'some description',
    *    }
-   * 
+   *  
    *  @apiSuccessExample {Object} GroupResponseExample 
    *    {
    *      name: 'alpaca-squad-91c4418262ebb7559A',
@@ -163,10 +155,11 @@ export class GroupClient extends ResourceClient {
    */
   @convertResponse(EntityType.GROUP)
   public async update(req: UpdateGroupRequest): Promise<Group> {
-    const { name, description } = req;
+    const { name, active, description } = req;
 
     const data: any = { name, type: 'GROUP' };
 
+    if (active) data.active = active;
     if (description) data.description = description;
 
     return this.request({
@@ -181,19 +174,20 @@ export class GroupClient extends ResourceClient {
    *  @api {GET} /group/attribute group.getAttributes
    *  @apiName group.getAttributes
    *  @apiGroup Group
-   * 
+   *  
    *  @apiDescription Gets a group's attributes. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getGroupAttributes>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    const session = await crowd.group.getAttributes(GetAttributesRequest)
-   * 
+   *    const attributes = await crowd.group.getAttributes(GetAttributesRequest)
+   *  
    *  @apiParam {Object} request Object housing properties below
    *  @apiParam {String} request.name Group name
    *  @apiParamExample {Object} GetAttributesRequest
    *    {
    *      name: 'alpaca-squad-91c4418262ebb7559A',
    *    }
-   * 
+   *  
+   *  @apiSuccess (Attributes Response) {Attributes} response Attributes object in the form { [key: string]: string }
    *  @apiSuccessExample {Object} AttributesResponse
    *    {
    *      attr1: 'test1',
@@ -212,12 +206,12 @@ export class GroupClient extends ResourceClient {
    *  @api {POST} /group/attribute group.setAttributes
    *  @apiName group.setAttributes
    *  @apiGroup Group
-   * 
+   *  
    *  @apiDescription Sets a group's attributes. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-storeGroupAttributes>[API DOCS]</a>
    *  
    *  @apiExample {javascript} Async/await
-   *    const session = await crowd.group.setAttributes(SetAttributesRequest)
-   * 
+   *    await crowd.group.setAttributes(SetAttributesRequest)
+   *  
    *  @apiParam {Object} request Object housing properties below
    *  @apiParam {String} request.name Group name
    *  @apiParam {Attributes} request.attributes Object of type { [key: string]: string }
@@ -242,11 +236,23 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Remove group attribute
-   * 
-   * @param {object} req 
-   * @param {string} req.name
-   * @param {string} req.attribute
+   *  @api {DELETE} /group/attribute group.removeAttribute
+   *  @apiName group.removeAttribute
+   *  @apiGroup Group
+   *  
+   *  @apiDescription Remove a group attribute. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-deleteGroupAttribute>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    await crowd.group.deleteAttribute(DeleteAttributesRequest)
+   *  
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {String} request.attribute Attribute to remove
+   *  @apiParamExample {Object} DeleteAttributesRequest 
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      attribute: 'attr1'
+   *    }
    */
   public async removeAttribute(req: RemoveGroupAttributeRequest): Promise<void> {
     return this.request({
@@ -260,12 +266,42 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Get group children
-   * 
-   * @param {object} req
-   * @param {string} req.name
-   * @param {number} req.maxResults
-   * @param {number} req.startIndex
+   *  @api {GET} /group/child-group/[direct|nested] group.getChildren
+   *  @apiName group.getChildren
+   *  @apiGroup Group
+   *  
+   *  @apiDescription Gets the child groups of a group. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getDirectChildrenOfGroup>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const groups = await crowd.group.getChildren(GetChildrenRequest)
+   *  
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {Boolean} [request.expand] Expand groups
+   *  @apiParam {Boolean} [request.nested=false] Bring back nested groups, brings back direct by default
+   *  @apiParam {Number} [request.maxResults=groups.length] Limits the max results brought back
+   *  @apiParam {Number} [request.startIndex=0] Starting index of query
+   *  @apiParamExample {Object} GetChildrenRequest
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      expand: true,
+   *      nested: true
+   *    }
+   *  
+   *  @apiSuccess (Groups Response) {Groups[]} Returns a list of groups
+   *  @apiSuccessExample {Object[]} GroupsResponse
+   *    [
+   *      {
+   *        name: 'hartebeest-cohort-95210146b41b9c375A',
+   *        active: true,
+   *        attributes: {}
+   *      },
+   *      {
+   *        name: 'koala-team-c29b0dd79bc188fbcA',
+   *        active: true,
+   *        attributes: {}
+   *      }
+   *    ]
    */
   @convertResponse(EntityType.GROUP)
   public async getChildren(req: GetGroupChildrenRequest): Promise<Groups> {
@@ -282,11 +318,23 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Add group child 
-   * 
-   * @param {object} req
-   * @param {string} req.name
-   * @param {string} req.childname
+   *  @api {POST} /group/child-group/direct group.addChild
+   *  @apiName group.addChild
+   *  @apiGroup Group
+   *  
+   *  @apiDescription Adds a child group to a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addDirectChildGroupMembership>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    await crowd.group.addChild(AddChildRequest)
+   *  
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {String} request.childname Name of child group
+   *  @apiParamExample {Object} AddChildRequest
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      childname: 'hartebeest-cohort-95210146b41b9c375A'
+   *    }
    */
   public async addChild(req: AddGroupChildRequest): Promise<void> {
     return this.request({
@@ -298,11 +346,23 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Remove a child group
+   *  @api {DELETE} /group/child-group/direct group.removeChild
+   *  @apiName group.removeChild
+   *  @apiGroup Group
    * 
-   * @param {object} req
-   * @param {string} req.name
-   * @param {string} req.childname
+   *  @apiDescription Removes a child group from a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeDirectChildGroupMembership>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    await crowd.group.removeChild(RemoveChildRequest)
+   * 
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {String} request.childname Name of child group
+   *  @apiParamExample {Object} RemoveChildRequest
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      childname: 'hartebeest-cohort-95210146b41b9c375A'
+   *    }
    */
   public async removeChild(req: RemoveGroupChildRequest): Promise<void> {
     return this.request({
@@ -314,14 +374,44 @@ export class GroupClient extends ResourceClient {
       method: Method.DELETE
     });
   }
+
   /**
-   * Get parent groups
+   *  @api {GET} /group/parent-group/[direct|nested] group.getParents
+   *  @apiName group.getParents
+   *  @apiGroup Group
    * 
-   * @param {object} req 
-   * @param {string} req.name
-   * @param {string} req.parentname
-   * @param {number} req.maxResults
-   * @param {number} req.startIndex
+   *  @apiDescription Gets the parent groups of a group. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getDirectParentsOfGroup>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const groups = await crowd.group.getParents(GetParentsRequest)
+   * 
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {Boolean} [request.expand] Expand groups
+   *  @apiParam {Boolean} [request.nested=false] Bring back nested groups, brings back direct by default
+   *  @apiParam {Number} [request.maxResults=groups.length] Limits the max results brought back
+   *  @apiParam {Number} [request.startIndex=0] Starting index of query
+   *  @apiParamExample {Object} GetParentsRequest
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      expand: true,
+   *      nested: true
+   *    }
+   *  
+   *  @apiSuccess (Groups Response) {Groups[]} Returns a list of groups
+   *  @apiSuccessExample {Object[]} GroupsResponse
+   *    [
+   *      {
+   *        name: 'whale-cohort-8208b9e1cd22b2f7aA',
+   *        active: true,
+   *        attributes: {}
+   *      },
+   *      {
+   *        name: 'skunk-squad-1bab57c561676580fA',
+   *        active: true,
+   *        attributes: {}
+   *      }
+   *    ]
    */
   @convertResponse(EntityType.GROUP)
   public async getParents(req: GetGroupParentsRequest): Promise<Groups> {
@@ -338,11 +428,23 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Add a parent group
+   *  @api {POST} /group/parent-group/direct group.addParent
+   *  @apiName group.addParent
+   *  @apiGroup Group
    * 
-   * @param {object} req 
-   * @param {string} req.name
-   * @param {string} req.parentname
+   *  @apiDescription Adds a parent group to a group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addDirectParentGroupMembership>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    await crowd.group.addParent(AddParentRequest)
+   * 
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {String} request.parentname Name of child group
+   *  @apiParamExample {Object} AddParentRequest
+   *    {
+   *      name: 'hartebeest-cohort-95210146b41b9c375A',
+   *      parentname: 'alpaca-squad-91c4418262ebb7559A'
+   *    }
    */
   public async addParent(req: AddGroupParentRequest): Promise<void> {
     return this.request({
@@ -354,35 +456,100 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Get users of group
-   * 
-   * @param {object} req 
-   * @param {string} req.name
-   * @param {string} req.username
-   * @param {boolean} req.nested Return users from nested groups
+   *  @api {GET} /group/user/[direct|nested] group.getUsers
+   *  @apiName group.getUsers
+   *  @apiGroup Group
+   *  
+   *  @apiDescription Gets group users. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-getDirectMembersOfGroup>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const users = await crowd.group.getUsers(GetUsersRequest)
+   *  
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {String} [request.username] Returns specific user if exists
+   *  @apiParam {Boolean} [request.expand] Expand users
+   *  @apiParam {Boolean} [request.nested=false] Bring back nested users, brings back direct by default
+   *  @apiParam {Number} [request.maxResults=groups.length] Limits the max results brought back
+   *  @apiParam {Number} [request.startIndex=0] Starting index of query
+   *  @apiParamExample {Object} GetUsersRequest
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      expand: true,
+   *      nested: true
+   *    }
+   *  
+   *  @apiSuccess (Users Response) {User|User[]} Returns either a user or list of users, depends on if username was passed
+   *  @apiSuccessExample {Object[]} GroupsResponse
+   *    [  
+   *       {
+   *         name: 'aemma',
+   *         active: true,
+   *         'first-name': 'Abigail',
+   *         'last-name': 'Emma',
+   *         'display-name': 'Abigail Emma',
+   *         email: 'aemma@test.com',
+   *         key: '<key>',
+   *         attributes: {},
+   *         'created-date': 1586223686277,
+   *         'updated-date': 1586482147883
+   *       },
+   *       {
+   *         name: 'ajacob',
+   *         active: true,
+   *         'first-name': 'Alexander',
+   *         'last-name': 'Jacob',
+   *         'display-name': 'Alexander Jacob',
+   *         email: 'ajacob@test.com',
+   *         key: '<key>',
+   *         attributes: {},
+   *         'created-date': 1586132987812,
+   *         'updated-date': 1586132987812
+   *       }
+   *    ] 
    */
   @convertResponse(EntityType.USER)
   public async getUsers(req: GetGroupUsersRequest): Promise<Users> {
-    return this.makePaginatedRequest({
+    const { username } = req;
+    const url = `group/user/${req.nested ? 'nested': 'direct'}`;
+
+    const params = {
+      groupname: req.name,
+      expand: this._createExpandParam(req.expand),
+      username: username ? username : undefined
+    };
+
+    return username ? this.request({ params, url }) : this.makePaginatedRequest({
       queryType: QueryTypes.USERS,
       params: {
         maxResults: req.maxResults,
         startIndex: req.startIndex,
-        groupname: req.name,
-        expand: this._createExpandParam(req.expand)
+        ...params
       },
-      url: `group/user/${req.nested ? 'nested': 'direct'}`
+      url: url
     });
   }
 
   /**
-   * Add user to group
+   *  @api {POST} /group/user/direct group.addUser
+   *  @apiName group.addUser
+   *  @apiGroup Group
    * 
-   * @param {object} req
-   * @param {string} req.name
-   * @param {string} req.username
+   *  @apiDescription Adds a user to group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-addUserAsDirectGroupMember>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    await crowd.group.addUser(AddUserRequest)
+   * 
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {String} request.username User name
+   *  @apiParamExample {Object} AddUserRequest
+   *    {
+   *      name: 'hartebeest-cohort-95210146b41b9c375A',
+   *      username: 'aemma'
+   *    }
    */
-  public async addUser(req: AddUserToGroupRequest) {
+  public async addUser(req: AddUserToGroupRequest): Promise<void> {
     return this.request({
       data: { name: req.username },
       params: {
@@ -394,11 +561,23 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Remove user from group
+   *  @api {DELETE} /group/user/direct group.removeUser
+   *  @apiName group.removeUser
+   *  @apiGroup Group
    * 
-   * @param {object} req 
-   * @param {string} req.name
-   * @param {string} req.username
+   *  @apiDescription Remove user from group. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeDirectGroupMembership>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    await crowd.group.removeUser(RemoveUserRequest)
+   * 
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {String} request.name Group name
+   *  @apiParam {String} request.username User name
+   *  @apiParamExample {Object} RemoveUserRequest
+   *    {
+   *      name: 'alpaca-squad-91c4418262ebb7559A',
+   *      username: 'aemma'
+   *    }
    */
   public async removeUser(req: RemoveGroupFromUserRequest): Promise<void> {
     return this.request({
@@ -412,7 +591,34 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Returns all memberships
+   *  @api {GET} /group/membership group.getMemberships
+   *  @apiName group.getMemberships
+   *  @apiGroup Group
+   * 
+   *  @apiDescription Gets all group memberships. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-removeDirectGroupMembership>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const memberships = await crowd.group.getMemberships()
+   *  
+   *  @apiSuccess (Memberships Response) {Memberships} Returns memberships in form { [groupname: string]: { users: string[], groups: string[] } }
+   *  @apiSuccessExample {Object} MembershipResponse 
+   *    { 
+   *      'alpaca-squad-91c4418262ebb7559A': {
+   *        users: [
+   *          'aemma'
+   *        ],
+   *        groups: [
+   *          'hartebeest-cohort-95210146b41b9c375A',
+   *          'koala-team-c29b0dd79bc188fbcA',
+   *        ]
+   *      },
+   *      'gnu-cohort-6fc32ad92454394faA': { 
+   *        users: [],
+   *        groups: [ 
+   *          'alpaca-squad-91c4418262ebb7559A'
+   *        ]
+   *      }
+   *    }
    */
   public async getMemberships(): Promise<Memberships> {
     const parser = new Parser();
