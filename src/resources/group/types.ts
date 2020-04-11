@@ -67,7 +67,7 @@ interface RemoveGroupChildRequest {
 
 interface GetGroupParentsRequest extends PaginatedRequest {
   name: string
-  expand: boolean
+  expand?: boolean
   nested?: boolean
 }
 

@@ -480,7 +480,7 @@ export class GroupClient extends ResourceClient {
    *    }
    *  
    *  @apiSuccess (Users Response) {User|User[]} Returns either a user or list of users, depends on if username was passed
-   *  @apiSuccessExample {Object[]} GroupsResponse
+   *  @apiSuccessExample {Object|Object[]} GroupsResponse
    *    [  
    *       {
    *         name: 'aemma',
@@ -669,19 +669,47 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Returns groups based on search restriction 
-   * Pass CQL expression to restriciton, if none is passed all will be returned
-   * 
-   * @param {object} req
-   * @param {string} req.restriction
-   * @param {boolean|string[]} req.expand
-   * @param {number} req.maxResults
-   * @param {number} req.startIndex
+   *  @api {GET} /search group.search
+   *  @apiName group.search
+   *  @apiGroup Group
+   *  
+   *  @apiDescription Search for groups based on CQL expression. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-searchByCql>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const groups = await crowd.group.search(SearchRequest)
+   *  
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {Boolean} [request.expand] Expand groups
+   *  @apiParam {String} [request.restriction] CQL restriction expression
+   *  @apiParam {Number} [request.maxResults=groups.length] Limits the max results brought back
+   *  @apiParam {Number} [request.startIndex=0] Starting index of query
+   *  @apiParamExample {Object} SearchRequest
+   *    {
+   *      restriction: 'active=false',
+   *      expand: true,
+   *    }
+   *  
+   *  @apiSuccess (Groups Response) {Group[]} Returns a list of groups
+   *  @apiSuccessExample {Object[]} GroupsResponse
+   *    [
+   *      {
+   *        name: 'alpaca-squad-91c4418262ebb7559A',
+   *        active: false,
+   *        description: 'some description',
+   *        attributes: { test: 'test' }
+   *      },
+   *      {
+   *        name: 'gnu-cohort-6fc32ad92454394faA',
+   *        active: false,
+   *        attributes: {}
+   *      }
+   *    ]
    */
   @convertResponse(EntityType.GROUP)
   public async search(req: SearchGroupsRequest = {}): Promise<Groups> {
     return this.makePaginatedRequest<Group>({
       params: {
+        restriction: req.restriction,
         maxResults: req.maxResults,
         startIndex: req.startIndex,
         expand: this._createExpandParam(req.expand),
@@ -693,12 +721,37 @@ export class GroupClient extends ResourceClient {
   }
 
   /**
-   * Alias for search without the additional params
-   * 
-   * @param {object} req 
-   * @param {boolean|string[]} req.expand
+   *  @api {GET} /search group.list
+   *  @apiName group.list
+   *  @apiGroup Group
+   *  
+   *  @apiDescription Search alias. List all groups, full expansion by default. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-searchByCql>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const groups = await crowd.group.list()
+   *  
+   *  @apiParam {Object} request Object housing properties below
+   *  @apiParam {Boolean} [request.expand=true] Expand groups
+   *  
+   *  @apiSuccess (Groups Response) {Group[]} Returns a list of groups
+   *  @apiSuccessExample {Group[]} GroupsResponse 
+   *    [
+   *      {
+   *        name: 'alpaca-squad-91c4418262ebb7559A',
+   *        active: false,
+   *        description: 'some description',
+   *        attributes: { test: 'test' }
+   *      },
+   *      {
+   *        name: 'gnu-cohort-6fc32ad92454394faA',
+   *        active: true,
+   *        attributes: {}
+   *      }, ...
+   *    ]
    */
-  public async list(req: { expand?: boolean | string[] } = {}): Promise<Groups> {
-    return this.search(req);
+  public async list(req: { expand?: boolean | string[] }): Promise<Groups> {
+    const { expand = true } = req;
+
+    return this.search({ expand });
   }
 }

@@ -1500,9 +1500,9 @@
       },
       "examples": [
         {
-          "title": "GroupsResponse",
+          "title": "{Object|Object[]} GroupsResponse",
           "content": "[\n   {\n     name: 'aemma',\n     active: true,\n     'first-name': 'Abigail',\n     'last-name': 'Emma',\n     'display-name': 'Abigail Emma',\n     email: 'aemma@test.com',\n     key: '<key>',\n     attributes: {},\n     'created-date': 1586223686277,\n     'updated-date': 1586482147883\n   },\n   {\n     name: 'ajacob',\n     active: true,\n     'first-name': 'Alexander',\n     'last-name': 'Jacob',\n     'display-name': 'Alexander Jacob',\n     email: 'ajacob@test.com',\n     key: '<key>',\n     attributes: {},\n     'created-date': 1586132987812,\n     'updated-date': 1586132987812\n   }\n]",
-          "type": "Object[]"
+          "type": "json"
         }
       ]
     },
@@ -1603,9 +1603,127 @@
       },
       "examples": [
         {
-          "title": "GroupsResponse",
+          "title": "{Object|Object[]} GroupsResponse",
           "content": "[  \n   {\n     name: 'aemma',\n     active: true,\n     'first-name': 'Abigail',\n     'last-name': 'Emma',\n     'display-name': 'Abigail Emma',\n     email: 'aemma@test.com',\n     key: '<key>',\n     attributes: {},\n     'created-date': 1586223686277,\n     'updated-date': 1586482147883\n   },\n   {\n     name: 'ajacob',\n     active: true,\n     'first-name': 'Alexander',\n     'last-name': 'Jacob',\n     'display-name': 'Alexander Jacob',\n     email: 'ajacob@test.com',\n     key: '<key>',\n     attributes: {},\n     'created-date': 1586132987812,\n     'updated-date': 1586132987812\n   }\n]",
-          "type": "Object[]"
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/search",
+    "title": "group.list",
+    "name": "group.list",
+    "group": "Group",
+    "description": "<p>Search alias. List all groups, full expansion by default. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-searchByCql>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const groups = await crowd.group.list()",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "defaultValue": "true",
+            "description": "<p>Expand groups</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Groups Response": [
+          {
+            "group": "Groups Response",
+            "type": "Group[]",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>a list of groups</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GroupsResponse",
+          "content": "[\n  {\n    name: 'alpaca-squad-91c4418262ebb7559A',\n    active: false,\n    description: 'some description',\n    attributes: { test: 'test' }\n  },\n  {\n    name: 'gnu-cohort-6fc32ad92454394faA',\n    active: true,\n    attributes: {}\n  }, ...\n]",
+          "type": "Group[]"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/search",
+    "title": "group.list",
+    "name": "group.list",
+    "group": "Group",
+    "description": "<p>Search alias. List all groups, full expansion by default. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-searchByCql>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const groups = await crowd.group.list()",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "defaultValue": "true",
+            "description": "<p>Expand groups</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Groups Response": [
+          {
+            "group": "Groups Response",
+            "type": "Group[]",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>a list of groups</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GroupsResponse ",
+          "content": "[\n  {\n    name: 'alpaca-squad-91c4418262ebb7559A',\n    active: false,\n    description: 'some description',\n    attributes: { test: 'test' }\n  },\n  {\n    name: 'gnu-cohort-6fc32ad92454394faA',\n    active: true,\n    attributes: {}\n  }, ...\n]",
+          "type": "Group[]"
         }
       ]
     },
@@ -2008,6 +2126,182 @@
           "title": "RemoveUserRequest",
           "content": "{\n  name: 'alpaca-squad-91c4418262ebb7559A',\n  username: 'aemma'\n}",
           "type": "Object"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/search",
+    "title": "group.search",
+    "name": "group.search",
+    "group": "Group",
+    "description": "<p>Search for groups based on CQL expression. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-searchByCql>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const groups = await crowd.group.search(SearchRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "description": "<p>Expand groups</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "request.restriction",
+            "description": "<p>CQL restriction expression</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.maxResults",
+            "defaultValue": "groups.length",
+            "description": "<p>Limits the max results brought back</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.startIndex",
+            "defaultValue": "0",
+            "description": "<p>Starting index of query</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "SearchRequest",
+          "content": "{\n  restriction: 'active=false',\n  expand: true,\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Groups Response": [
+          {
+            "group": "Groups Response",
+            "type": "Group[]",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>a list of groups</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GroupsResponse",
+          "content": "[\n  {\n    name: 'alpaca-squad-91c4418262ebb7559A',\n    active: false,\n    description: 'some description',\n    attributes: { test: 'test' }\n  },\n  {\n    name: 'gnu-cohort-6fc32ad92454394faA',\n    active: false,\n    attributes: {}\n  }\n]",
+          "type": "Object[]"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/group/client.d.ts",
+    "groupTitle": "Group"
+  },
+  {
+    "type": "GET",
+    "url": "/search",
+    "title": "group.search",
+    "name": "group.search",
+    "group": "Group",
+    "description": "<p>Search for groups based on CQL expression. Paginates until all results retrieved automatically. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/group-searchByCql>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const groups = await crowd.group.search(SearchRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "description": "<p>Expand groups</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "request.restriction",
+            "description": "<p>CQL restriction expression</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.maxResults",
+            "defaultValue": "groups.length",
+            "description": "<p>Limits the max results brought back</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "request.startIndex",
+            "defaultValue": "0",
+            "description": "<p>Starting index of query</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "SearchRequest",
+          "content": "{\n  restriction: 'active=false',\n  expand: true,\n}",
+          "type": "Object"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Groups Response": [
+          {
+            "group": "Groups Response",
+            "type": "Group[]",
+            "optional": false,
+            "field": "Returns",
+            "description": "<p>a list of groups</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "GroupsResponse",
+          "content": "[\n  {\n    name: 'alpaca-squad-91c4418262ebb7559A',\n    active: false,\n    description: 'some description',\n    attributes: { test: 'test' }\n  },\n  {\n    name: 'gnu-cohort-6fc32ad92454394faA',\n    active: false,\n    attributes: {}\n  }\n]",
+          "type": "Object[]"
         }
       ]
     },
@@ -3062,5 +3356,263 @@
     "version": "0.0.0",
     "filename": "src/resources/session/client.ts",
     "groupTitle": "Session"
+  },
+  {
+    "type": "GET",
+    "url": "/user",
+    "title": "user.get",
+    "name": "user.get",
+    "group": "User",
+    "description": "<p>Retrieves user from Crowd. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/user-getUser>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const user = await crowd.user.get(GetUserRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "examples": [
+        {
+          "title": "GetUserRequest",
+          "content": "{\n  name: 'aemma',\n  expand: true\n}",
+          "type": "Object"
+        }
+      ],
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing below properties</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>User name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "defaultValue": "false",
+            "description": "<p>Expand attributes of user</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "UserResponseExample",
+          "content": "{\n  name: 'aemma',\n  active: true,\n  'first-name': 'Abigail',\n  'last-name': 'Emma',\n  'display-name': 'Abigail Emma',\n  email: 'aemma@test.com',\n  key: '<key>',\n  attributes: {\n    invalidPasswordAttempts: '0',\n    lastActive: '1586482147886',\n    lastAuthenticated: '1586482147882',\n    passwordLastChanged: '1586223686282',\n    requiresPasswordChange: 'false'\n  },\n  'created-date': 1586223686277,\n  'updated-date': 1586482147883\n}",
+          "type": "Object"
+        }
+      ],
+      "fields": {
+        "User Response": [
+          {
+            "group": "User Response",
+            "type": "User",
+            "optional": false,
+            "field": "response",
+            "description": "<p>Object that houses below properties</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.name",
+            "description": "<p>Username</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "Boolean",
+            "optional": false,
+            "field": "response.active",
+            "description": "<p>Whether user is active</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.first-name",
+            "description": "<p>User first name</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.last-name",
+            "description": "<p>User last name</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.display-name",
+            "description": "<p>User display name</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.email",
+            "description": "<p>User email</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.key",
+            "description": "<p>User key</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "Object",
+            "optional": false,
+            "field": "response.attributes",
+            "description": "<p>Empty object</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/user/client.d.ts",
+    "groupTitle": "User"
+  },
+  {
+    "type": "GET",
+    "url": "/user",
+    "title": "user.get",
+    "name": "user.get",
+    "group": "User",
+    "description": "<p>Retrieves user from Crowd. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/user-getUser>[API DOCS]</a></p>",
+    "examples": [
+      {
+        "title": "Async/await",
+        "content": "const user = await crowd.user.get(GetUserRequest)",
+        "type": "javascript"
+      }
+    ],
+    "parameter": {
+      "examples": [
+        {
+          "title": "GetUserRequest",
+          "content": "{\n  name: 'aemma',\n  expand: true\n}",
+          "type": "Object"
+        }
+      ],
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Object housing below properties</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "request.name",
+            "description": "<p>User name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "request.expand",
+            "defaultValue": "false",
+            "description": "<p>Expand attributes of user</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "UserResponseExample ",
+          "content": "{\n  name: 'aemma',\n  active: true,\n  'first-name': 'Abigail',\n  'last-name': 'Emma',\n  'display-name': 'Abigail Emma',\n  email: 'aemma@test.com',\n  key: '<key>',\n  attributes: {\n    invalidPasswordAttempts: '0',\n    lastActive: '1586482147886',\n    lastAuthenticated: '1586482147882',\n    passwordLastChanged: '1586223686282',\n    requiresPasswordChange: 'false'\n  },\n  'created-date': 1586223686277,\n  'updated-date': 1586482147883\n}",
+          "type": "Object"
+        }
+      ],
+      "fields": {
+        "User Response": [
+          {
+            "group": "User Response",
+            "type": "User",
+            "optional": false,
+            "field": "response",
+            "description": "<p>Object that houses below properties</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.name",
+            "description": "<p>Username</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "Boolean",
+            "optional": false,
+            "field": "response.active",
+            "description": "<p>Whether user is active</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.first-name",
+            "description": "<p>User first name</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.last-name",
+            "description": "<p>User last name</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.display-name",
+            "description": "<p>User display name</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.email",
+            "description": "<p>User email</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "String",
+            "optional": false,
+            "field": "response.key",
+            "description": "<p>User key</p>"
+          },
+          {
+            "group": "User Response",
+            "type": "Object",
+            "optional": false,
+            "field": "response.attributes",
+            "description": "<p>Empty object</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/resources/user/client.ts",
+    "groupTitle": "User"
   }
 ]

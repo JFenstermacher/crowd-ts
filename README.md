@@ -42,17 +42,17 @@ import { CrowdApplication } from 'crowd-ts';
   await crowd.group.removeUser({ name: group.name, username: user.name });
 
   // Returning all users with attributes
-  const users = await crowd.user.list({ expand: true });
+  const users = await crowd.user.list();
 
   // Returning users fitting some CQL restriction
   const users2 = await crowd.user.search({ restriction: '<restriction>' });
 
-  // Returning list of all groups
-  const groups = await crowd.group.list()
+  // Returning list of all groups, just names
+  const groups = await crowd.group.list({ expand: false })
 
   // Returning all group memberships as JSON
   // Structured as { [groupname: string]: { users: string[], groups: string[] }}
-  const memberships = await crowd.getAllMemberships();
+  const memberships = await crowd.getMemberships();
 
 })()
 ```

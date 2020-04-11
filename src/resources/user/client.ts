@@ -5,16 +5,17 @@ import { EntityType, Method, QueryTypes } from '../../shared/enums';
 export class UserClient extends ResourceClient {
 
   /**
-   *  @apiDefine UserResponseObject
-   * 
-   *  @apiSuccess (User) {String} name Username
-   *  @apiSuccess (User) {Boolean} active Whether user is active
-   *  @apiSuccess (User) {String} first-name User first name
-   *  @apiSuccess (User) {String} last-name User last name 
-   *  @apiSuccess (User) {String} display-name User display name 
-   *  @apiSuccess (User) {String} email User email
-   *  @apiSuccess (User) {String} key User key
-   *  @apiSuccess (User) {Object} attributes Empty object
+   *  @apiDefine UserResponse
+   *  
+   *  @apiSuccess (User Response) {User}    response              Object that houses below properties
+   *  @apiSuccess (User Response) {String}  response.name         Username
+   *  @apiSuccess (User Response) {Boolean} response.active       Whether user is active
+   *  @apiSuccess (User Response) {String}  response.first-name   User first name
+   *  @apiSuccess (User Response) {String}  response.last-name    User last name 
+   *  @apiSuccess (User Response) {String}  response.display-name User display name 
+   *  @apiSuccess (User Response) {String}  response.email        User email
+   *  @apiSuccess (User Response) {String}  response.key          User key
+   *  @apiSuccess (User Response) {Object}  response.attributes   Empty object
    */
 
    /**
@@ -35,12 +36,45 @@ export class UserClient extends ResourceClient {
   }
 
   /**
-   * Gets user, name or key, one is optional.
-   * 
-   * @param {object} req 
-   * @param {string} req.name
-   * @param {string} req.key
-   * @param {boolean} req.expand
+   *  @api {GET} /user user.get
+   *  @apiName user.get
+   *  @apiGroup User
+   *  
+   *  @apiDescription Retrieves user from Crowd. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/user-getUser>[API DOCS]</a>
+   *  
+   *  @apiExample {javascript} Async/await
+   *    const user = await crowd.user.get(GetUserRequest)
+   *  @apiParamExample {Object} GetUserRequest
+   *    {
+   *      name: 'aemma',
+   *      expand: true
+   *    }
+   *  
+   *  @apiUse UserResponse 
+   *  
+   *  @apiParam {Object} request Object housing below properties
+   *  @apiParam {String} request.name User name
+   *  @apiParam {Boolean} [request.expand=false] Expand attributes of user
+   *  
+   *  @apiSuccessExample {Object} UserResponseExample 
+   *    {
+   *      name: 'aemma',
+   *      active: true,
+   *      'first-name': 'Abigail',
+   *      'last-name': 'Emma',
+   *      'display-name': 'Abigail Emma',
+   *      email: 'aemma@test.com',
+   *      key: '<key>',
+   *      attributes: {
+   *        invalidPasswordAttempts: '0',
+   *        lastActive: '1586482147886',
+   *        lastAuthenticated: '1586482147882',
+   *        passwordLastChanged: '1586223686282',
+   *        requiresPasswordChange: 'false'
+   *      },
+   *      'created-date': 1586223686277,
+   *      'updated-date': 1586482147883
+   *    }
    */
   @convertResponse(EntityType.USER)
   public async get(req: GetUserRequest): Promise<User> {
