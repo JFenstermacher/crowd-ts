@@ -3,6 +3,107 @@ import { ResourceClient } from '../base';
 import { convertResponse, convertAttrToList } from '../../shared/utilities';
 import { EntityType, Method, QueryTypes } from '../../shared/enums';
 
+import { Attributes, PaginatedRequest, Users } from '../..'
+
+export type Groups = Group[];
+export type Group = {
+  name: string
+  active?: boolean
+  description?: string
+  attributes?: Attributes
+}
+
+export type Memberships = {
+  [groupname: string]: Membership
+}
+
+export type Membership = {
+  users: string[]
+  groups: string[]
+}
+
+export interface GetGroupRequest {
+  name: string
+  expand?: boolean
+}
+
+export interface CreateGroupRequest {
+  name: string
+  active?: boolean
+  description?: string
+}
+
+export interface UpdateGroupRequest {
+  name: string
+  active?: boolean
+  description?: string
+}
+
+export interface RemoveGroupRequest {
+  name: string
+}
+
+export interface GetGroupAttributesRequest {
+  name: string
+}
+
+export interface SetGroupAttributesRequest {
+  name: string
+  attributes: Attributes
+}
+
+export interface RemoveGroupAttributeRequest {
+  name: string
+  attribute: string
+}
+
+export interface GetGroupChildrenRequest extends PaginatedRequest {
+  name: string
+  nested?: boolean
+}
+
+export interface AddGroupChildRequest {
+  name: string
+  childname: string
+}
+
+export interface RemoveGroupChildRequest {
+  name: string
+  childname: string
+}
+
+export interface GetGroupParentsRequest extends PaginatedRequest {
+  name: string
+  expand?: boolean
+  nested?: boolean
+}
+
+export interface AddGroupParentRequest {
+  name: string
+  parentname: string
+}
+
+export interface GetGroupUsersRequest extends PaginatedRequest {
+  name: string
+  username?: string
+  nested?: boolean
+}
+
+export interface AddUserToGroupRequest {
+  name: string
+  username: string
+}
+
+export interface RemoveGroupFromUserRequest {
+  name: string
+  username: string
+}
+
+export interface SearchGroupsRequest extends PaginatedRequest {
+  restriction?: string
+  expand?: boolean | string[]
+}
+
 export class GroupClient extends ResourceClient {
   /**
    *  @apiDefine GroupResponse

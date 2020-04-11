@@ -35,7 +35,7 @@ const generateUser = function*(): Generator<any, any> {
   }
 }
 
-const generateGroup = function*(): Generator<Group, Group> {
+const generateGroup = function*(): Generator<any, any> {
   const animals = [
     'otter',      'porcupine',  'lemur',  'orangutan',  'skunk',
     'hartebeest', 'lizard' ,    'gnu',    'horse',      'bull',

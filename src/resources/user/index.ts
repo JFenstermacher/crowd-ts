@@ -2,6 +2,112 @@ import { ResourceClient } from '../base';
 import { convertResponse, convertAttrToList } from '../../shared/utilities';
 import { EntityType, Method, QueryTypes } from '../../shared/enums';
 
+import { Groups, Attributes, PaginatedRequest } from '../..';
+
+export type Users = User[];
+export type User = {
+  name: string
+  active?: boolean
+  firstName?: string
+  lastName?: string
+  displayName?: string
+  email?: string
+  key?: string
+  password?: string
+  attributes?: Attributes
+  createdDate?: string
+  updatedDate?: string
+}
+
+export interface AuthenticateUserRequest {
+  name: string
+  password: string
+}
+
+export interface GetUserRequestWithKey {
+  key: string
+  expand?: boolean
+}
+
+export interface GetUserRequestWithName {
+  name: string
+  expand?: boolean 
+}
+
+export type GetUserRequest = GetUserRequestWithKey | GetUserRequestWithName
+
+export interface CreateUserRequest {
+  name: string
+  active: boolean
+  firstName: string
+  lastName: string
+  displayName: string
+  email: string
+  password: string
+}
+
+export interface UpdateUserRequest {
+  name: string
+  active?: boolean
+  firstName?: string
+  lastName?: string
+  displayName?: string
+  email?: string
+}
+
+export interface RemoveUserRequest {
+  name: string
+}
+
+export interface GetUserAttributesRequest {
+  name: string
+}
+
+export interface SetUserAttributesRequest {
+  name: string,
+  attributes: Attributes
+}
+
+export interface RemoveUserAttributeRequest {
+  name: string,
+  attribute: string
+}
+
+export interface GetUserGroupsRequest extends PaginatedRequest {
+  name: string
+  nested?: boolean
+  expand?: boolean | string[]
+}
+
+export interface AddUserGroupRequest {
+  name: string
+  groupname: string
+}
+
+export interface RemoveUserGroupRequest {
+  name: string
+  groupname: string
+}
+
+export interface UpdateUserPasswordRequest {
+  name: string
+  password: string
+}
+
+export interface RemoveUserPasswordRequest {
+  name: string
+}
+
+export interface RenameUserRequest {
+  name: string
+  newName: string
+}
+
+export interface SearchUsersRequest extends PaginatedRequest {
+  restriction?: string
+  expand?: boolean | string[] 
+}
+
 export class UserClient extends ResourceClient {
 
   /**

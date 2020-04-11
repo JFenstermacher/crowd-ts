@@ -1,5 +1,7 @@
 import { getCrowd, addGroupsByCount, addUsersByCount, getRandomEle } from './utils';
 
+import { Group, Groups, User, Users } from '../src';
+
 const crowd = getCrowd();
 
 let groups: Groups = [];

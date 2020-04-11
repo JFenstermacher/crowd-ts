@@ -2,7 +2,7 @@ import { addUsersByCount, getCrowd, getRandomEle, generateRandomString } from '.
 
 const crowd = getCrowd();
 
-let users: Users = [];
+let users: any[] = [];
 
 beforeAll(async (done) => {
   users = await addUsersByCount(crowd, 3);

@@ -2,7 +2,8 @@
   "name": "crowd-ts",
   "version": "1.0.0",
   "description": "Crowd typescript",
-  "main": "crowd.js",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -12,9 +13,14 @@
   "keywords": [
     "atlassian",
     "crowd",
-    "typescript"
+    "typescript",
+    "api-client",
+    "api",
+    "rest"
   ],
   "author": "J Fenstermacher",
+  "homepage": "https://jfenstermacher.github.io/crowd-ts/",
+  "bugs": "https://github.com/JFenstermacher/crowd-ts/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/jfenstermacher/crowd-ts.git"

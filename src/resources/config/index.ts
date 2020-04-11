@@ -1,5 +1,11 @@
 import { ResourceClient } from '../base';
 
+export type Config = {
+  domain: string
+  secure: false
+  name: string
+}
+
 export class ConfigClient extends ResourceClient {
 
   /**
@@ -7,7 +13,7 @@ export class ConfigClient extends ResourceClient {
    * @apiName config.get
    * @apiGroup Config
    * 
-   * @apiDescription Returns the cookie configuration for the application. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/config-getConfig>[API DOCS]</a>
+   * @apiDescription Returns the cookie configuration for the application. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/cookie-getConfig>[API DOCS]</a>
    * 
    * @apiExample {javascript} Async/await
    *  const config = await crowd.config.get();

@@ -3,9 +3,19 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import pQueue from 'p-queue';
 import { Transform } from 'stream';
 
-interface CrowdConfig extends AxiosRequestConfig {
+export interface CrowdConfig extends AxiosRequestConfig {
   concurrency?: number,
   debug?: boolean
+}
+
+export type Attributes = {
+  [key: string]: string
+}
+
+export interface PaginatedRequest {
+  expand?: boolean | string[]
+  maxResults?: number
+  startIndex?: number
 }
 
 export class CrowdApplication {

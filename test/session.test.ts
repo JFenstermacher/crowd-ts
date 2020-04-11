@@ -2,7 +2,7 @@ import { getCrowd, addUsersByCount } from './utils';
 
 const crowd = getCrowd();
 
-let user: User;
+let user: any;
 
 beforeAll(async (done) => {
   const users = await addUsersByCount(crowd, 1);

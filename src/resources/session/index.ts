@@ -2,6 +2,53 @@ import { ResourceClient } from '../base';
 import { convertResponse, convertValidationFactors } from '../../shared/utilities';
 import { EntityType, Method } from '../../shared/enums';
 
+import { User } from '../..';
+
+export type Session = {
+  token: string
+  user: User
+  createdDate: number 
+  expiryDate: number 
+}
+
+export type ValidationFactors = {
+  [key: string]: string
+}
+
+export interface AuthenticateUserSessionRequest {
+  name: string
+  password: string
+  validationFactors?: ValidationFactors
+  validate?: boolean
+  duration?: number
+  expand?: boolean
+}
+
+export interface RemoveAllSessionsRequest {
+  name: string
+  exclude?: string
+}
+
+export interface GetTokenRequest {
+  name: string
+  password: string
+  validate?: boolean
+  duration?: string
+}
+
+export interface InvalidateTokenRequest {
+  token: string
+}
+
+export interface ValidateTokenRequest {
+  token: string
+  validationFactors: ValidationFactors
+}
+
+export interface GetSessionRequest {
+  token: string
+  expand?: boolean
+}
 export class SessionClient extends ResourceClient {
   /**
    *  @apiDefine SessionResponse
