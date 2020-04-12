@@ -9,7 +9,7 @@ npm install --save crowd-ts
 
 ### Creating Client
 
-The client uses axios and p-queue. An axios instance is via the config passed to the client. The one configuration property exception being, concurrency. Concurrency is passed to p-queue to allow for ratelimiting if desired, by default, there is no rate limiting. Both the instance and queue are available as properties.
+The client uses axios and p-queue. An axios instance is created via the config passed to the client. The one configuration property exception being, concurrency. Concurrency is passed to p-queue to allow for ratelimiting if desired, by default, there is no rate limiting. Both the instance and queue are available as properties.
 ```js
 import { CrowdApplication } from 'crowd-ts';
 
@@ -72,12 +72,24 @@ crowd.queue; // pQueue instance reference
   // Structured as { [groupname: string]: { users: string[], groups: string[] }}
   const memberships = await crowd.getMemberships();
 
+  // Remove all users
+  await Promise.all(users.map( user => crowd.user.remove(user) ));
+
+  // Remove all gorups
+  await Promise.all(groups.map( group => crowd.group.remove(group) ));
+
 })()
 ```
+Notes:
+
+* Objects don't map directly to those in the examples shown in the Crowd documentation. I remapped properties with hyphens to allow dot notation.
+* Expand sometimes accepts either boolean or string[]. Passing `true` will do full expansion allowed, if you'd like to only expand user or group, you can pass that as a string param
+
 
 #### Links 
 
 Source: [crowd-ts](https://github.com/JFenstermacher/crowd-ts)
+
 Client documentation: [crowd-ts](https://jfenstermacher.github.io/crowd-ts/)
 
 ## Acknowledgements

@@ -36,11 +36,21 @@ export class ResourceClient {
   }
 
   protected _createExpandParam(expand?: boolean | string[]): string | undefined {
-    expand = expand ? expand : [];
+    const allowed = ['user', 'group', 'attributes'];
 
-    const param = Array.isArray(expand) ? expand.join(',') : 'user,group,attributes';
+    let retval;
 
-    return param.length ? param: undefined;
+    if (Array.isArray(expand)) {
+      for (const e of expand) {
+        if (!allowed.includes(e)) {
+          throw new Error(`Allowed expansion attributes are: ${allowed}`);
+        }
+      }
+
+      retval = expand.join(',');
+    } else if (expand) retval = allowed.join(',');
+
+    return retval;
   }
 
   protected request(params: AxiosRequestConfig) {

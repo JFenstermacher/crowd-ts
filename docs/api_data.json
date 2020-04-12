@@ -66,7 +66,7 @@
             "type": "String",
             "optional": false,
             "field": "domain",
-            "description": ""
+            "description": "<p>Domain of Crowd server</p>"
           },
           {
             "group": "Config Response",
@@ -80,10 +80,17 @@
             "type": "String",
             "optional": false,
             "field": "name",
-            "description": ""
+            "description": "<p>Cookie name</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "ConfigResponseExample",
+          "content": "{\n  domain: '.atlassian.com' ,\n  secure: false,\n  name: 'dev_crowd.token_key'\n}",
+          "type": "Object"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "src/resources/config.ts",

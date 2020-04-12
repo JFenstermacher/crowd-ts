@@ -10,7 +10,7 @@
     "test": "jest",
     "docs": "apidoc -f \".*\\.ts$\" -i src -o docs/",
     "package": "rm -rf dist && tsc --outDir dist",
-    "link": "npm link test-link",
+    "link": "npm link && cd test-link && npm link crowd-ts",
     "clean": "rm -rf dist"
   },
   "keywords": [
