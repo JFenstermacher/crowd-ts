@@ -17,9 +17,10 @@ export class ConfigClient extends ResourceClient {
    * 
    * @apiExample {javascript} Async/await
    *  const config = await crowd.config.get();
-   * @apiSuccess (Config Response) {String} domain Domain of Crowd server
-   * @apiSuccess (Config Response) {Boolean} secure
-   * @apiSuccess (Config Response) {String} name Cookie name
+   * @apiSuccess (Config Response) {Object} response Object housing properties below
+   * @apiSuccess (Config Response) {String} response.domain Domain of Crowd server
+   * @apiSuccess (Config Response) {Boolean} response.secure
+   * @apiSuccess (Config Response) {String} response.name Cookie name
    * @apiSuccessExample {Object} ConfigResponseExample
    *  {
    *    domain: '.atlassian.com' ,

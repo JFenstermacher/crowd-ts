@@ -18,27 +18,41 @@
         "Config Response": [
           {
             "group": "Config Response",
+            "type": "Object",
+            "optional": false,
+            "field": "response",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Config Response",
             "type": "String",
             "optional": false,
-            "field": "domain",
-            "description": ""
+            "field": "response.domain",
+            "description": "<p>Domain of Crowd server</p>"
           },
           {
             "group": "Config Response",
             "type": "Boolean",
             "optional": false,
-            "field": "secure",
+            "field": "response.secure",
             "description": ""
           },
           {
             "group": "Config Response",
             "type": "String",
             "optional": false,
-            "field": "name",
-            "description": ""
+            "field": "response.name",
+            "description": "<p>Cookie name</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "ConfigResponseExample",
+          "content": "{\n  domain: '.atlassian.com' ,\n  secure: false,\n  name: 'dev_crowd.token_key'\n}",
+          "type": "Object"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "src/resources/config.d.ts",
@@ -63,23 +77,30 @@
         "Config Response": [
           {
             "group": "Config Response",
+            "type": "Object",
+            "optional": false,
+            "field": "response",
+            "description": "<p>Object housing properties below</p>"
+          },
+          {
+            "group": "Config Response",
             "type": "String",
             "optional": false,
-            "field": "domain",
+            "field": "response.domain",
             "description": "<p>Domain of Crowd server</p>"
           },
           {
             "group": "Config Response",
             "type": "Boolean",
             "optional": false,
-            "field": "secure",
+            "field": "response.secure",
             "description": ""
           },
           {
             "group": "Config Response",
             "type": "String",
             "optional": false,
-            "field": "name",
+            "field": "response.name",
             "description": "<p>Cookie name</p>"
           }
         ]
