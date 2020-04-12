@@ -14,10 +14,10 @@ The client uses axios and p-queue. An axios instance is created via the config p
 import { CrowdApplication } from 'crowd-ts';
 
 const crowd = new CrowdApplication({
-  baseURL: 'https://<SERVER>',
+  baseURL: 'https://crowd.test.org',
   auth: {
-    username: '<APPLICATION_NAME>',
-    password: '<APPLICATION_PASS>'
+    username: 'test-application',
+    password: 'test-password'
   },
   concurrency: 10 // If rate-limiting desired
 });
@@ -75,7 +75,7 @@ crowd.queue; // pQueue instance reference
   // Remove all users
   await Promise.all(users.map( user => crowd.user.remove(user) ));
 
-  // Remove all gorups
+  // Remove all groups
   await Promise.all(groups.map( group => crowd.group.remove(group) ));
 
 })()
