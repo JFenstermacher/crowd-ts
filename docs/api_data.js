@@ -5,7 +5,7 @@ define({ "api": [
     "title": "config.get",
     "name": "config.get",
     "group": "Config",
-    "description": "<p>Returns the cookie configuration for the application. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/config-getConfig>[API DOCS]</a></p>",
+    "description": "<p>Returns the cookie configuration for the application. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/cookie-getConfig>[API DOCS]</a></p>",
     "examples": [
       {
         "title": "Async/await",
@@ -41,7 +41,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/config/client.d.ts",
+    "filename": "src/resources/config.d.ts",
     "groupTitle": "Config"
   },
   {
@@ -50,7 +50,7 @@ define({ "api": [
     "title": "config.get",
     "name": "config.get",
     "group": "Config",
-    "description": "<p>Returns the cookie configuration for the application. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/config-getConfig>[API DOCS]</a></p>",
+    "description": "<p>Returns the cookie configuration for the application. Refer to the CROWD documentation <a href=https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/#usermanagement/1/cookie-getConfig>[API DOCS]</a></p>",
     "examples": [
       {
         "title": "Async/await",
@@ -86,7 +86,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/config/client.ts",
+    "filename": "src/resources/config.ts",
     "groupTitle": "Config"
   },
   {
@@ -193,7 +193,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -300,7 +300,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -352,7 +352,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -404,7 +404,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -456,7 +456,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -508,7 +508,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -560,7 +560,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -612,7 +612,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -713,7 +713,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -814,7 +814,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -879,7 +879,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -944,7 +944,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -1040,7 +1040,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -1136,7 +1136,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -1174,7 +1174,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -1212,7 +1212,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -1308,7 +1308,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -1404,7 +1404,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -1507,7 +1507,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -1610,7 +1610,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -1669,7 +1669,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -1728,7 +1728,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -1773,7 +1773,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -1818,7 +1818,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -1870,7 +1870,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -1922,7 +1922,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -1974,7 +1974,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -2026,7 +2026,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -2078,7 +2078,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -2130,7 +2130,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -2218,7 +2218,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -2306,7 +2306,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -2358,7 +2358,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -2410,7 +2410,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -2503,7 +2503,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.d.ts",
+    "filename": "src/resources/group.d.ts",
     "groupTitle": "Group"
   },
   {
@@ -2596,7 +2596,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/group/client.ts",
+    "filename": "src/resources/group.ts",
     "groupTitle": "Group"
   },
   {
@@ -2725,7 +2725,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/session/client.d.ts",
+    "filename": "src/resources/session.d.ts",
     "groupTitle": "Session"
   },
   {
@@ -2854,7 +2854,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/session/client.ts",
+    "filename": "src/resources/session.ts",
     "groupTitle": "Session"
   },
   {
@@ -2955,7 +2955,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/session/client.d.ts",
+    "filename": "src/resources/session.d.ts",
     "groupTitle": "Session"
   },
   {
@@ -3056,7 +3056,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/session/client.ts",
+    "filename": "src/resources/session.ts",
     "groupTitle": "Session"
   },
   {
@@ -3101,7 +3101,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/session/client.d.ts",
+    "filename": "src/resources/session.d.ts",
     "groupTitle": "Session"
   },
   {
@@ -3146,7 +3146,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/session/client.ts",
+    "filename": "src/resources/session.ts",
     "groupTitle": "Session"
   },
   {
@@ -3198,7 +3198,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/session/client.d.ts",
+    "filename": "src/resources/session.d.ts",
     "groupTitle": "Session"
   },
   {
@@ -3250,7 +3250,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/session/client.ts",
+    "filename": "src/resources/session.ts",
     "groupTitle": "Session"
   },
   {
@@ -3302,7 +3302,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/session/client.d.ts",
+    "filename": "src/resources/session.d.ts",
     "groupTitle": "Session"
   },
   {
@@ -3354,7 +3354,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/session/client.ts",
+    "filename": "src/resources/session.ts",
     "groupTitle": "Session"
   },
   {
@@ -3406,7 +3406,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -3458,7 +3458,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -3586,7 +3586,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -3714,7 +3714,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -3843,7 +3843,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -3972,7 +3972,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -4101,7 +4101,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -4230,7 +4230,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -4295,7 +4295,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -4360,7 +4360,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -4457,7 +4457,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -4554,7 +4554,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -4613,7 +4613,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -4672,7 +4672,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -4717,7 +4717,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -4762,7 +4762,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -4814,7 +4814,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -4866,7 +4866,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -4918,7 +4918,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -4970,7 +4970,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -5022,7 +5022,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -5074,7 +5074,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -5202,7 +5202,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -5330,7 +5330,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -5418,7 +5418,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -5506,7 +5506,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -5558,7 +5558,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -5610,7 +5610,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -5690,7 +5690,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -5770,7 +5770,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   },
   {
@@ -5822,7 +5822,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.d.ts",
+    "filename": "src/resources/user.d.ts",
     "groupTitle": "User"
   },
   {
@@ -5874,7 +5874,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/resources/user/client.ts",
+    "filename": "src/resources/user.ts",
     "groupTitle": "User"
   }
 ] });
