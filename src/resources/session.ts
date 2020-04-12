@@ -1,8 +1,8 @@
-import { ResourceClient } from '../base';
-import { convertResponse, convertValidationFactors } from '../../shared/utilities';
-import { EntityType, Method } from '../../shared/enums';
+import { ResourceClient } from './base';
+import { convertResponse, convertValidationFactors } from '../shared/utilities';
+import { EntityType, Method } from '../shared/enums';
 
-import { User } from '../..';
+import { User } from '..';
 
 export type Session = {
   token: string

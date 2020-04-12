@@ -1,3 +1,5 @@
+import { Attributes } from '..';
+
 const CONVERSION_KEYS: { [key: string]: any[] } = {
   group: [
     ['name', 'name'],

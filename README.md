@@ -1,21 +1,34 @@
-Promise-based typescript library to communicate with an Atlassian Crowd server with Node. Simple, hopefully intuitive namespaced API. Built on top of axios, with built-in rate limiting via p-queue. This is a wrapper on [CROWD REST Apis](https://https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/). Takes inspiration from [atlassian-crowd-client](https://github.com/ghengeveld/atlassian-crowd-client).
+Promise-based typescript library to communicate with an Atlassian Crowd server with Node. Simple, hopefully intuitive namespaced API. Built on top of axios, with built-in rate limiting via p-queue. This is a wrapper on [CROWD REST Apis](https://https://docs.atlassian.com/atlassian-crowd/4.0.0/REST/).
 
 ## Installation
-```npm install --save crowd-ts```
-
-## Basic Usage
+```sh
+npm install --save crowd-ts
 ```
+
+## Usage
+
+### Creating Client
+
+The client uses axios and p-queue. An axios instance is via the config passed to the client. The one configuration property exception being, concurrency. Concurrency is passed to p-queue to allow for ratelimiting if desired, by default, there is no rate limiting. Both the instance and queue are available as properties.
+```js
 import { CrowdApplication } from 'crowd-ts';
 
+const crowd = new CrowdApplication({
+  baseURL: 'https://<SERVER>',
+  auth: {
+    username: '<APPLICATION_NAME>',
+    password: '<APPLICATION_PASS>'
+  },
+  concurrency: 10 // If rate-limiting desired
+});
+
+crowd.instance; // Axios instance reference
+crowd.queue; // pQueue instance reference
+```
+
+### Basic Usage Examples
+```js
 (async () => {
-  const crowd = new CrowdApplication({
-    baseURL: 'https://<SERVER>'
-    auth: {
-      username: '<APPLICATION_NAME>',
-      password: '<APPLICATION_PASS>'
-    },
-    concurrency: 10
-  })
 
   // Create a user 
   const params = {
@@ -30,8 +43,9 @@ import { CrowdApplication } from 'crowd-ts';
 
   const user = await crowd.user.add(params);
 
-  user.email = 'update@test.com' // Update a user
-  await crowd.user.update(user); //Update User
+  // Update a user
+  user.email = 'update@test.com';
+  await crowd.user.update(user);
 
   // Add Group
   const group = await crowd.group.add({ name: 'testgroup' });
@@ -60,3 +74,12 @@ import { CrowdApplication } from 'crowd-ts';
 
 })()
 ```
+
+#### Links 
+
+Source: [crowd-ts](https://github.com/JFenstermacher/crowd-ts)
+Client documentation: [crowd-ts](https://jfenstermacher.github.io/crowd-ts/)
+
+## Acknowledgements
+
+Takes inspiration from [atlassian-crowd-client](https://github.com/ghengeveld/atlassian-crowd-client) and [node-bitbucket](https://github.com/MunifTanjim/node-bitbucket).

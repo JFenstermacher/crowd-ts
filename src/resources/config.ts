@@ -1,4 +1,4 @@
-import { ResourceClient } from '../base';
+import { ResourceClient } from './base';
 
 export type Config = {
   domain: string

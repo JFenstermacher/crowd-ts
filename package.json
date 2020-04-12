@@ -1,14 +1,17 @@
 {
   "name": "crowd-ts",
   "version": "1.0.0",
-  "description": "Crowd typescript",
+  "description": "Atlassian Crowd typescript",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "docs": "apidoc -f \".*\\.ts$\" -i src -o docs/"
+    "docs": "apidoc -f \".*\\.ts$\" -i src -o docs/",
+    "package": "rm -rf dist && tsc --outDir dist",
+    "link": "npm link test-link",
+    "clean": "rm -rf dist"
   },
   "keywords": [
     "atlassian",

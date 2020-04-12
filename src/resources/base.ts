@@ -9,14 +9,16 @@ export class ResourceClient {
   }
 
   protected async makePaginatedRequest<T>(req: AxiosRequestConfig & { queryType: string }): Promise<T[]> {
-    const { queryType, ...requestParams } = req;
-    const { maxResults = 1000, startIndex = 0, ...params } = requestParams.params;
+    const RESPONSE_MAX = 1000; // 1000 is max that can be queried
 
-    const total = maxResults < 1000 ? maxResults : Number.MAX_SAFE_INTEGER;
+    const { queryType, ...requestParams } = req;
+    const { maxResults, startIndex = 0, ...params } = requestParams.params;
+
+    const total = maxResults ? maxResults : Number.MAX_SAFE_INTEGER;
 
     const results: T[] = [];
 
-    params['max-results'] = maxResults;
+    params['max-results'] = Math.min(total, RESPONSE_MAX);
     params['start-index'] = startIndex;
     requestParams.params = params;
 
@@ -25,12 +27,12 @@ export class ResourceClient {
 
       results.push(...response);
 
-      if (response.length < Math.min(maxResults, 1000)) break;
+      if (response.length < 1000) break;
 
       requestParams.params['start-index'] += response.length;
     }
 
-    return results;
+    return results.slice(0, total);
   }
 
   protected _createExpandParam(expand?: boolean | string[]): string | undefined {

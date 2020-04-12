@@ -1,8 +1,8 @@
-import { ResourceClient } from '../base';
-import { convertResponse, convertAttrToList } from '../../shared/utilities';
-import { EntityType, Method, QueryTypes } from '../../shared/enums';
+import { ResourceClient } from './base';
+import { convertResponse, convertAttrToList } from '../shared/utilities';
+import { EntityType, Method, QueryTypes } from '../shared/enums';
 
-import { Groups, Attributes, PaginatedRequest } from '../..';
+import { Groups, Attributes, PaginatedRequest } from '..';
 
 export type Users = User[];
 export type User = {

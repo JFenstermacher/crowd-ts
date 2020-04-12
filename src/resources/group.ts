@@ -1,9 +1,9 @@
 import * as Parser from 'node-xml-stream';
-import { ResourceClient } from '../base';
-import { convertResponse, convertAttrToList } from '../../shared/utilities';
-import { EntityType, Method, QueryTypes } from '../../shared/enums';
+import { ResourceClient } from './base';
+import { convertResponse, convertAttrToList } from '../shared/utilities';
+import { EntityType, Method, QueryTypes } from '../shared/enums';
 
-import { Attributes, PaginatedRequest, Users } from '../..'
+import { Attributes, PaginatedRequest, Users } from '..'
 
 export type Groups = Group[];
 export type Group = {

@@ -59,7 +59,7 @@ const generateRandomString = (password = false) => {
   return password ? `${randomString}${specials[((Math.random() * 3) | 0) % 3]}` : randomString;
 }
 
-const getCrowd = () => {
+const getCrowd = (concurrency?: number) => {
   const { BASE_URL, CROWD_USERNAME = '', CROWD_PASSWORD = '' } = process.env;
 
   return new CrowdApplication({
@@ -67,8 +67,9 @@ const getCrowd = () => {
     auth: {
       username: CROWD_USERNAME,
       password: CROWD_PASSWORD
-    }
-  })
+    },
+    concurrency: concurrency
+  });
 }
 
 const addGroupsByCount = async (crowd: CrowdApplication, length: number) => {
