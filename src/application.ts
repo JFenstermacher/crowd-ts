@@ -1,7 +1,6 @@
 import { ConfigClient, GroupClient, SessionClient, UserClient, } from './resources';
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig }  from 'axios';
 import pQueue from 'p-queue';
-import { Transform } from 'stream';
 
 export interface CrowdConfig extends AxiosRequestConfig {
   concurrency?: number,
@@ -21,7 +20,6 @@ export interface PaginatedRequest {
 export class CrowdApplication {
   public instance: AxiosInstance;
   public queue: pQueue;
-  public stream: Transform;
 
   public config: ConfigClient;
   public group: GroupClient;
