@@ -2,8 +2,8 @@
   "name": "crowd-ts",
   "version": "1.0.0",
   "description": "Atlassian Crowd typescript",
-  "main": "dist/src/index.js",
-  "types": "dist/src/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -13,6 +13,9 @@
     "link": "npm link && cd test-link && npm link crowd-ts",
     "clean": "rm -rf dist"
   },
+  "files": [
+    "/dist"
+  ],
   "keywords": [
     "atlassian",
     "crowd",

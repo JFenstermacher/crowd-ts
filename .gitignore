@@ -2,6 +2,7 @@ src/**/*.js
 test/**/*.js
 !jest.config.js
 *.d.ts
+!untyped.d.ts
 node_modules
 .env
 .DS_Store

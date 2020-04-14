@@ -3572,21 +3572,21 @@
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.firstName",
+            "field": "response.firstname",
             "description": "<p>User first name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.lastName",
+            "field": "response.lastname",
             "description": "<p>User last name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.displayName",
+            "field": "response.displayname",
             "description": "<p>User display name</p>"
           },
           {
@@ -3669,7 +3669,7 @@
       "examples": [
         {
           "title": "UserResponseExample ",
-          "content": "{\n  name: 'aemma',\n  active: true,\n  firstName: 'Abigail',\n  lastName: 'Emma',\n  displayName: 'Abigail Emma',\n  email: 'aemma@test.com',\n  key: '<key>',\n  attributes: {\n    invalidPasswordAttempts: '0',\n    lastActive: '1586482147886',\n    lastAuthenticated: '1586482147882',\n    passwordLastChanged: '1586223686282',\n    requiresPasswordChange: 'false'\n  },\n  createdDate: 1586223686277,\n  updatedDate: 1586482147883\n}",
+          "content": "{\n  name: 'aemma',\n  active: true,\n  firstname: 'Abigail',\n  lastname: 'Emma',\n  displayname: 'Abigail Emma',\n  email: 'aemma@test.com',\n  key: '<key>',\n  attributes: {\n    invalidPasswordAttempts: '0',\n    lastActive: '1586482147886',\n    lastAuthenticated: '1586482147882',\n    passwordLastChanged: '1586223686282',\n    requiresPasswordChange: 'false'\n  },\n  createdDate: 1586223686277,\n  updatedDate: 1586482147883\n}",
           "type": "Object"
         }
       ],
@@ -3700,21 +3700,21 @@
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.firstName",
+            "field": "response.firstname",
             "description": "<p>User first name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.lastName",
+            "field": "response.lastname",
             "description": "<p>User last name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.displayName",
+            "field": "response.displayname",
             "description": "<p>User display name</p>"
           },
           {
@@ -3829,21 +3829,21 @@
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.firstName",
+            "field": "response.firstname",
             "description": "<p>User first name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.lastName",
+            "field": "response.lastname",
             "description": "<p>User last name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.displayName",
+            "field": "response.displayname",
             "description": "<p>User display name</p>"
           },
           {
@@ -3892,7 +3892,7 @@
       "examples": [
         {
           "title": "CreateUserRequest",
-          "content": "{\n  active: true,\n  name: 'emason-d42445',\n  password: '<password>',\n  firstName: 'Emma',\n  lastName: 'Mason',\n  displayName: 'Emma Mason',\n  email: 'emason-d42445@test.com'\n}",
+          "content": "{\n  active: true,\n  name: 'emason-d42445',\n  password: '<password>',\n  firstname: 'Emma',\n  lastname: 'Mason',\n  displayname: 'Emma Mason',\n  email: 'emason-d42445@test.com'\n}",
           "type": "Object"
         }
       ],
@@ -3927,7 +3927,7 @@
       "examples": [
         {
           "title": "UserResponseExample ",
-          "content": "{\n  name: 'emason-d42445',\n  active: true,\n  firstName: 'Emma',\n  lastName: 'Mason',\n  displayName: 'Emma Mason',\n  email: 'emason-d42445@test.com',\n  key: '<key>',\n  attributes: {\n    invalidPasswordAttempts: '0',\n    passwordLastChanged: '1586619725091',\n    requiresPasswordChange: 'false'\n  },\n  createdDate: 1586619725088,\n  updatedDate: 1586619725088\n}",
+          "content": "{\n  name: 'emason-d42445',\n  active: true,\n  firstname: 'Emma',\n  lastname: 'Mason',\n  displayname: 'Emma Mason',\n  email: 'emason-d42445@test.com',\n  key: '<key>',\n  attributes: {\n    invalidPasswordAttempts: '0',\n    passwordLastChanged: '1586619725091',\n    requiresPasswordChange: 'false'\n  },\n  createdDate: 1586619725088,\n  updatedDate: 1586619725088\n}",
           "type": "Object"
         }
       ],
@@ -3958,21 +3958,21 @@
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.firstName",
+            "field": "response.firstname",
             "description": "<p>User first name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.lastName",
+            "field": "response.lastname",
             "description": "<p>User last name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.displayName",
+            "field": "response.displayname",
             "description": "<p>User display name</p>"
           },
           {
@@ -4087,21 +4087,21 @@
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.firstName",
+            "field": "response.firstname",
             "description": "<p>User first name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.lastName",
+            "field": "response.lastname",
             "description": "<p>User last name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.displayName",
+            "field": "response.displayname",
             "description": "<p>User display name</p>"
           },
           {
@@ -4185,7 +4185,7 @@
       "examples": [
         {
           "title": "UserResponseExample ",
-          "content": "{\n  name: 'aemma',\n  active: true,\n  firstName: 'Abigail',\n  lastName: 'Emma',\n  displayName: 'Abigail Emma',\n  email: 'aemma@test.com',\n  key: '<key>',\n  attributes: {\n    invalidPasswordAttempts: '0',\n    lastActive: '1586482147886',\n    lastAuthenticated: '1586482147882',\n    passwordLastChanged: '1586223686282',\n    requiresPasswordChange: 'false'\n  },\n  createdDate: 1586223686277,\n  updatedDate: 1586482147883\n}",
+          "content": "{\n  name: 'aemma',\n  active: true,\n  firstname: 'Abigail',\n  lastname: 'Emma',\n  displayname: 'Abigail Emma',\n  email: 'aemma@test.com',\n  key: '<key>',\n  attributes: {\n    invalidPasswordAttempts: '0',\n    lastActive: '1586482147886',\n    lastAuthenticated: '1586482147882',\n    passwordLastChanged: '1586223686282',\n    requiresPasswordChange: 'false'\n  },\n  createdDate: 1586223686277,\n  updatedDate: 1586482147883\n}",
           "type": "Object"
         }
       ],
@@ -4216,21 +4216,21 @@
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.firstName",
+            "field": "response.firstname",
             "description": "<p>User first name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.lastName",
+            "field": "response.lastname",
             "description": "<p>User last name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.displayName",
+            "field": "response.displayname",
             "description": "<p>User display name</p>"
           },
           {
@@ -4694,7 +4694,7 @@
       "examples": [
         {
           "title": "UsersResponse ",
-          "content": "[\n  {\n    name: 'sisabella',\n    active: true,\n    firstName: 'Sophia',\n    lastName: 'Isabella',\n    displayName: 'Sophia Isabella',\n    email: 'sisabella@test.com',\n    key: '<key>',\n    attributes: {\n      invalidPasswordAttempts: '0',\n      passwordLastChanged: '1586132914494',\n      requiresPasswordChange: 'false'\n    },\n    createdDate: 1586132914491,\n    updatedDate: 1586132914491\n  },\n  {\n    name: 'solivia',\n    active: true,\n    firstName: 'Sophia',\n    lastName: 'Olivia',\n    displayName: 'Sophia Olivia',\n    email: 'solivia@test.com',\n    key: '<key>',\n    attributes: {\n      invalidPasswordAttempts: '0',\n      lastActive: '1586312382390',\n      lastAuthenticated: '1586312382388',\n      passwordLastChanged: '1586312349888',\n      requiresPasswordChange: 'false'\n    },\n    createdDate: 1586221772684,\n    updatedDate: 1586312349887\n  }\n]",
+          "content": "[\n  {\n    name: 'sisabella',\n    active: true,\n    firstname: 'Sophia',\n    lastname: 'Isabella',\n    displayname: 'Sophia Isabella',\n    email: 'sisabella@test.com',\n    key: '<key>',\n    attributes: {\n      invalidPasswordAttempts: '0',\n      passwordLastChanged: '1586132914494',\n      requiresPasswordChange: 'false'\n    },\n    createdDate: 1586132914491,\n    updatedDate: 1586132914491\n  },\n  {\n    name: 'solivia',\n    active: true,\n    firstname: 'Sophia',\n    lastname: 'Olivia',\n    displayname: 'Sophia Olivia',\n    email: 'solivia@test.com',\n    key: '<key>',\n    attributes: {\n      invalidPasswordAttempts: '0',\n      lastActive: '1586312382390',\n      lastAuthenticated: '1586312382388',\n      passwordLastChanged: '1586312349888',\n      requiresPasswordChange: 'false'\n    },\n    createdDate: 1586221772684,\n    updatedDate: 1586312349887\n  }\n]",
           "type": "User[]"
         }
       ]
@@ -5140,7 +5140,7 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "request.newName",
+            "field": "request.newname",
             "description": "<p>New username</p>"
           }
         ]
@@ -5148,7 +5148,7 @@
       "examples": [
         {
           "title": "RenameRequest",
-          "content": "{\n  name: 'aemma',\n  newName: 'ddolittle'\n}",
+          "content": "{\n  name: 'aemma',\n  newname: 'ddolittle'\n}",
           "type": "Object"
         }
       ]
@@ -5188,21 +5188,21 @@
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.firstName",
+            "field": "response.firstname",
             "description": "<p>User first name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.lastName",
+            "field": "response.lastname",
             "description": "<p>User last name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.displayName",
+            "field": "response.displayname",
             "description": "<p>User display name</p>"
           },
           {
@@ -5268,7 +5268,7 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "request.newName",
+            "field": "request.newname",
             "description": "<p>New username</p>"
           }
         ]
@@ -5276,7 +5276,7 @@
       "examples": [
         {
           "title": "RenameRequest",
-          "content": "{\n  name: 'aemma',\n  newName: 'ddolittle'\n}",
+          "content": "{\n  name: 'aemma',\n  newname: 'ddolittle'\n}",
           "type": "Object"
         }
       ]
@@ -5285,7 +5285,7 @@
       "examples": [
         {
           "title": "UserResponseExample ",
-          "content": "{\n  name: 'ddolittle',\n  active: true,\n  firstName: 'Douglas',\n  lastName: 'Dolittle',\n  displayName: 'Douglas Dolittle',\n  email: 'ddolittle@test.com',\n  key: '<key>',\n  attributes: {},\n  createdDate: 1586619725088,\n  updatedDate: 1586619725088\n}",
+          "content": "{\n  name: 'ddolittle',\n  active: true,\n  firstname: 'Douglas',\n  lastname: 'Dolittle',\n  displayname: 'Douglas Dolittle',\n  email: 'ddolittle@test.com',\n  key: '<key>',\n  attributes: {},\n  createdDate: 1586619725088,\n  updatedDate: 1586619725088\n}",
           "type": "Object"
         }
       ],
@@ -5316,21 +5316,21 @@
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.firstName",
+            "field": "response.firstname",
             "description": "<p>User first name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.lastName",
+            "field": "response.lastname",
             "description": "<p>User last name</p>"
           },
           {
             "group": "User Response",
             "type": "String",
             "optional": false,
-            "field": "response.displayName",
+            "field": "response.displayname",
             "description": "<p>User display name</p>"
           },
           {
@@ -5528,7 +5528,7 @@
       "examples": [
         {
           "title": "UsersResponse",
-          "content": "[\n  {\n    name: 'sisabella',\n    active: true,\n    firstName: 'Sophia',\n    lastName: 'Isabella',\n    displayName: 'Sophia Isabella',\n    email: 'sisabella@test.com',\n    key: '<key>',\n    attributes: {\n      invalidPasswordAttempts: '0',\n      passwordLastChanged: '1586132914494',\n      requiresPasswordChange: 'false'\n    },\n    createdDate: 1586132914491,\n    updatedDate: 1586132914491\n  },\n  {\n    name: 'solivia',\n    active: true,\n    firstName: 'Sophia',\n    lastName: 'Olivia',\n    displayName: 'Sophia Olivia',\n    email: 'solivia@test.com',\n    key: '<key>',\n    attributes: {\n      invalidPasswordAttempts: '0',\n      lastActive: '1586312382390',\n      lastAuthenticated: '1586312382388',\n      passwordLastChanged: '1586312349888',\n      requiresPasswordChange: 'false'\n    },\n    createdDate: 1586221772684,\n    updatedDate: 1586312349887\n  }\n]]",
+          "content": "[\n  {\n    name: 'sisabella',\n    active: true,\n    firstname: 'Sophia',\n    lastname: 'Isabella',\n    displayname: 'Sophia Isabella',\n    email: 'sisabella@test.com',\n    key: '<key>',\n    attributes: {\n      invalidPasswordAttempts: '0',\n      passwordLastChanged: '1586132914494',\n      requiresPasswordChange: 'false'\n    },\n    createdDate: 1586132914491,\n    updatedDate: 1586132914491\n  },\n  {\n    name: 'solivia',\n    active: true,\n    firstname: 'Sophia',\n    lastname: 'Olivia',\n    displayname: 'Sophia Olivia',\n    email: 'solivia@test.com',\n    key: '<key>',\n    attributes: {\n      invalidPasswordAttempts: '0',\n      lastActive: '1586312382390',\n      lastAuthenticated: '1586312382388',\n      passwordLastChanged: '1586312349888',\n      requiresPasswordChange: 'false'\n    },\n    createdDate: 1586221772684,\n    updatedDate: 1586312349887\n  }\n]]",
           "type": "Object[]"
         }
       ]
@@ -5763,21 +5763,21 @@
             "group": "Parameter",
             "type": "String",
             "optional": true,
-            "field": "request.firstName",
+            "field": "request.firstname",
             "description": "<p>User first name</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": true,
-            "field": "request.lastName",
+            "field": "request.lastname",
             "description": "<p>User last name</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": true,
-            "field": "request.displayName",
+            "field": "request.displayname",
             "description": "<p>User display name</p>"
           },
           {
@@ -5792,7 +5792,7 @@
       "examples": [
         {
           "title": "UpdateUserRequest ",
-          "content": "{\n  name: 'aemma',\n  active: true,\n  firstName: 'Douglas',\n  lastName: 'Dolittle',\n  displayName: 'Douglas Dolittle',\n  email: 'ddolittle@test.com'\n}",
+          "content": "{\n  name: 'aemma',\n  active: true,\n  firstname: 'Douglas',\n  lastname: 'Dolittle',\n  displayname: 'Douglas Dolittle',\n  email: 'ddolittle@test.com'\n}",
           "type": "Object"
         }
       ]

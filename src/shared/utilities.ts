@@ -10,9 +10,9 @@ const CONVERSION_KEYS: { [key: string]: any[] } = {
   user: [
     ['name', 'name'],
     ['active', 'active'],
-    ['first-name', 'firstName'],
-    ['last-name', 'lastName'],
-    ['display-name', 'displayName'],
+    ['first-name', 'firstname'],
+    ['last-name', 'lastname'],
+    ['display-name', 'displayname'],
     ['email', 'email'],
     ['key', 'key'],
     ['attributes', 'attributes'],

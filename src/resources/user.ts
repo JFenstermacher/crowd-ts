@@ -8,9 +8,9 @@ export type Users = User[];
 export type User = {
   name: string
   active?: boolean
-  firstName?: string
-  lastName?: string
-  displayName?: string
+  firstname?: string
+  lastname?: string
+  displayname?: string
   email?: string
   key?: string
   password?: string
@@ -39,9 +39,9 @@ export type GetUserRequest = GetUserRequestWithKey | GetUserRequestWithName
 export interface CreateUserRequest {
   name: string
   active: boolean
-  firstName: string
-  lastName: string
-  displayName: string
+  firstname: string
+  lastname: string
+  displayname: string
   email: string
   password: string
 }
@@ -49,9 +49,9 @@ export interface CreateUserRequest {
 export interface UpdateUserRequest {
   name: string
   active?: boolean
-  firstName?: string
-  lastName?: string
-  displayName?: string
+  firstname?: string
+  lastname?: string
+  displayname?: string
   email?: string
 }
 
@@ -100,7 +100,7 @@ export interface RemoveUserPasswordRequest {
 
 export interface RenameUserRequest {
   name: string
-  newName: string
+  newname: string
 }
 
 export interface SearchUsersRequest extends PaginatedRequest {
@@ -116,9 +116,9 @@ export class UserClient extends ResourceClient {
    *  @apiSuccess (User Response) {User}        response              Object that houses below properties
    *  @apiSuccess (User Response) {String}      response.name         Username
    *  @apiSuccess (User Response) {Boolean}     response.active       Whether user is active
-   *  @apiSuccess (User Response) {String}      response.firstName    User first name
-   *  @apiSuccess (User Response) {String}      response.lastName     User last name 
-   *  @apiSuccess (User Response) {String}      response.displayName  User display name 
+   *  @apiSuccess (User Response) {String}      response.firstname    User first name
+   *  @apiSuccess (User Response) {String}      response.lastname     User last name 
+   *  @apiSuccess (User Response) {String}      response.displayname  User display name 
    *  @apiSuccess (User Response) {String}      response.email        User email
    *  @apiSuccess (User Response) {String}      response.key          User key
    *  @apiSuccess (User Response) {Attributes}  response.attributes   Attributes object, may be empty
@@ -149,9 +149,9 @@ export class UserClient extends ResourceClient {
    *    {
    *      name: 'aemma',
    *      active: true,
-   *      firstName: 'Abigail',
-   *      lastName: 'Emma',
-   *      displayName: 'Abigail Emma',
+   *      firstname: 'Abigail',
+   *      lastname: 'Emma',
+   *      displayname: 'Abigail Emma',
    *      email: 'aemma@test.com',
    *      key: '<key>',
    *      attributes: {
@@ -200,9 +200,9 @@ export class UserClient extends ResourceClient {
    *    {
    *      name: 'aemma',
    *      active: true,
-   *      firstName: 'Abigail',
-   *      lastName: 'Emma',
-   *      displayName: 'Abigail Emma',
+   *      firstname: 'Abigail',
+   *      lastname: 'Emma',
+   *      displayname: 'Abigail Emma',
    *      email: 'aemma@test.com',
    *      key: '<key>',
    *      attributes: {
@@ -247,9 +247,9 @@ export class UserClient extends ResourceClient {
    *      active: true,
    *      name: 'emason-d42445',
    *      password: '<password>',
-   *      firstName: 'Emma',
-   *      lastName: 'Mason',
-   *      displayName: 'Emma Mason',
+   *      firstname: 'Emma',
+   *      lastname: 'Mason',
+   *      displayname: 'Emma Mason',
    *      email: 'emason-d42445@test.com'
    *    }
    *  
@@ -263,9 +263,9 @@ export class UserClient extends ResourceClient {
    *    {
    *      name: 'emason-d42445',
    *      active: true,
-   *      firstName: 'Emma',
-   *      lastName: 'Mason',
-   *      displayName: 'Emma Mason',
+   *      firstname: 'Emma',
+   *      lastname: 'Mason',
+   *      displayname: 'Emma Mason',
    *      email: 'emason-d42445@test.com',
    *      key: '<key>',
    *      attributes: {
@@ -283,9 +283,9 @@ export class UserClient extends ResourceClient {
       name: req.name,
       password: { value: req.password },
       active: req.active,
-      'first-name': req.firstName,
-      'last-name': req.lastName,
-      'display-name': req.displayName,
+      'first-name': req.firstname,
+      'last-name': req.lastname,
+      'display-name': req.displayname,
       email: req.email
     }
 
@@ -309,17 +309,17 @@ export class UserClient extends ResourceClient {
    *  @apiParam {Object}  request                 Object housing properties below
    *  @apiParam {String}  request.name            User name
    *  @apiParam {Boolean} [request.active]        Whether user is active
-   *  @apiParam {String}  [request.firstName]     User first name
-   *  @apiParam {String}  [request.lastName]      User last name
-   *  @apiParam {String}  [request.displayName]   User display name
+   *  @apiParam {String}  [request.firstname]     User first name
+   *  @apiParam {String}  [request.lastname]      User last name
+   *  @apiParam {String}  [request.displayname]   User display name
    *  @apiParam {String}  [request.email]         User email
    *  @apiParamExample {Object} UpdateUserRequest 
    *    {
    *      name: 'aemma',
    *      active: true,
-   *      firstName: 'Douglas',
-   *      lastName: 'Dolittle',
-   *      displayName: 'Douglas Dolittle',
+   *      firstname: 'Douglas',
+   *      lastname: 'Dolittle',
+   *      displayname: 'Douglas Dolittle',
    *      email: 'ddolittle@test.com'
    *    }
    */
@@ -635,11 +635,11 @@ export class UserClient extends ResourceClient {
    * 
    *  @apiParam {Object} request          Object housing properties below
    *  @apiParam {String} request.name     Current username
-   *  @apiParam {String} request.newName  New username
+   *  @apiParam {String} request.newname  New username
    *  @apiParamExample {Object} RenameRequest
    *    {
    *      name: 'aemma',
-   *      newName: 'ddolittle'
+   *      newname: 'ddolittle'
    *    }
    * 
    *  @apiUse UserResponse
@@ -648,9 +648,9 @@ export class UserClient extends ResourceClient {
    *    {
    *      name: 'ddolittle',
    *      active: true,
-   *      firstName: 'Douglas',
-   *      lastName: 'Dolittle',
-   *      displayName: 'Douglas Dolittle',
+   *      firstname: 'Douglas',
+   *      lastname: 'Dolittle',
+   *      displayname: 'Douglas Dolittle',
    *      email: 'ddolittle@test.com',
    *      key: '<key>',
    *      attributes: {},
@@ -661,7 +661,7 @@ export class UserClient extends ResourceClient {
   @convertResponse(EntityType.USER)
   public async rename(req: RenameUserRequest): Promise<User> {
     return this.request({
-      data: { 'new-name': req.newName },
+      data: { 'new-name': req.newname },
       params: { username: req.name },
       url: 'user/rename',
       method: Method.POST
@@ -695,9 +695,9 @@ export class UserClient extends ResourceClient {
    *      {
    *        name: 'sisabella',
    *        active: true,
-   *        firstName: 'Sophia',
-   *        lastName: 'Isabella',
-   *        displayName: 'Sophia Isabella',
+   *        firstname: 'Sophia',
+   *        lastname: 'Isabella',
+   *        displayname: 'Sophia Isabella',
    *        email: 'sisabella@test.com',
    *        key: '<key>',
    *        attributes: {
@@ -711,9 +711,9 @@ export class UserClient extends ResourceClient {
    *      {
    *        name: 'solivia',
    *        active: true,
-   *        firstName: 'Sophia',
-   *        lastName: 'Olivia',
-   *        displayName: 'Sophia Olivia',
+   *        firstname: 'Sophia',
+   *        lastname: 'Olivia',
+   *        displayname: 'Sophia Olivia',
    *        email: 'solivia@test.com',
    *        key: '<key>',
    *        attributes: {
@@ -761,9 +761,9 @@ export class UserClient extends ResourceClient {
    *      {
    *        name: 'sisabella',
    *        active: true,
-   *        firstName: 'Sophia',
-   *        lastName: 'Isabella',
-   *        displayName: 'Sophia Isabella',
+   *        firstname: 'Sophia',
+   *        lastname: 'Isabella',
+   *        displayname: 'Sophia Isabella',
    *        email: 'sisabella@test.com',
    *        key: '<key>',
    *        attributes: {
@@ -777,9 +777,9 @@ export class UserClient extends ResourceClient {
    *      {
    *        name: 'solivia',
    *        active: true,
-   *        firstName: 'Sophia',
-   *        lastName: 'Olivia',
-   *        displayName: 'Sophia Olivia',
+   *        firstname: 'Sophia',
+   *        lastname: 'Olivia',
+   *        displayname: 'Sophia Olivia',
    *        email: 'solivia@test.com',
    *        key: '<key>',
    *        attributes: {

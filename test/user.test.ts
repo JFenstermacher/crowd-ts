@@ -95,7 +95,7 @@ describe('Testing user functionalities', () => {
     const oldname = user.name;
 
     user.name = 'yoda';
-    const response = await crowd.user.rename({ name: oldname, newName: user.name });
+    const response = await crowd.user.rename({ name: oldname, newname: user.name });
 
     expect(response.name).toBe(user.name);
 

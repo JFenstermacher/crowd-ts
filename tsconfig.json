@@ -22,5 +22,9 @@
   "exclude": [
     "node_modules",
     "dist"
+  ],
+  "include": [
+    "src",
+    "untyped.d.ts"
   ]
 }
