@@ -1,5 +1,5 @@
-src/**/*.js
-test/**/*.js
+!docs
+*.js
 !jest.config.js
 *.d.ts
 !untyped.d.ts
