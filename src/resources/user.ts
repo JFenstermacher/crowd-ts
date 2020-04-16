@@ -15,8 +15,8 @@ export type User = {
   key?: string
   password?: string
   attributes?: Attributes
-  createdDate?: string
-  updatedDate?: string
+  createdDate?: number 
+  updatedDate?: number 
 }
 
 export interface AuthenticateUserRequest {
