@@ -1,6 +1,6 @@
 {
   "name": "crowd-ts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Atlassian Crowd typescript",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
