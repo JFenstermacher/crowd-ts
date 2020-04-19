@@ -732,6 +732,7 @@ export class UserClient extends ResourceClient {
   public async search(req: SearchUsersRequest = {}): Promise<Users> {
     return this.makePaginatedRequest({
       params: {
+        restriction: req.restriction,
         maxResults: req.maxResults,
         startIndex: req.startIndex,
         expand: this._createExpandParam(req.expand),
